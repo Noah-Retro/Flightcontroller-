@@ -1,5 +1,5 @@
 nrf24==2.0.0
-mpu9250==1.0.12
+mpu9250-jmdev==1.0.12
 pygame==2.5.2
 adafruit-circuitpython-motorkit==1.6.13
 pysimplegui==4.60.5

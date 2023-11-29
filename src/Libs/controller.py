@@ -36,6 +36,7 @@ class PS4Controller(object):
 
         while True:
             for event in pygame.event.get():
+                print("gets data in controller")
                 if event.type == pygame.JOYAXISMOTION:
                     self.axis_data[event.axis] = round(event.value,2)
                 elif event.type == pygame.JOYBUTTONDOWN:
