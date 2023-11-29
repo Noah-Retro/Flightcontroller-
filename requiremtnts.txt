@@ -1,0 +1,4 @@
+nrf24==2.0.0
+mpu9250==1.0.12
+pygame==2.5.2
+adafruit-circuitpython-motorkit==1.6.13

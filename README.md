@@ -48,4 +48,9 @@ ex. [@DomPizzie](https://twitter.com/dompizzie)
 
 Inspiration, code snippets, etc.
 * [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [DomPizzie](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc#file-readme-template-md)
+* [DomPizzie](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc#file-readme-template-md) README.md File 
+* [bjarne-hansen](https://github.com/bjarne-hansen/py-nrf24) nrf24 module
+* [jefmenegazzoo](https://github.com/jefmenegazzo/mpu-i2c-drivers-python) mdu9250 module
+* [ChristianD37](https://github.com/ChristianD37/YoutubeTutorials/blob/master/PS4%20Controller) code example ps4-controller in pygame
+* [Adafruit](https://learn.adafruit.com/adafruit-dc-and-stepper-motor-hat-for-raspberry-pi/installing-software) usage and examles for the Motor-Hat
+
