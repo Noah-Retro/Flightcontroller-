@@ -32,3 +32,6 @@ if __name__ == "__main__":
     #    thread.join()
     while not keyboard.is_pressed("q"):
         print(controller.axis_data)
+        
+    
+        
