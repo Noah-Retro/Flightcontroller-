@@ -3,4 +3,4 @@
 /Notes
 /log
 *.pyc
-*_pycache_
+*/_pycache_
