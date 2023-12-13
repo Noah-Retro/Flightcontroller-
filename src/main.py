@@ -1,3 +1,3 @@
-import Libs.autoupdate
+import Libs.autoupdate as ap
 
-
+ap.update()
