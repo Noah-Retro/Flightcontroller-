@@ -1,6 +1,6 @@
-/DB
-/settings
-/Notes
-/log
+DB/
+settings/
+Notes/
+log/
 *.pyc
-*/_pycache_
+*_pycache_/
