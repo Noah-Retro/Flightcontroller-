@@ -7,4 +7,6 @@ def update():
     repo.remotes.origin.pull()
     
 if __name__ == '__main__':
+    print("updating")
     update()
+    print("done")
