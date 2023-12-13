@@ -3,7 +3,7 @@ import json
 import os
 
 def update():   
-    print("searching for changes in repo")
+    print("searching for changes in repo_")
     repo = git.Repo(os.getcwd())
     repo.remotes.origin.pull()
     print("all up to date now")
