@@ -6,7 +6,7 @@ try:
     if platform == "linux":
         ap.update(os.path.dirname(os.path.abspath(__file__)))
 except:
-    pass
+    raise SystemError
 
 
 #last test i hope
