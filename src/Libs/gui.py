@@ -5,7 +5,6 @@ import threading
 class App(threading.Thread):             
     def __init__(self):
         super().__init__() 
-        self.is_closed = False
                 
     def callback(self):
         self.root.quit()
