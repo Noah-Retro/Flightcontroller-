@@ -19,6 +19,9 @@ except Exception as e:
 pygame.init()
 pygame.joystick.init()
 
+while pygame.joystick.get_count()>=0:
+    pass
+
 controller = pygame.joystick.Joystick(0)
 controller.init()
 
