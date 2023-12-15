@@ -3,6 +3,9 @@ import threading
 
 
 class App(threading.Thread):             
+    def __init__(self):
+        super().__init__() 
+        self.is_closed = False
                 
     def callback(self):
         self.root.quit()
@@ -18,6 +21,9 @@ class App(threading.Thread):
         label.pack()
         
         self.root.mainloop()
+        if self.is_closed:
+            self.root.destroy()
+            
         
     #def join(self):
     #    
