@@ -2,7 +2,8 @@ import os
 import pprint
 import pygame
 from queue import Queue
-
+import threading
+import time
 """
 0:"X"
 1:"O"
@@ -21,23 +22,22 @@ Axisdata:Axis on L and R Down {0,1} UP {0,-1} right {1,0} left {-1,0} data {{x,y
 hat_data:Dpad axis Up {0,1} Down {0,-1} right {1,0} left {-1,0}
 """
 
-class PS4Controller(object):
+class PS4Controller(threading.Thread):
     """Class representing the PS4 controller. Pretty straightforward functionality."""
     
-    def __init__(self):
-        self.controller = None
+    def __init__(self,controller:pygame.joystick,q:Queue,*args,**kwargs):
+        self.q = q
+        self.controller = controller
         self.axis_data = None
         self.button_data = None
         self.hat_data = None
+        super().__init__(*args,**kwargs)
 
     def init(self):
         """Initialize the joystick components"""
-        pygame.init()
-        pygame.joystick.init()
-        self.controller = pygame.joystick.Joystick(0)
-        self.controller.init()
+        pass
 
-    def listen(self,q:Queue):
+    def run(self):
         """Listen for events to happen"""
         
         if not self.axis_data:
@@ -55,7 +55,7 @@ class PS4Controller(object):
 
         while True:
             for event in pygame.event.get():
-                print("Data from controller goten")
+                
                 if event.type == pygame.JOYAXISMOTION:
                     self.axis_data[event.axis] = round(event.value,2)
                 elif event.type == pygame.JOYBUTTONDOWN:
@@ -67,15 +67,31 @@ class PS4Controller(object):
 
                 # Insert your code on what you would like to happen for each event here!
                 # In the current setup, I have the state simply printing out to the screen.
-                q.put({**self.button_data,**self.axis_data,**self.hat_data})
-                return 
-                os.system('clear')
-                pprint.pprint(self.button_data)
-                pprint.pprint(self.axis_data.keys())
-                pprint.pprint(self.hat_data.keys())
+                #self.queue.put({**self.button_data,**self.axis_data,**self.hat_data})
+                self.q.put_nowait([self.button_data,self.axis_data,self.hat_data])
+                
+                #return 
+                #os.system('clear')
+                #pprint.pprint([self.button_data,self.axis_data,self.hat_data])
+                #pprint.pprint(self.axis_data.keys())
+                #pprint.pprint(self.hat_data.keys())
 
 
 if __name__ == "__main__":
-    ps4 = PS4Controller()
-    ps4.init()
-    ps4.listen()
+    pygame.init()
+    pygame.joystick.init()
+    
+    controllerQueue = Queue()
+    
+    controller = pygame.joystick.Joystick(0)
+    
+    controller.init()
+    
+    ps4 = PS4Controller(controller=controller,q=controllerQueue)
+    ps4.start()
+    while True:
+        if not controllerQueue.empty():
+            print(controllerQueue.get_nowait())
+        time.sleep(1)
+        
+    

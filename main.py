@@ -1,12 +1,13 @@
 import src.Libs.autoupdate as ap
-import src.Libs.controller as controller
+from src.Libs.controller import PS4Controller
+import pygame
 
 from sys import platform
 import os
 from threading import Thread
 from queue import Queue
-
-
+from collections import deque
+import time
 
 try:
     if platform == "linux":
@@ -14,24 +15,36 @@ try:
 except Exception as e:
     raise e
 
+pygame.init()
+pygame.joystick.init()
+
+controller = pygame.joystick.Joystick(0)
+controller.init()
+
 controllerQueue = Queue()
-c = controller.PS4Controller()
-c.init()
+
+ps4con = PS4Controller(controller=controller,q=controllerQueue)
 
 if __name__ == '__main__':
-    threads = []
-    controllerThread = Thread(target=c.listen,daemon=True,args=(controllerQueue,))
-    threads.append(controllerThread)
-    controllerData = None
-    
-    for thread in threads:
-        thread.start()
-        
+    ps4con.start()
+    controllerData = []
+    print(controller.get_name())
+    print(controller.get_power_level())
     while True:
-        print(controllerQueue.empty())
         if not controllerQueue.empty():
-            controllerData = controllerQueue.get(block=False)
+            
+            for _ in range(controllerQueue.qsize()-1):
+                controllerData = controllerQueue.get_nowait()
+        
         print(controllerData)
+        time.sleep(1)
+        if controllerData[0][0]:
+            print("rumble")
+            print(controller.rumble(low_frequency=0,high_frequency=0.7,duration=0))
+        else:
+            print("stop rumble")
+            controller.stop_rumble()
+            
         
         
         
