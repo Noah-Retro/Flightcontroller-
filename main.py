@@ -34,6 +34,7 @@ if __name__ == '__main__':
     controllerData = []
     
     app=App()
+    app.start()
     
     while True:
         if not controllerQueue.empty():
@@ -48,9 +49,8 @@ if __name__ == '__main__':
         else:
             controller.stop_rumble()
         
-        if controllerData[0][9]:
-            if not app.is_alive():
-                app.run()
+        
+                
         
                         
         
