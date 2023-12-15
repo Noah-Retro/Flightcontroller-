@@ -50,12 +50,12 @@ if __name__ == '__main__':
                 app.start()
         
         if controllerData[0][10]:
-            print("close")
-            print(app.is_alive())
             if app.is_alive():
                 app.root.quit()
                 app.root.update()
+                print("done")
                 app.join(2)
+                print("done 2")
                 
                 print("should be closed")
                         
