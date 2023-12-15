@@ -23,7 +23,7 @@ class App(threading.Thread):
         self.root.mainloop()
         if self.is_closed:
             self.root.destroy()
-            
+            self.join()
         
     #def join(self):
     #    
