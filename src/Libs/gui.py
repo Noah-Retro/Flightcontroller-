@@ -21,8 +21,7 @@ class App(threading.Thread):
         label.pack()
         
         self.root.mainloop()
-        if self.is_closed:
-            self.root.destroy()
+        
         
     #def join(self):
     #    
