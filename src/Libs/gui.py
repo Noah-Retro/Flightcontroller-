@@ -21,7 +21,7 @@ class App(threading.Thread):
         label = tk.Label(self.root, text="Hello World")
         label.pack()
         
-        self.mainloop()
+        self.root.mainloop()
 
 
 
