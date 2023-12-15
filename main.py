@@ -1,8 +1,12 @@
 import src.Libs.autoupdate as ap
 import src.Libs.controller as controller
+
+import pprint
 from sys import platform
 import os
 from threading import Thread
+from queue import Queue
+
 
 try:
     if platform == "linux":
@@ -10,7 +14,8 @@ try:
 except Exception as e:
     raise e
 
-c = controller.PS4Controller()
+controllerQueue = Queue()
+c = controller.PS4Controller(controllerQueue)
 c.init()
 
 if __name__ == '__main__':
@@ -22,7 +27,9 @@ if __name__ == '__main__':
         thread.start()
         
     while True:
-        print(c.button_data,c.axis_data,c.hat_data)
+        data = controllerQueue.get()
+        pprint.pprint(data)
+        
 
 
 

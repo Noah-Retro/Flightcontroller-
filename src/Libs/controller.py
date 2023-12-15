@@ -1,6 +1,7 @@
 import os
 import pprint
 import pygame
+from queue import Queue
 
 """
 0:"X"
@@ -22,15 +23,16 @@ hat_data:Dpad axis Up {0,1} Down {0,-1} right {1,0} left {-1,0}
 
 class PS4Controller(object):
     """Class representing the PS4 controller. Pretty straightforward functionality."""
-
-    controller = None
-    axis_data = None
-    button_data = None
-    hat_data = None
+    
+    def __init__(self,q:Queue):
+        self.queue = q
+        self.controller = None
+        self.axis_data = None
+        self.button_data = None
+        self.hat_data = None
 
     def init(self):
         """Initialize the joystick components"""
-        
         pygame.init()
         pygame.joystick.init()
         self.controller = pygame.joystick.Joystick(0)
@@ -66,6 +68,7 @@ class PS4Controller(object):
 
                 # Insert your code on what you would like to happen for each event here!
                 # In the current setup, I have the state simply printing out to the screen.
+                self.queue.put({**self.button_data,**self.axis_data,**self.hat_data})
                 return 
                 os.system('clear')
                 pprint.pprint(self.button_data)
