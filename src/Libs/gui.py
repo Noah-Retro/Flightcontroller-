@@ -23,9 +23,11 @@ class App(threading.Thread):
         self.root.mainloop()
         
     def join(self):
+        
         self.root.destroy()
+        print("destroyed")
         super().join()
-        #
+        print("joint")
 
 
 
