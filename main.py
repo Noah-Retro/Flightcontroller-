@@ -6,6 +6,7 @@ from sys import platform
 import os
 from threading import Thread
 from queue import Queue
+import tk
 
 
 try:
@@ -28,7 +29,7 @@ if __name__ == '__main__':
         
     while True:
         data = controllerQueue.get()
-        pprint.pprint(data)
+        print(data)
         
 
 
