@@ -53,7 +53,7 @@ if __name__ == '__main__':
             print("close")
             print(app.is_alive())
             if app.is_alive():
-                app.join()
+                app.root.destroy()
                 print("should be closed")
                         
         
