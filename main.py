@@ -47,7 +47,7 @@ if __name__ == '__main__':
         
         if controllerData[0][9]:
             if not app.is_alive():
-                app.start()
+                app.run()
         
         if controllerData[0][10]:
             if app.is_alive():
