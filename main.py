@@ -36,11 +36,11 @@ if __name__ == '__main__':
             for _ in range(controllerQueue.qsize()-1):
                 controllerData = controllerQueue.get_nowait()
         
-        print(controllerData)
+        
         time.sleep(1)
         if controllerData[0][0]:
             print("rumble")
-            print(controller.rumble(low_frequency=0,high_frequency=0.7,duration=0))
+            print(controller.rumble(low_frequency=0.5,high_frequency=1,duration=0))
         else:
             print("stop rumble")
             controller.stop_rumble()
