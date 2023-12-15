@@ -47,11 +47,11 @@ if __name__ == '__main__':
         
         if controllerData[0][9]:
             if not app.is_alive():
-                app.run()
+                app.start()
         
-        #if controllerData[0][10]:
-        #    print("close")
-        #    if app.is_alive():
-        #        app.join()
+        if controllerData[0][10]:
+            print("close")
+            if app.is_alive():
+                app.join()
                         
         
