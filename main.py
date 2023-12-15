@@ -55,6 +55,7 @@ if __name__ == '__main__':
             if app.is_alive():
                 app.root.quit()
                 app.root.update()
+                
                 print("should be closed")
                         
         
