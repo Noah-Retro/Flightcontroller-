@@ -21,6 +21,9 @@ class App(threading.Thread):
         label.pack()
         
         self.root.mainloop()
+        
+    def join(self):
+        self.root.quit()
 
 
 
