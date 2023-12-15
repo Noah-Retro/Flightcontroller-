@@ -39,6 +39,7 @@ class PS4Controller(threading.Thread):
         self.button_data = None
         self.hat_data = None
         super().__init__(*args,**kwargs)
+        self.daemon = True
 
     def run(self):
         """Listen for events to happen"""
