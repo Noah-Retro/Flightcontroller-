@@ -53,7 +53,7 @@ if __name__ == '__main__':
         
         if controllerData[0][10]:
             if gui.is_alive():
-                gui.join()
+                gui._stop()
                         
         
         
