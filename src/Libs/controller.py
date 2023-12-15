@@ -40,10 +40,6 @@ class PS4Controller(threading.Thread):
         self.hat_data = None
         super().__init__(*args,**kwargs)
 
-    def init(self):
-        """Initialize the joystick components"""
-        pass
-
     def run(self):
         """Listen for events to happen"""
         

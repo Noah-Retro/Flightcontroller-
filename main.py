@@ -38,7 +38,7 @@ if __name__ == '__main__':
             for _ in range(controllerQueue.qsize()-1):
                 controllerData = controllerQueue.get_nowait()
         
-        
+        print(controllerData)
         
         if controllerData[0][0]:
             controller.rumble(low_frequency=0.5,high_frequency=1,duration=0)
@@ -49,16 +49,9 @@ if __name__ == '__main__':
             if not app.is_alive():
                 app.run()
         
-        if controllerData[0][10]:
-            print("close")
-            if app.is_alive():
-                app.join()
+        #if controllerData[0][10]:
+        #    print("close")
+        #    if app.is_alive():
+        #        app.join()
                         
         
-        
-        
-
-
-
-    
-
