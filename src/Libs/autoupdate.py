@@ -7,9 +7,8 @@ def update(path:str)->None:
     head = repo.head.ref
     tracking = head.tracking_branch()
     s = list(tracking.iter_items(repo,f'{head.path}..{tracking.path}'))
-    
+    repo.remotes.origin.pull()
     if len(s)>=1:
-        repo.remotes.origin.pull()
         os.system('sudo reboot')
     
 

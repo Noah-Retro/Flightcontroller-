@@ -24,6 +24,7 @@ class App(threading.Thread):
         
     def join(self):
         self.root.quit()
+        threading.Thread.join(self)
 
 
 

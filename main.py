@@ -50,6 +50,7 @@ if __name__ == '__main__':
                 app.run()
         
         if controllerData[0][10]:
+            print("close")
             if app.is_alive():
                 app.join()
                         
