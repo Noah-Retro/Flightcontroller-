@@ -3,6 +3,7 @@ import os
 
 def update(path:str)->None:   
     repo = git.Repo(path)
+    repo.remotes.fetch()
     head = repo.head.ref
     tracking = head.tracking_branch()
     s = list(tracking.iter_items(repo,f'{head.path}..{tracking.path}'))
