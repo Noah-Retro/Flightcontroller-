@@ -49,10 +49,5 @@ if __name__ == '__main__':
             if not app.is_alive():
                 app.run()
         
-        if controllerData[0][10]:
-            if app.is_alive():
-                app.is_closed = True
-                
-                print("should be closed")
                         
         
