@@ -1,12 +1,11 @@
 import src.Libs.autoupdate as ap
 import src.Libs.controller as controller
 
-import pprint
 from sys import platform
 import os
 from threading import Thread
 from queue import Queue
-import tk
+
 
 
 try:
@@ -16,22 +15,26 @@ except Exception as e:
     raise e
 
 controllerQueue = Queue()
-c = controller.PS4Controller(controllerQueue)
+c = controller.PS4Controller()
 c.init()
 
 if __name__ == '__main__':
     threads = []
-    controllerThread = Thread(target=c.listen,daemon=True)
+    controllerThread = Thread(target=c.listen,daemon=True,args=(controllerQueue,))
     threads.append(controllerThread)
+    controllerData = None
     
     for thread in threads:
         thread.start()
         
     while True:
-        data = controllerQueue.get()
-        print(data)
+        print(controllerQueue.empty())
+        if not controllerQueue.empty():
+            controllerData = controllerQueue.get(block=False)
+        print(controllerData)
         
-
+        
+        
 
 
 

@@ -24,8 +24,7 @@ hat_data:Dpad axis Up {0,1} Down {0,-1} right {1,0} left {-1,0}
 class PS4Controller(object):
     """Class representing the PS4 controller. Pretty straightforward functionality."""
     
-    def __init__(self,q:Queue):
-        self.queue = q
+    def __init__(self):
         self.controller = None
         self.axis_data = None
         self.button_data = None
@@ -38,7 +37,7 @@ class PS4Controller(object):
         self.controller = pygame.joystick.Joystick(0)
         self.controller.init()
 
-    def listen(self):
+    def listen(self,q:Queue):
         """Listen for events to happen"""
         
         if not self.axis_data:
@@ -56,7 +55,7 @@ class PS4Controller(object):
 
         while True:
             for event in pygame.event.get():
-                print("gets data in controller")
+                print("Data from controller goten")
                 if event.type == pygame.JOYAXISMOTION:
                     self.axis_data[event.axis] = round(event.value,2)
                 elif event.type == pygame.JOYBUTTONDOWN:
@@ -68,7 +67,7 @@ class PS4Controller(object):
 
                 # Insert your code on what you would like to happen for each event here!
                 # In the current setup, I have the state simply printing out to the screen.
-                self.queue.put({**self.button_data,**self.axis_data,**self.hat_data})
+                q.put({**self.button_data,**self.axis_data,**self.hat_data})
                 return 
                 os.system('clear')
                 pprint.pprint(self.button_data)
