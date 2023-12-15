@@ -3,14 +3,16 @@ import os
 
 def update(path:str)->None:   
     repo = git.Repo(path)
-    fetch = repo.remotes.origin.pull()
-    if fetch.pop != "origin/master":
+    head = repo.head.ref
+    tracking = head.tracking_branch()
+    s = list(tracking.iter_items(repo,f'{head.path}..{tracking.path}'))
+    
+    repo.remotes.origin.pull()
+    
+    if len(s)>=1:
         os.system('sudo reboot')
 
     
 if __name__ == '__main__':
-    repo = git.Repo(r'G:\Documente\Projekts\IDPA')
-    fetch = repo.remotes.origin.fetch()
-    for i in fetch:
-        print(fetch.pop())
+    pass
 
