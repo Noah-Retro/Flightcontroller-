@@ -39,7 +39,7 @@ if __name__ == '__main__':
                 controllerData = controllerQueue.get_nowait()
         
         
-        time.sleep(1)
+        
         if controllerData[0][0]:
             print("rumble")
             print(controller.rumble(low_frequency=0.5,high_frequency=1,duration=0))
@@ -48,10 +48,12 @@ if __name__ == '__main__':
             controller.stop_rumble()
         
         if controllerData[0][9]:
-            gui.start()
+            if not gui.is_alive():
+                gui.start()
         
         if controllerData[0][10]:
-            gui.join()
+            if gui.is_alive():
+                gui.join()
                         
         
         
