@@ -24,7 +24,8 @@ class App(threading.Thread):
         
     def join(self):
         self.root.destroy()
-        #threading.Thread.join(self)
+        super().join()
+        #
 
 
 
