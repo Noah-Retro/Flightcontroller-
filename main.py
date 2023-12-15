@@ -1,6 +1,6 @@
 import src.Libs.autoupdate as ap
 from src.Libs.controller import PS4Controller
-from src.Libs.gui import app
+from src.Libs.gui import App
 import pygame
 
 from sys import platform
@@ -30,7 +30,6 @@ if __name__ == '__main__':
     ps4con.start()
     controllerData = []
     
-    gui = Thread(target= app.mainloop)
     
     while True:
         if not controllerQueue.empty():
@@ -48,12 +47,12 @@ if __name__ == '__main__':
             controller.stop_rumble()
         
         if controllerData[0][9]:
-            if not gui.is_alive():
-                gui.run()
+            if not App.is_alive():
+                App.run()
         
         if controllerData[0][10]:
-            if gui.is_alive():
-                gui._stop()
+            if App.is_alive():
+                App.join()
                         
         
         
