@@ -20,7 +20,7 @@ pygame.init()
 pygame.joystick.init()
 
 while pygame.joystick.get_count()<=0:
-    pass
+    print(pygame.joystick.get_count())
 
 controller = pygame.joystick.Joystick(0)
 controller.init()
