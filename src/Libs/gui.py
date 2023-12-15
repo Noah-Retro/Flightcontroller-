@@ -26,8 +26,8 @@ class App(threading.Thread):
         
         self.root.destroy()
         print("destroyed")
-        super().join()
-        print("joint")
+        #super().join()
+        #print("joint")
 
 
 
