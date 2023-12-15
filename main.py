@@ -30,6 +30,7 @@ if __name__ == '__main__':
     ps4con.start()
     controllerData = []
     
+    app=App()
     
     while True:
         if not controllerQueue.empty():
@@ -47,12 +48,12 @@ if __name__ == '__main__':
             controller.stop_rumble()
         
         if controllerData[0][9]:
-            if not App.is_alive():
-                App.run()
+            if not app.is_alive():
+                app.run()
         
         if controllerData[0][10]:
-            if App.is_alive():
-                App.join()
+            if app.is_alive():
+                app.join()
                         
         
         
