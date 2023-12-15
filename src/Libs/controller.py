@@ -18,8 +18,15 @@ import time
 10:PS button
 11:L3
 12:R3
-Axisdata:Axis on L and R Down {0,1} UP {0,-1} right {1,0} left {-1,0} data {{x,y},{x,y}} {L,R}
-hat_data:Dpad axis Up {0,1} Down {0,-1} right {1,0} left {-1,0}
+Axisdata:{
+    0:Leftstick -1 = Left
+    1:Leftstick -1 = Up
+    2:L3 -1 = not pressed 1 = pressed float in between
+    3:Rigthstick -1 = Left
+    4:Rightstick -1 = Up
+    5:R3 -1 = Not pressed 1 = pressed float in between
+}
+hat_data: Dpad (Left/right,Up/down) Left=-1 Down=-1
 """
 
 class PS4Controller(threading.Thread):
