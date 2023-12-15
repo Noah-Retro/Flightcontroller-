@@ -49,7 +49,7 @@ if __name__ == '__main__':
         
         if controllerData[0][9]:
             if not gui.is_alive():
-                gui.start()
+                gui.run()
         
         if controllerData[0][10]:
             if gui.is_alive():
