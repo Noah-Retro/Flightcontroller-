@@ -1,11 +1,11 @@
 from tkinter import *
 
-window = Tk()
+app = Tk()
 
-width = window.winfo_screenwidth()
-height = window.winfo_screenwidth()
+width = app.winfo_screenwidth()
+height = app.winfo_screenwidth()
 
-window.title("Flightcontroller")
-window.geometry(f"{width}x{height}")
+app.title("Flightcontroller")
+app.geometry(f"{width}x{height}")
 
-window.mainloop()
+
