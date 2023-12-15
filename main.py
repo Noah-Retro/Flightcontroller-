@@ -41,10 +41,8 @@ if __name__ == '__main__':
         
         
         if controllerData[0][0]:
-            print("rumble")
-            print(controller.rumble(low_frequency=0.5,high_frequency=1,duration=0))
+            controller.rumble(low_frequency=0.5,high_frequency=1,duration=0)
         else:
-            print("stop rumble")
             controller.stop_rumble()
         
         if controllerData[0][9]:
