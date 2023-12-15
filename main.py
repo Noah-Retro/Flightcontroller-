@@ -51,6 +51,7 @@ if __name__ == '__main__':
         
         if controllerData[0][10]:
             print("close")
+            print(app.is_alive())
             if app.is_alive():
                 app.join()
                 print("should be closed")
