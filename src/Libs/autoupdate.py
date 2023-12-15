@@ -9,7 +9,7 @@ def update(path:str)->None:
     s = list(tracking.iter_items(repo,f'{head.path}..{tracking.path}'))
     repo.remotes.origin.pull()
     if len(s)>=1:
-        os.system('sudo reboot -r now')
+        os.system('sudo shutdown -r now')
     
 
     
