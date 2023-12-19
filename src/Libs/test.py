@@ -1,60 +1,62 @@
 import tkinter as tk
 from tkinter import ttk
- 
+from PIL import ImageTk, Image
+
 window = tk.Tk()
-window.geometry('600x400')
-window.title("Tab Widget")
+w = window.winfo_screenwidth()
+h = window.winfo_screenheight()
+window.geometry(f"{w}x{h}")
+
+window.title("Fligth controller")
 
 # Notebook widget
 notebook = ttk.Notebook(window)
 
-# tab 1
-tab1 = ttk.Frame(notebook)
-label1 = ttk.Label(tab1, text = 'Text in tab 1')
-label1.pack()
-button1 = ttk.Button(tab1, text = 'Button in tab 1')
-button1.pack()
+# Airplane Settings Frame
+airplainSettingsFrame = ttk.Frame(notebook)
 
-# tab 2
-tab2 = ttk.Frame(notebook)
-label2 = ttk.Label(tab2, text = 'Text in tab 2')
-label2.pack()
-entry2 = ttk.Entry(tab2)
-entry2.pack()
+# Controller Settings Frame
+controllerSettingsFrame = ttk.Frame(notebook)
 
-# tab 3
-tab3 = ttk.Frame(notebook)
-strinput = ttk.Scale(tab3,value=0.1)
-strinput.pack()
-label3 = ttk.Label(tab3)
-label3.pack()
+# data Transfer Frame
+dataTransferFrame = ttk.Frame(notebook)
 
-notebook.add(tab1, text = 'Tab 1')
-notebook.add(tab2, text = 'Tab 2')
-notebook.add(tab3, text = 'Tab 3')
+#Controller Frame
+controllerFrame = ttk.Frame(notebook)
+
+motorSettingsFrame = ttk.Frame(controllerSettingsFrame)
+l = ttk.Label(motorSettingsFrame,text='empty')
+l.pack()
+def print_selection(v):
+    l.config(text='you have selected ' + v)
+    motorSettingsFrame.update()
+
+s = tk.Scale(motorSettingsFrame, label='try me', from_=0, to=10, orient=tk.HORIZONTAL, length=200, showvalue=0,tickinterval=2, resolution=0.01, command=print_selection)
+s.pack()
+motorSettingsFrame.pack()
+
+notebook.add(controllerFrame, text = 'Controller View')
+notebook.add(airplainSettingsFrame, text = 'Airplane Settings')
+notebook.add(controllerSettingsFrame, text = 'Controller Settings')
+notebook.add(dataTransferFrame, text = 'Data transfer Settings')
 notebook.pack()
 
-# exercise
-# add another tab with 2 buttons and one label inside 
-
-tab_exercise = ttk.Frame(notebook)
-button_exercise_1 = ttk.Button(tab_exercise, text = 'button 1')
-button_exercise_1.pack()
-
-button_exercise_2 = ttk.Button(tab_exercise, text = 'button 2')
-button_exercise_2.pack()
-
-label_exercise_2 = ttk.Label(tab_exercise, text = 'Label')
-label_exercise_2.pack()
-
-scale_exercise_3 = ttk.Scale(tab3,value=0.1)
-scale_exercise_3.pack()
 
 
-button_exercise_3 = ttk.Button(tab3,command=notebook.update(),text=scale_exercise_3.get())
-button_exercise_3.pack()
+lmain= ttk.Label(controllerFrame)
+lmain.grid()
 
-notebook.add(tab_exercise, text = 'Tab exercise')
+def video_stream(video_stream_in):
+    img = Image.frombytes(mode='RGBA',data= video_stream_in,size=(320,240)).resize((640,480))
+    imgtk = ImageTk.PhotoImage(image=img)
+    lmain.imgtk = imgtk
+    lmain.configure(image=imgtk)
+    lmain.after(1, video_stream_in) 
+    return video_stream
 
+from video import video
+video_stream(video())
+lmain.bind(func=video_stream)
 # run 
 window.mainloop()  
+
