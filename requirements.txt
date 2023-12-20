@@ -5,3 +5,4 @@ adafruit-circuitpython-motorkit==1.6.13
 pysimplegui==4.60.5
 gitpython==3.1.40
 opencv-python==4.8.0.76
+ds4drv
