@@ -51,7 +51,7 @@ if __name__ == "__main__":
     
     # Display the content of NRF24L01 device registers.
     nrf.show_registers()
-
+    return
     # Enter a loop receiving data on the address specified.
     try:
         print(f'Receive from {address}')
