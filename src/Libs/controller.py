@@ -1,9 +1,9 @@
 import os
-import pprint
 import pygame
 from queue import Queue
 import threading
 import time
+
 """
 0:"X"
 1:"O"

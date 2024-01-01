@@ -1,0 +1,61 @@
+{
+    "tx": {
+        "hostname": "localhost",
+        "port": 8888,
+        "address": "1852M",
+        "ce": 25,
+        "payload_size": {
+            "options": [
+                "DYNAMIC",
+                "MIN",
+                "MAX"
+            ],
+            "value": "DYNAMIC"
+        },
+        "channel": 100,
+        "data_rate": {
+            "options": [
+                "RATE_250KBPS",
+                "RATE_1MBPS",
+                "RATE_2MBPS"
+            ],
+            "value": "RATE_2MBPS"
+        },
+        "pa_level": {
+            "options": [
+                "MIN",
+                "MAX"
+            ],
+            "value": "MIN"
+        }
+    },
+    "rx": {
+        "hostname": "localhost",
+        "port": 8888,
+        "address": "1852M",
+        "payload_size": {
+            "options": [
+                "DYNAMIC",
+                "MIN",
+                "MAX"
+            ],
+            "value": "DYNAMIC"
+        },
+        "channel": 100,
+        "data_rate": {
+            "options": [
+                "RATE_250KBPS",
+                "RATE_1MBPS",
+                "RATE_2MBPS"
+            ],
+            "value": "RATE_2MBPS"
+        },
+        "pa_level": {
+            "options": [
+                "MIN",
+                "MAX"
+            ],
+            "value": "MIN"
+        }
+    }
+}

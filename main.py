@@ -19,18 +19,22 @@ except Exception as e:
 pygame.init()
 pygame.joystick.init()
 
-while pygame.joystick.get_count()<=0:
-    print(pygame.joystick.get_count())
 
-controller = pygame.joystick.Joystick(0)
-controller.init()
+if platform == "linux":
+    while pygame.joystick.get_count()<=0:
+        print(platform)
+        print(pygame.joystick.get_count())
 
-controllerQueue = Queue()
+    controller = pygame.joystick.Joystick(0)
+    controller.init()
 
-ps4con = PS4Controller(controller=controller,q=controllerQueue)
+    controllerQueue = Queue()
+
+    ps4con = PS4Controller(controller=controller,q=controllerQueue)
 
 if __name__ == '__main__':
-    ps4con.start()
+    if platform == "linux":
+        ps4con.start()
     controllerData = []
     
     app=App()

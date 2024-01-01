@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import *
 import threading
 
 
@@ -23,8 +23,6 @@ class App(threading.Thread):
         self.root.mainloop()
         
 
-class ControllerSettings(tk.ttk.Frame):
-    pass
 
 if __name__ == "__main__":
     import tkinter as tk					 
@@ -48,12 +46,28 @@ if __name__ == "__main__":
                                 row = 0, 
                                 padx = 30, 
                                 pady = 30) 
-    ttk.Label(tab2, 
-            text ="""Lets dive into the
-            world of computers""").grid(column = 0, 
-                                        row = 0, 
-                                        padx = 30, 
-                                        pady = 30) 
-    ttk.OptionMenu(tab1,variable=["Hello","Hoi"],default="None")
 
+    import json
+    file = open("C:/Users/Noah/Desktop/Flightconfold/Flightcontroller-/src/settings/transmitt.json",mode="r")
+    data = json.load(file)
+    file.close() 
+
+    payload_label = ttk.Label(tab2,text="Payload size")
+    payload_label.pack()
+
+    l = [data["tx"]["payload_size"]["value"], * data["tx"]["payload_size"]["options"]]
+    payload_var = StringVar()
+    payload_var.set(data["tx"]["payload_size"]["value"])
+    
+    dropdown = ttk.OptionMenu(tab2,payload_var,*l)
+    dropdown.pack()
+
+    def save():
+        file = open("C:/Users/Noah/Desktop/Flightconfold/Flightcontroller-/src/settings/transmitt.json",mode="w")
+        data["tx"]["payload_size"]["value"] = payload_var.get()
+        file.write(json.dumps(data,indent=4))
+        file.close()
+
+    sub_button = ttk.Button(tab2,text= "Save",command=save)
+    sub_button.pack()
     root.mainloop() 
