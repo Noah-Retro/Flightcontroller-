@@ -37,7 +37,7 @@ if __name__ == '__main__':
         ps4con.start()
     controllerData = []
     
-    app=App()
+    app=App("Flightcontroller-/src/settings")
     app.start()
     
     while True:

@@ -1,0 +1,10 @@
+{
+    "rumble": false,
+    "sensitivity_x": 1.0,
+    "sensitivity_y": 1.0,
+    "calibration_x_l": 0,
+    "calibration_y_l": 0,
+    "calibration_x_r": 0,
+    "calibration_y_r": 0,
+    "inverse_look": false
+}
