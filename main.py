@@ -20,8 +20,6 @@ except Exception as e:
 pygame.init()
 pygame.joystick.init()
 
-
-
 while pygame.joystick.get_count()<=0:
     print(platform)
     print(pygame.joystick.get_count())
@@ -31,20 +29,17 @@ controller.init()
 
 controllerQueue = Queue()
 controllerQueueSend = Queue()
-controllerQueueSend = controllerQueue
 
-ps4con = PS4Controller(controller=controller,q=controllerQueue)
+ps4con = PS4Controller(controller=controller,q=controllerQueue,q1=controllerQueueSend)
+rx = Tx_Thread(controllerQueueSend)
+app=App("src/settings")
 
 controllerData = []
 
 if __name__ == '__main__':
     
     ps4con.start()
-    
-    app=App("src/settings")
     app.start()
-    
-    rx = Tx_Thread(controllerQueueSend)
     rx.start()
     
     while True:

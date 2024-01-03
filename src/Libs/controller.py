@@ -32,8 +32,9 @@ hat_data: Dpad (Left/right,Up/down) Left=-1 Down=-1
 class PS4Controller(threading.Thread):
     """Class representing the PS4 controller. Pretty straightforward functionality."""
     
-    def __init__(self,controller:pygame.joystick,q:Queue,*args,**kwargs):
+    def __init__(self,controller:pygame.joystick,q:Queue,q1:Queue,*args,**kwargs):
         self.q = q
+        self.q1 = q1
         self.controller = controller
         self.axis_data = None
         self.button_data = None
@@ -72,7 +73,7 @@ class PS4Controller(threading.Thread):
                 # In the current setup, I have the state simply printing out to the screen.
                 #self.queue.put({**self.button_data,**self.axis_data,**self.hat_data})
                 self.q.put_nowait([self.button_data,self.axis_data,self.hat_data])
-                
+                self.q1.put_nowait([self.button_data,self.axis_data,self.hat_data])
                 #return 
                 #os.system('clear')
                 #pprint.pprint([self.button_data,self.axis_data,self.hat_data])
