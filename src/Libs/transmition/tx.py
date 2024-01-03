@@ -74,7 +74,8 @@ class Tx_Thread(threading.Thread):
                                                 send[2][0][1])
                         nrf.reset_packages_lost()
                         nrf.send(payload)
-                        
+                print("<B"+"?"*13+"f"*6+"h"*2)
+                print(payload)        
                 # Send the payload to the address specified above.
                 
                 try:
