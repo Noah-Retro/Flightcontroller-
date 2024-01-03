@@ -72,7 +72,7 @@ class Tx_Thread(threading.Thread):
                                                 *send[1].values(),
                                                 send[2][0][0],
                                                 send[2][0][1])
-                    print(payload)
+                print(payload)
                 # Send the payload to the address specified above.
                 nrf.reset_packages_lost()
                 nrf.send(payload)
