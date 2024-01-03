@@ -44,7 +44,7 @@ if __name__ == '__main__':
     
     rx = Tx_Thread(controllerData)
     rx.start()
-
+    
     while True:
         if not controllerQueue.empty():
             

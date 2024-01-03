@@ -43,19 +43,17 @@ nrf.show_registers()
 
 class Tx_Thread(threading.Thread):
     def __init__(self,sending_data,is_setting:bool=False) -> None:
-        self.sending_data = sending_data
-        self.is_setting = is_setting
-        super().__init__(daemon=True)
+        super().__init__(daemon=True,args=(sending_data,is_setting))
 
     def callback(self):
         nrf.power_down()
         pi.stop()
 
-    def run(self):
+    def run(self,sending_data,is_setting):
         count = 0
         while True:
 
-            print(self.sending_data)
+            print(sending_data)
             payload = struct.pack("<Bf", 0x01, 0.1)
 
             # Send the payload to the address specified above.
