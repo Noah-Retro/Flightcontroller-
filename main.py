@@ -33,7 +33,6 @@ if platform == "linux":
 
     ps4con = PS4Controller(controller=controller,q=controllerQueue)
 
-    receve_queue = Queue()
 
 if __name__ == '__main__':
     if platform == "linux":
@@ -59,12 +58,7 @@ if __name__ == '__main__':
         else:
             controller.stop_rumble()
             
-        if not receve_queue.empty():
-            for _ in range(receve_queue.qsize()-1):
-                print(receve_queue.qsize())
-                temp = receve_queue.get_nowait()
-            print(temp)
-        time.sleep(10)
+        
         
         
                 

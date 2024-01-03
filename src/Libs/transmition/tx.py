@@ -67,10 +67,6 @@ class Tx_Thread(threading.Thread):
                 time.sleep(0.2)
                 continue
             
-            if nrf.get_packages_lost() == 0:
-                self.sending_data = f"Success: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}"
-            else:
-                self.sending_data = f"Error: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}"
             
 
      
