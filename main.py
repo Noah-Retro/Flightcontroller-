@@ -58,7 +58,10 @@ if __name__ == '__main__':
             controller.rumble(low_frequency=0.5,high_frequency=1,duration=0)
         else:
             controller.stop_rumble()
-        print(receve_queue.get_nowait())
+            
+        if not receve_queue.empty():
+            for _ in range(receve_queue.qsize()-1):
+                print(receve_queue.get_nowait())
         
         
                 
