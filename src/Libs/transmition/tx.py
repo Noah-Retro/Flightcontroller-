@@ -89,9 +89,9 @@ class Tx_Thread(threading.Thread):
                         hat_bytes = struct.pack("h"*2,
                                                  send[2][0][0],
                                                  send[2][0][1])
-                    print(send[2])
-                    print(str(button_bytes) + str(axis_bytes) + str(hat_bytes))        
+       
                     payload = struct.pack("<Bf", 0x01, 0.1)
+                    print(payload.__sizeof__())
                 # Send the payload to the address specified above.
                 nrf.reset_packages_lost()
                 nrf.send(payload)
