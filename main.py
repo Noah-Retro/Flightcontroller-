@@ -61,6 +61,7 @@ if __name__ == '__main__':
             
         if not receve_queue.empty():
             for _ in range(receve_queue.qsize()-1):
+                print(receve_queue.qsize())
                 print(receve_queue.get_nowait())
         
         

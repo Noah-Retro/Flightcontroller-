@@ -42,8 +42,8 @@ nrf.show_registers()
 
 
 class Tx_Thread(threading.Thread):
-    def __init__(self,data) -> None:
-        self.data = data
+    def __init__(self,sending_data) -> None:
+        self.sending_data = sending_data
         super().__init__()
 
     def callback(self):
@@ -59,7 +59,7 @@ class Tx_Thread(threading.Thread):
             # sent/received fluctuate a bit.
             temperature = normalvariate(23.0, 0.5)
             humidity = normalvariate(62.0, 0.5)
-            self.data=f'Sensor values: temperature={temperature}, humidity={humidity}'
+            self.sending_data=f'Sensor values: temperature={temperature}, humidity={humidity}'
 
             # Pack temperature and humidity into a byte buffer (payload) using a protocol 
             # signature of 0x01 so that the receiver knows that the bytes we are sending 
@@ -78,9 +78,9 @@ class Tx_Thread(threading.Thread):
                 continue
             
             if nrf.get_packages_lost() == 0:
-                self.data = f"Success: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}"
+                self.sending_data = f"Success: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}"
             else:
-                self.data = f"Error: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}"
+                self.sending_data = f"Error: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}"
             
 
      
