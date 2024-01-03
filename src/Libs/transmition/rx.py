@@ -66,7 +66,7 @@ class Rx_Thread(threading.Thread):
                 hex = ':'.join(f'{i:02x}' for i in payload)
                 
                 print(payload)
-                #print("Payload rx: " + str(struct.unpack("<B"+"?"*13+"f"*6+"h"*2, payload)))
+                print("Payload rx: " + str(struct.unpack("<B"+"?"*13+"f"*6+"h"*2, payload)))
                 
                 # If the length of the message is 9 bytes and the first byte is 0x01, then we try to interpret the bytes
                 # sent as an example message holding a temperature and humidity sent from the "simple-sender.py" program.
