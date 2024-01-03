@@ -79,6 +79,7 @@ class Tx_Thread(threading.Thread):
                 try:
                     nrf.wait_until_sent()
                 except TimeoutError:
+                    print("Timed out")
                     time.sleep(0.2)
                     continue
         except KeyboardInterrupt:
