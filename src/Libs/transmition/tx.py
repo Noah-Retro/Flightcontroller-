@@ -93,6 +93,7 @@ class Tx_Thread(threading.Thread):
                     continue
         except KeyboardInterrupt:
             nrf.power_down()
+            pi.stop()
             
             
 

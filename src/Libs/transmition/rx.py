@@ -76,5 +76,6 @@ class Rx_Thread(threading.Thread):
                         self.queue.put_nowait(values)
         except KeyboardInterrupt:
             nrf.power_down()
+            pi.stop()
             
 
