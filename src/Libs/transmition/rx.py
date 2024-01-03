@@ -71,7 +71,7 @@ class Rx_Thread(threading.Thread):
                 # sent as an example message holding a temperature and humidity sent from the "simple-sender.py" program.
                 if len(payload) == 9 and payload[0] == 0x01:
                     values = struct.unpack("<Bff", payload)
-                    print(f'Protocol: {values[0]}, temperature: {values[1]}, humidity: {values[2]}')
+                    data=f'Protocol: {values[0]}, temperature: {values[1]}, humidity: {values[2]}'
 
 
 if __name__ == "__main__":
