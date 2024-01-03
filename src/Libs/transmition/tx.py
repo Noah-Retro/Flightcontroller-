@@ -63,23 +63,23 @@ class Tx_Thread(threading.Thread):
                     if not send:
                         continue
                     print(send)
-                    if send[0]["8"] and send[0]["10"]:
+                    if send[0][8] and send[0][10]:
                         pass
                     else:
                         button_bytes = struct.pack("?"*13,
-                                                   send[0]["0"],
-                                                   send[0]["1"],
-                                                   send[0]["2"],
-                                                   send[0]["3"],
-                                                   send[0]["4"],
-                                                   send[0]["5"],
-                                                   send[0]["6"],
-                                                   send[0]["7"],
-                                                   send[0]["8"],
-                                                   send[0]["9"],
-                                                   send[0]["10"],
-                                                   send[0]["11"],
-                                                   send[0]["12"])
+                                                   send[0][0],
+                                                   send[0][1],
+                                                   send[0][2],
+                                                   send[0][3],
+                                                   send[0][4],
+                                                   send[0][5],
+                                                   send[0][6],
+                                                   send[0][7],
+                                                   send[0][8],
+                                                   send[0][9],
+                                                   send[0][10],
+                                                   send[0][11],
+                                                   send[0][12])
                     print(type(send[1]["0"]))        
                     payload = struct.pack("<Bf", 0x01, 0.1)
                 print(send)
