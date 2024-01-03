@@ -40,14 +40,15 @@ nrf.open_reading_pipe(RF24_RX_ADDR.P1, address)
 nrf.show_registers()
 
 class Rx_Thread(threading.Thread):
-    def __init__(self) -> None:
+    def __init__(self,data) -> None:
+        self.data=data
         super().__init__()
 
     def callback(self):
         nrf.power_down()
         pi.stop()      
 
-    def run(self,data):
+    def run(self):
         count = 0
         while True:
             while nrf.data_ready():

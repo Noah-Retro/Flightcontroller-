@@ -39,14 +39,15 @@ nrf.open_writing_pipe(address)
 nrf.show_registers()
 
 class Tx_Thread(threading.Thread):
-    def __init__(self) -> None:
+    def __init__(self,data) -> None:
+        self.data = data
         super().__init__()
 
     def callback(self):
         nrf.power_down()
         pi.stop()
 
-    def run(self,data):
+    def run(self):
         count = 0
         while True:
 
@@ -74,9 +75,9 @@ class Tx_Thread(threading.Thread):
                 continue
             
             if nrf.get_packages_lost() == 0:
-                data = f"Success: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}"
+                self.data = f"Success: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}"
             else:
-                data = f"Error: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}"
+                self.data = f"Error: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}"
             time.sleep(1)
 
 if __name__ == "__main__":
