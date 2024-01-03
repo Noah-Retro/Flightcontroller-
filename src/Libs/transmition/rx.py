@@ -66,12 +66,12 @@ class Rx_Thread(threading.Thread):
         
                 hex = ':'.join(f'{i:02x}' for i in payload)
                 
-                print("Payload rx: " + payload)
+                print("Payload rx: " + struct.unpack("<Bf", payload))
                 
                 # If the length of the message is 9 bytes and the first byte is 0x01, then we try to interpret the bytes
                 # sent as an example message holding a temperature and humidity sent from the "simple-sender.py" program.
                 if len(payload) == 9 and payload[0] == 0x01:
-                    values = struct.unpack("<Bff", payload)
+                    values = struct.unpack("<Bf", payload)
                     self.queue.put_nowait(values)
 
 
