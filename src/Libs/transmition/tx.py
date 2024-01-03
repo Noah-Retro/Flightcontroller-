@@ -77,6 +77,7 @@ class Tx_Thread(threading.Thread):
                 print(f"Success: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}")
             else:
                 print(f"Error: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}")
+            time.sleep(1)
 
 if __name__ == "__main__":
     data = 0
