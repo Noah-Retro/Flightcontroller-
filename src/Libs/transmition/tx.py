@@ -80,7 +80,7 @@ class Tx_Thread(threading.Thread):
                                                    send[0][10],
                                                    send[0][11],
                                                    send[0][12])
-                    print(type(send[1][0]))
+                    print(send[1])
                     print(str(button_bytes))        
                     payload = struct.pack("<Bf", 0x01, 0.1)
                 # Send the payload to the address specified above.
