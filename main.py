@@ -1,7 +1,7 @@
 import src.Libs.autoupdate as ap
 from src.Libs.controller import PS4Controller
 from src.Libs.gui import App
-from src.Libs.transmition import Rx_Thread
+from src.Libs.transmition import Tx_Thread
 import pygame
 
 from sys import platform
@@ -41,9 +41,9 @@ if __name__ == '__main__':
     controllerData = []
     
     app=App("src/settings/transmitt.json")
-    app_thread = Thread(target= app.run)
+    app.start()
     
-    rx = Rx_Thread(receve_queue)
+    rx = Tx_Thread(receve_queue)
     rx.start()
 
     while True:

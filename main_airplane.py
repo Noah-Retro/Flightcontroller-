@@ -1,10 +1,10 @@
 import nrf24
-from src.Libs.transmition import Tx_Thread
+from src.Libs.transmition import Rx_Thread
 from threading import Thread
 import time
 
 data = None
-tx = Tx_Thread(data)
+tx = Rx_Thread(data)
 print("Started thread in 1")
 tx.start()
 print("Started")

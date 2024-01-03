@@ -42,7 +42,7 @@ nrf.show_registers()
 
 
 class Tx_Thread(threading.Thread):
-    def __init__(self,sending_data,is_setting) -> None:
+    def __init__(self,sending_data,is_setting:bool=False) -> None:
         self.sending_data = sending_data
         self.is_setting = is_setting
         super().__init__(daemon=True)
@@ -55,17 +55,7 @@ class Tx_Thread(threading.Thread):
         count = 0
         while True:
 
-            # Emulate that we read temperature and humidity from a sensor, for example
-            # a DHT22 sensor.  Add a little random variation so we can see that values
-            # sent/received fluctuate a bit.
-            temperature = normalvariate(23.0, 0.5)
-            humidity = normalvariate(62.0, 0.5)
-            self.sending_data=f'Sensor values: temperature={temperature}, humidity={humidity}'
-
-            # Pack temperature and humidity into a byte buffer (payload) using a protocol 
-            # signature of 0x01 so that the receiver knows that the bytes we are sending 
-            # are a temperature and a humidity (see "simple-receiver.py").
-            payload = struct.pack("<Bff", 0x01, temperature, humidity)
+            payload = struct.pack("<Bff", 0x01, self.sending_data)
 
             # Send the payload to the address specified above.
             nrf.reset_packages_lost()
