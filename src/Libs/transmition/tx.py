@@ -56,7 +56,7 @@ class Tx_Thread(threading.Thread):
             # sent/received fluctuate a bit.
             temperature = normalvariate(23.0, 0.5)
             humidity = normalvariate(62.0, 0.5)
-            print(f'Sensor values: temperature={temperature}, humidity={humidity}')
+            self.data=f'Sensor values: temperature={temperature}, humidity={humidity}'
 
             # Pack temperature and humidity into a byte buffer (payload) using a protocol 
             # signature of 0x01 so that the receiver knows that the bytes we are sending 
@@ -80,9 +80,4 @@ class Tx_Thread(threading.Thread):
                 self.data = f"Error: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}"
             time.sleep(1)
 
-if __name__ == "__main__":
-    data = 0
-    sender = Tx_Thread()
-    sender.run(data)       
-    while not KeyboardInterrupt:
-        pass        
+     
