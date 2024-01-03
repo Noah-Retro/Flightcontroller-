@@ -1,6 +1,7 @@
 import src.Libs.autoupdate as ap
 from src.Libs.controller import PS4Controller
 from src.Libs.gui import App
+from src.Libs.transmition import Rx_Thread
 import pygame
 
 from sys import platform
@@ -39,7 +40,11 @@ if __name__ == '__main__':
     
     app=App("Flightcontroller-/src/settings")
     app.start()
-    
+
+    rx_thread = Rx_Thread()
+    data = 0
+    rx_thread.run(data)
+
     while True:
         if not controllerQueue.empty():
             
@@ -52,6 +57,7 @@ if __name__ == '__main__':
             controller.rumble(low_frequency=0.5,high_frequency=1,duration=0)
         else:
             controller.stop_rumble()
+        print(data)
         
         
                 

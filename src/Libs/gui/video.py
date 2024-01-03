@@ -12,4 +12,5 @@ def video():
     imgbytes = img.tobytes()
     return imgbytes
 
-
+if __name__ == "__main__":
+    pass

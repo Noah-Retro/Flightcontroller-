@@ -54,7 +54,7 @@ def video_stream(video_stream_in):
     lmain.after(1, video_stream_in) 
     return video_stream
 
-from video import video
+from gui.video import video
 video_stream(video())
 lmain.bind(func=video_stream)
 # run 
