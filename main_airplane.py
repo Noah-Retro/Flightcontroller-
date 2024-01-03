@@ -4,7 +4,7 @@ from threading import Thread
 import time
 from queue import Queue
 
-data = Queue
+data = Queue()
 tx = Rx_Thread(data)
 print("Started thread in 1")
 tx.start()
