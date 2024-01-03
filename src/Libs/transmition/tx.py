@@ -66,19 +66,17 @@ class Tx_Thread(threading.Thread):
                     if send[0][9] and send[0][10]:
                         pass
                     else:     
-                        #payload = struct.pack("<B"+"?"*13+"f"*6+"h"*2,
-                        #                        0x01,
-                        #                        *send[0].values(),
-                        #                        *send[1].values(),
-                        #                        send[2][0][0],
-                        #                        send[2][0][1])
-                        pass
-                temp = normalvariate(100,50)
-                payload=struct.pack("<Bf",0x02,temp)
-                print(payload)
+                        payload = struct.pack("<B"+"?"*13+"f"*6+"h"*2,
+                                                0x01,
+                                                *send[0].values(),
+                                                *send[1].values(),
+                                                send[2][0][0],
+                                                send[2][0][1])
+                        nrf.reset_packages_lost()
+                        nrf.send(payload)
+                        
                 # Send the payload to the address specified above.
-                nrf.reset_packages_lost()
-                nrf.send(payload)
+                
                 try:
                     nrf.wait_until_sent()
                 except TimeoutError:
