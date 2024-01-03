@@ -13,7 +13,7 @@ from random import normalvariate
 import pigpio
 from nrf24 import *
 
-data = open("/src/settings/transmitt.json")
+data = open("src/settings/transmitt.json")
 settings = json.load(data)
 tx_settings = settings["tx"]
 
