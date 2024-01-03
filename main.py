@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
     rx = Rx_Thread()
     data = 0
-    rx_thread = Thread(target=rx.run,args=(data,))
+    rx.start(data)
 
     while True:
         if not controllerQueue.empty():

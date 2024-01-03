@@ -6,7 +6,7 @@ import time
 data = 0
 tx = Tx_Thread()
 print("Started thread in 1")
-tx_thread = Thread(target=tx.run,args=(data,))
+tx.start()
 print("Started")
 
 while True:

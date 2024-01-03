@@ -47,7 +47,7 @@ class Rx_Thread(threading.Thread):
         nrf.power_down()
         pi.stop()      
 
-    def start(self,data):
+    def run(self,data):
         count = 0
         while True:
             while nrf.data_ready():
