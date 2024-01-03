@@ -60,7 +60,7 @@ class Tx_Thread(threading.Thread):
                     for _ in range(self.sending_data.qsize()-1):
                         send=self.sending_data.get_nowait()
                 payload = struct.pack("<Bf", 0x01, 0.1)
-                #print(send)
+                print(send)
                 # Send the payload to the address specified above.
                 nrf.reset_packages_lost()
                 nrf.send(payload)
