@@ -78,7 +78,6 @@ class Rx_Thread(threading.Thread):
                         val1 = struct.unpack("f"*6,values[2])
                         val2 = struct.unpack("h"*2,values[3])
                         self.queue.put_nowait([val,val1,val2])
-                    time.sleep(1)
         except KeyboardInterrupt:
             nrf.power_down()
             pi.stop()
