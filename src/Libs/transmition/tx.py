@@ -45,10 +45,6 @@ class Tx_Thread(threading.Thread):
     def callback(self):
         nrf.power_down()
         pi.stop()
-    
-    def join(self, timeout: float | None = None) -> None:
-        nrf.power_down()
-        return super().join(timeout)    
 
     def run(self,data):
         count = 0
