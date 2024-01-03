@@ -82,6 +82,7 @@ class Tx_Thread(threading.Thread):
                     print("Timed out")
                     time.sleep(0.2)
                     continue
+                time.sleep(1)
         except KeyboardInterrupt:
             nrf.power_down()
             pi.stop()
