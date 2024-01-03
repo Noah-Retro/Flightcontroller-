@@ -43,7 +43,7 @@ nrf.show_registers()
 class Rx_Thread(threading.Thread):
     def __init__(self,queue:Queue) -> None:
         self.queue=queue
-        super().__init__(daemon=True)
+        super().__init__()
 
     def callback(self):
         nrf.power_down()

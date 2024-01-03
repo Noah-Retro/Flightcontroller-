@@ -30,6 +30,7 @@ if platform == "linux":
     controller.init()
 
     controllerQueue = Queue()
+    controllerQueueSend = controllerQueue
 
     ps4con = PS4Controller(controller=controller,q=controllerQueue)
 
@@ -42,10 +43,11 @@ if __name__ == '__main__':
     app=App("src/settings")
     app.start()
     
-    rx = Tx_Thread(controllerData)
+    rx = Tx_Thread(controllerQueueSend)
     rx.start()
     
     while True:
+        controllerQueueSend = controllerQueue
         if not controllerQueue.empty():
             
             for _ in range(controllerQueue.qsize()-1):

@@ -3,7 +3,7 @@ from datetime import datetime
 import struct
 import sys
 import time
-import traceback
+from queue import Queue
 import json
 import threading
 from typing import Any
@@ -42,8 +42,10 @@ nrf.show_registers()
 
 
 class Tx_Thread(threading.Thread):
-    def __init__(self,sending_data,is_setting:bool=False) -> None:
-        super().__init__(daemon=True,args=(sending_data,is_setting))
+    def __init__(self,sending_data:Queue,is_setting:bool=False) -> None:
+        self.sending_data = sending_data
+        self.is_setting = is_setting
+        super().__init__()
 
     def callback(self):
         nrf.power_down()
@@ -52,9 +54,7 @@ class Tx_Thread(threading.Thread):
     def run(self):
         count = 0
         while True:
-            sending_data = self.args[0]
-            is_setting = self.args[1]
-            print(sending_data)
+            print(self.sending_data.get_nowait())
             payload = struct.pack("<Bf", 0x01, 0.1)
 
             # Send the payload to the address specified above.
