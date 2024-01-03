@@ -65,6 +65,7 @@ class Rx_Thread(threading.Thread):
         
                 hex = ':'.join(f'{i:02x}' for i in payload)
                 
+                print(nrf.data_ready())
                 print(payload)
                 print("Payload rx: " + str(struct.unpack("<B"+"?"*13+"f"*6+"h"*2, payload)))
                 
@@ -72,10 +73,7 @@ class Rx_Thread(threading.Thread):
                 # sent as an example message holding a temperature and humidity sent from the "simple-sender.py" program.
                 if payload[0] == 0x01:
                     values = struct.unpack("<B"+"?"*13+"f"*6+"h"*2, payload)
-                    val = struct.unpack("?"*13,values[1])
-                    val1 = struct.unpack("f"*6,values[2])
-                    val2 = struct.unpack("h"*2,values[3])
-                    self.queue.put_nowait([val,val1,val2])
+                    self.queue.put_nowait(values)
                 time.sleep(1)
 
             
