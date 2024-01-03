@@ -45,7 +45,7 @@ class PS4Controller(threading.Thread):
         """Listen for events to happen"""
         
         if not self.axis_data:
-            self.axis_data = {}
+            self.axis_data = {0:0,1:0,2:0,3:0,4:0,5:0}
 
         if not self.button_data:
             self.button_data = {}

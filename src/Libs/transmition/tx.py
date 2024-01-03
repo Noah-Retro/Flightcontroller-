@@ -63,7 +63,7 @@ class Tx_Thread(threading.Thread):
                     if not send:
                         continue
                     print(send)
-                    if send[0][8] and send[0][10]:
+                    if send[0][9] and send[0][10]:
                         pass
                     else:
                         button_bytes = struct.pack("?"*13,
