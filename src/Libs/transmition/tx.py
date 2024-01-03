@@ -77,7 +77,6 @@ class Tx_Thread(threading.Thread):
                 print("<B"+"?"*13+"f"*6+"h"*2)
                 print(len(send[0].values()))
                 print(len(send[1].values()))
-                print(len(send[2][0].values()))
                 print(payload)        
                 # Send the payload to the address specified above.
                 
