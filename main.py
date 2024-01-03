@@ -41,10 +41,9 @@ if __name__ == '__main__':
     app=App("src/settings/transmitt.json")
     app_thread = Thread(target= app.run)
     
-
-    rx = Rx_Thread()
     data = 0
-    rx.start(data)
+    rx = Rx_Thread(data)
+    rx.start()
 
     while True:
         if not controllerQueue.empty():
