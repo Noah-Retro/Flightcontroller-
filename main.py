@@ -40,7 +40,7 @@ if __name__ == '__main__':
         ps4con.start()
     controllerData = []
     
-    app=App("src/settings/transmitt.json")
+    app=App("src/settings")
     app.start()
     
     rx = Tx_Thread(receve_queue)
