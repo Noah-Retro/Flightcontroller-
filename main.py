@@ -35,7 +35,6 @@ controllerQueueSend = controllerQueue
 ps4con = PS4Controller(controller=controller,q=controllerQueue)
     
 
-
 if __name__ == '__main__':
     
     ps4con.start()

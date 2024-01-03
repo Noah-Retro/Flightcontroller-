@@ -56,7 +56,7 @@ class Tx_Thread(threading.Thread):
         send=[]
         try:
             while True:
-                if self.sending_data.qsize()>0:
+                if not self.sending_data.empty():
                     for _ in range(self.sending_data.qsize()-1):
                         send=self.sending_data.get_nowait()
                 payload = struct.pack("<Bf", 0x01, 0.1)
