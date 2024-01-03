@@ -13,7 +13,6 @@ import time
 
 try:
     if platform == "linux":
-        os.system("sudo pigpiod")
         ap.update(os.path.dirname(os.path.abspath(__file__)))
 except Exception as e:
     raise e

@@ -5,7 +5,6 @@ import time
 from queue import Queue
 import os
 
-os.system("sudo pigpiod")
 
 data = Queue()
 tx = Rx_Thread(data)
