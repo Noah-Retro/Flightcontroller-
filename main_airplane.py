@@ -6,13 +6,14 @@ from queue import Queue
 
 data = Queue()
 tx = Rx_Thread(data)
-print("Started thread in 1")
+#print("Started thread in 1")
 tx.start()
-print("Started")
+#print("Started")
 
 while True:
-    print(data)
-    print(data.qsize())
+    #print(data)
+    #print(data.qsize())
     if data.qsize()>0:
-        print(data.get_nowait())
+        #print(data.get_nowait())
+        pass
 
