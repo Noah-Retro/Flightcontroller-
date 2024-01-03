@@ -53,20 +53,23 @@ class Tx_Thread(threading.Thread):
 
     def run(self):
         count = 0
-        while True:
-            print(self.sending_data.qsize())
-            if self.sending_data.qsize()>0:
-                print(self.sending_data.get_nowait())
-            payload = struct.pack("<Bf", 0x01, 0.1)
+        try:
+            while True:
+                print(self.sending_data.qsize())
+                if self.sending_data.qsize()>0:
+                    print(self.sending_data.get_nowait())
+                payload = struct.pack("<Bf", 0x01, 0.1)
 
-            # Send the payload to the address specified above.
-            nrf.reset_packages_lost()
-            nrf.send(payload)
-            try:
-                nrf.wait_until_sent()
-            except TimeoutError:
-                time.sleep(0.2)
-                continue
+                # Send the payload to the address specified above.
+                nrf.reset_packages_lost()
+                nrf.send(payload)
+                try:
+                    nrf.wait_until_sent()
+                except TimeoutError:
+                    time.sleep(0.2)
+                    continue
+        except KeyboardInterrupt:
+            nrf.power_down()
             
             
 

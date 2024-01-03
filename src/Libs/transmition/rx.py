@@ -51,27 +51,30 @@ class Rx_Thread(threading.Thread):
 
     def run(self):
         count = 0
-        while True:
-            while nrf.data_ready():
-                # Count message and record time of reception.            
-                count += 1
-                now = datetime.now()
+        try:
+            while True:
+                while nrf.data_ready():
+                    # Count message and record time of reception.            
+                    count += 1
+                    now = datetime.now()
+                        
+                    # Read pipe and payload for message.
+                    pipe = nrf.data_pipe()
+                    payload = nrf.get_payload()    
+            
+                    # Resolve protocol number.
+                    protocol = payload[0] if len(payload) > 0 else -1            
+            
+                    hex = ':'.join(f'{i:02x}' for i in payload)
                     
-                # Read pipe and payload for message.
-                pipe = nrf.data_pipe()
-                payload = nrf.get_payload()    
-        
-                # Resolve protocol number.
-                protocol = payload[0] if len(payload) > 0 else -1            
-        
-                hex = ':'.join(f'{i:02x}' for i in payload)
-                
-                print("Payload rx: " + str(struct.unpack("<Bf", payload)))
-                
-                # If the length of the message is 9 bytes and the first byte is 0x01, then we try to interpret the bytes
-                # sent as an example message holding a temperature and humidity sent from the "simple-sender.py" program.
-                if len(payload) == 9 and payload[0] == 0x01:
-                    values = struct.unpack("<Bf", payload)
-                    self.queue.put_nowait(values)
-
+                    print("Payload rx: " + str(struct.unpack("<Bf", payload)))
+                    
+                    # If the length of the message is 9 bytes and the first byte is 0x01, then we try to interpret the bytes
+                    # sent as an example message holding a temperature and humidity sent from the "simple-sender.py" program.
+                    if len(payload) == 9 and payload[0] == 0x01:
+                        values = struct.unpack("<Bf", payload)
+                        self.queue.put_nowait(values)
+        except KeyboardInterrupt:
+            nrf.power_down()
+            
 
