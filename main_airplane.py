@@ -11,6 +11,7 @@ tx.start()
 print("Started")
 
 while True:
+    print(data)
     if data.qsize()>0:
         print(data.get_nowait())
 
