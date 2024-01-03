@@ -44,7 +44,7 @@ nrf.show_registers()
 class Tx_Thread(threading.Thread):
     def __init__(self,sending_data) -> None:
         self.sending_data = sending_data
-        super().__init__()
+        super().__init__(daemon=True)
 
     def callback(self):
         nrf.power_down()
@@ -72,8 +72,6 @@ class Tx_Thread(threading.Thread):
             try:
                 nrf.wait_until_sent()
             except TimeoutError:
-                print('Timeout waiting for transmission to complete.')
-                # Wait 10 seconds before sending the next reading.
                 time.sleep(0.2)
                 continue
             

@@ -43,7 +43,7 @@ nrf.show_registers()
 class Rx_Thread(threading.Thread):
     def __init__(self,queue:Queue) -> None:
         self.queue=queue
-        super().__init__()
+        super().__init__(daemon=True)
 
     def callback(self):
         nrf.power_down()
@@ -65,10 +65,7 @@ class Rx_Thread(threading.Thread):
                 protocol = payload[0] if len(payload) > 0 else -1            
         
                 hex = ':'.join(f'{i:02x}' for i in payload)
-        
-                # Show message received as hex.
-                print(f"{now:%Y-%m-%d %H:%M:%S.%f}: pipe: {pipe}, len: {len(payload)}, bytes: {hex}, count: {count}")
-        
+                
                 # If the length of the message is 9 bytes and the first byte is 0x01, then we try to interpret the bytes
                 # sent as an example message holding a temperature and humidity sent from the "simple-sender.py" program.
                 if len(payload) == 9 and payload[0] == 0x01:

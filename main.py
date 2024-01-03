@@ -63,6 +63,7 @@ if __name__ == '__main__':
             for _ in range(receve_queue.qsize()-1):
                 print(receve_queue.qsize())
                 print(receve_queue.get_nowait())
+        time.sleep(10)
         
         
                 
