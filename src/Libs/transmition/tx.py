@@ -55,7 +55,8 @@ class Tx_Thread(threading.Thread):
         count = 0
         while True:
 
-            payload = struct.pack("<Bf", 0x01, self.sending_data)
+            print(self.sending_data)
+            payload = struct.pack("<Bf", 0x01, 0.1)
 
             # Send the payload to the address specified above.
             nrf.reset_packages_lost()
