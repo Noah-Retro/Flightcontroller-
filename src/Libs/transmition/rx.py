@@ -41,8 +41,8 @@ nrf.open_reading_pipe(RF24_RX_ADDR.P1, address)
 nrf.show_registers()
 
 class Rx_Thread(threading.Thread):
-    def __init__(self,data:Queue) -> None:
-        self.data=data
+    def __init__(self,queue:Queue) -> None:
+        self.queue=queue
         super().__init__()
 
     def callback(self):
@@ -73,6 +73,6 @@ class Rx_Thread(threading.Thread):
                 # sent as an example message holding a temperature and humidity sent from the "simple-sender.py" program.
                 if len(payload) == 9 and payload[0] == 0x01:
                     values = struct.unpack("<Bff", payload)
-                    self.data.put_nowait(f'Protocol: {values[0]}, temperature: {values[1]}, humidity: {values[2]}')
+                    self.queue.put_nowait(f'Protocol: {values[0]}, temperature: {values[1]}, humidity: {values[2]}')
 
 
