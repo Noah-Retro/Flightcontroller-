@@ -3,6 +3,9 @@ from src.Libs.transmition import Rx_Thread
 from threading import Thread
 import time
 from queue import Queue
+import os
+
+os.system("sudo pigpiod")
 
 data = Queue()
 tx = Rx_Thread(data)

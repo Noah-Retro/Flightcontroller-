@@ -13,6 +13,7 @@ import time
 
 try:
     if platform == "linux":
+        os.system("sudo pigpiod")
         ap.update(os.path.dirname(os.path.abspath(__file__)))
 except Exception as e:
     raise e
@@ -21,23 +22,24 @@ pygame.init()
 pygame.joystick.init()
 
 
-if platform == "linux":
-    while pygame.joystick.get_count()<=0:
-        print(platform)
-        print(pygame.joystick.get_count())
 
-    controller = pygame.joystick.Joystick(0)
-    controller.init()
+while pygame.joystick.get_count()<=0:
+    print(platform)
+    print(pygame.joystick.get_count())
 
-    controllerQueue = Queue()
-    controllerQueueSend = controllerQueue
+controller = pygame.joystick.Joystick(0)
+controller.init()
 
-    ps4con = PS4Controller(controller=controller,q=controllerQueue)
+controllerQueue = Queue()
+controllerQueueSend = controllerQueue
+
+ps4con = PS4Controller(controller=controller,q=controllerQueue)
+    
 
 
 if __name__ == '__main__':
-    if platform == "linux":
-        ps4con.start()
+    
+    ps4con.start()
     controllerData = []
     
     app=App("src/settings")
