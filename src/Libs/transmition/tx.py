@@ -49,10 +49,11 @@ class Tx_Thread(threading.Thread):
         nrf.power_down()
         pi.stop()
 
-    def run(self,sending_data,is_setting):
+    def run(self):
         count = 0
         while True:
-
+            sending_data = self.args[0]
+            is_setting = self.args[1]
             print(sending_data)
             payload = struct.pack("<Bf", 0x01, 0.1)
 
