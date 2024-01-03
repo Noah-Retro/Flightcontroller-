@@ -12,7 +12,7 @@ from typing import Any
 import pigpio
 from nrf24 import *
 
-data = open("Flightcontroller-/src/settings/transmitt.json")
+data = open("src/settings/transmitt.json")
 settings = json.load(data)
 rx_settings = settings["rx"]
 

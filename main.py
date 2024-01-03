@@ -38,7 +38,7 @@ if __name__ == '__main__':
         ps4con.start()
     controllerData = []
     
-    app=App("Flightcontroller-/src/settings")
+    app=App("src/settings/transmitt.json")
     app.start()
 
     rx_thread = Rx_Thread()
