@@ -73,7 +73,8 @@ class Tx_Thread(threading.Thread):
                         #                        send[2][0][0],
                         #                        send[2][0][1])
                         pass
-                payload=struct.pack("<Bf",0x02,normalvariate(100,50))
+                temp = normalvariate(100,50)
+                payload=struct.pack("<Bf",0x02,temp)
                 print(payload)
                 # Send the payload to the address specified above.
                 nrf.reset_packages_lost()
