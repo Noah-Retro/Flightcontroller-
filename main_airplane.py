@@ -12,6 +12,7 @@ print("Started")
 
 while True:
     print(data)
+    print(data.qsize())
     if data.qsize()>0:
         print(data.get_nowait())
 
