@@ -41,7 +41,7 @@ if __name__ == '__main__':
     app=App("src/settings/transmitt.json")
     app_thread = Thread(target= app.run)
     
-    data:int
+    data=None
     rx = Rx_Thread(data)
     rx.start()
 

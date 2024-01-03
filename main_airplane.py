@@ -3,7 +3,7 @@ from src.Libs.transmition import Tx_Thread
 from threading import Thread
 import time
 
-data = 0
+data = None
 tx = Tx_Thread(data)
 print("Started thread in 1")
 tx.start()
