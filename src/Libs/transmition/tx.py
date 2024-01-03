@@ -65,14 +65,13 @@ class Tx_Thread(threading.Thread):
                         continue
                     if send[0][9] and send[0][10]:
                         pass
-                    else:
-                        button_bytes = struct.pack("?"*13,*send[0].values())
-                        axis_bytes = struct.pack("f"*6,*send[1].values())
-                        hat_bytes = struct.pack("h"*2,
-                                                 send[2][0][0],
-                                                 send[2][0][1])
-       
-                        payload = struct.pack("<B", 0x01)+ button_bytes + axis_bytes + hat_bytes
+                    else:     
+                        payload = struct.pack("<B"+"?"*13+"f"*6+"h"*2,
+                                                0x01,
+                                                *send[0].values(),
+                                                *send[1].values(),
+                                                send[2][0][0],
+                                                send[2][0][1])
                     print(payload.__sizeof__())
                 # Send the payload to the address specified above.
                 nrf.reset_packages_lost()
