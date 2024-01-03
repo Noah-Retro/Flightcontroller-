@@ -62,6 +62,7 @@ class Tx_Thread(threading.Thread):
                 
                     if not send:
                         continue
+                    print(send)
                     if send[0]["8"] and send[0]["10"]:
                         pass
                     else:
