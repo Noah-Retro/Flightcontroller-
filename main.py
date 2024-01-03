@@ -53,7 +53,8 @@ if __name__ == '__main__':
             for _ in range(controllerQueue.qsize()-1):
                 controllerData = controllerQueue.get_nowait()
         
-        
+        if not controllerQueueSend.empty():
+            print(controllerQueueSend.get_nowait())
         if len(controllerData)>0:
             if controllerData[0][0]:
                 controller.rumble(low_frequency=0.5,high_frequency=1,duration=0)
