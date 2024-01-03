@@ -43,7 +43,7 @@ if __name__ == '__main__':
     app=App("src/settings")
     app.start()
     
-    rx = Tx_Thread(receve_queue)
+    rx = Tx_Thread(controllerData)
     rx.start()
 
     while True:
