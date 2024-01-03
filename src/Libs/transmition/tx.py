@@ -87,8 +87,8 @@ class Tx_Thread(threading.Thread):
                                                  send[1][4],
                                                  send[1][5])
                         hat_bytes = struct.pack("h"*2,
-                                                 send[2][0],
-                                                 send[2][1])
+                                                 send[2][0][0],
+                                                 send[2][0][1])
                     print(send[2])
                     print(str(button_bytes) + str(axis_bytes) + str(hat_bytes))        
                     payload = struct.pack("<Bf", 0x01, 0.1)
