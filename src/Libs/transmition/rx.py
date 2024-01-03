@@ -47,7 +47,7 @@ class Rx_Thread(threading.Thread):
         nrf.power_down()
         pi.stop()      
 
-    def run(self,data):
+    def start(self,data):
         count = 0
         while True:
             while nrf.data_ready():
@@ -79,4 +79,4 @@ if __name__ == "__main__":
     recever = Rx_Thread()
     recever.run(data)
     while not KeyboardInterrupt:
-        pass
+        print("running")

@@ -160,5 +160,8 @@ class App(threading.Thread):
 
 
 if __name__ == "__main__":
-    test = App("C:/Users/Noah/Desktop/Flightconfold/Flightcontroller-/src/settings")
-    test.run()
+    test = App("./src/settings")
+    
+    test_thread = threading.Thread(target=test.run)
+    test_thread.start()
+    print("Hey")
