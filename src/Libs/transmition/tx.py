@@ -42,8 +42,9 @@ nrf.show_registers()
 
 
 class Tx_Thread(threading.Thread):
-    def __init__(self,sending_data) -> None:
+    def __init__(self,sending_data,is_setting) -> None:
         self.sending_data = sending_data
+        self.is_setting = is_setting
         super().__init__(daemon=True)
 
     def callback(self):
