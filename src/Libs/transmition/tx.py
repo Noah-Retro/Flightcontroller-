@@ -80,9 +80,9 @@ class Tx_Thread(threading.Thread):
                                                    send[0][10],
                                                    send[0][11],
                                                    send[0][12])
-                    print(type(send[1]["0"]))        
+                    print(type(send[1][0]))
+                    print(str(button_bytes))        
                     payload = struct.pack("<Bf", 0x01, 0.1)
-                print(send)
                 # Send the payload to the address specified above.
                 nrf.reset_packages_lost()
                 nrf.send(payload)
