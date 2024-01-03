@@ -30,15 +30,15 @@ controller = pygame.joystick.Joystick(0)
 controller.init()
 
 controllerQueue = Queue()
-controllerQueueSend = controllerQueue
+controllerQueueSend = Queue()
 
 ps4con = PS4Controller(controller=controller,q=controllerQueue)
-    
+
+controllerData = []
 
 if __name__ == '__main__':
     
     ps4con.start()
-    controllerData = []
     
     app=App("src/settings")
     app.start()
