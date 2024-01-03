@@ -33,6 +33,8 @@ if platform == "linux":
 
     ps4con = PS4Controller(controller=controller,q=controllerQueue)
 
+    receve_queue = Queue()
+
 if __name__ == '__main__':
     if platform == "linux":
         ps4con.start()
@@ -41,8 +43,7 @@ if __name__ == '__main__':
     app=App("src/settings/transmitt.json")
     app_thread = Thread(target= app.run)
     
-    data=None
-    rx = Rx_Thread(data)
+    rx = Rx_Thread(receve_queue)
     rx.start()
 
     while True:
@@ -57,7 +58,7 @@ if __name__ == '__main__':
             controller.rumble(low_frequency=0.5,high_frequency=1,duration=0)
         else:
             controller.stop_rumble()
-        print(data)
+        print(receve_queue.get_nowait())
         
         
                 

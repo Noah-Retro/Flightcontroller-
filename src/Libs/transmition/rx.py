@@ -8,6 +8,7 @@ import traceback
 import json
 import threading
 from typing import Any
+from queue import Queue
 
 import pigpio
 from nrf24 import *
@@ -40,7 +41,7 @@ nrf.open_reading_pipe(RF24_RX_ADDR.P1, address)
 nrf.show_registers()
 
 class Rx_Thread(threading.Thread):
-    def __init__(self,data) -> None:
+    def __init__(self,data:Queue) -> None:
         self.data=data
         super().__init__()
 
@@ -72,12 +73,6 @@ class Rx_Thread(threading.Thread):
                 # sent as an example message holding a temperature and humidity sent from the "simple-sender.py" program.
                 if len(payload) == 9 and payload[0] == 0x01:
                     values = struct.unpack("<Bff", payload)
-                    data=f'Protocol: {values[0]}, temperature: {values[1]}, humidity: {values[2]}'
+                    self.data.put_nowait(f'Protocol: {values[0]}, temperature: {values[1]}, humidity: {values[2]}')
 
 
-if __name__ == "__main__":
-    data = 0
-    recever = Rx_Thread()
-    recever.run(data)
-    while not KeyboardInterrupt:
-        print("running")

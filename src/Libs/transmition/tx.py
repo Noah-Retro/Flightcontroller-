@@ -1,4 +1,3 @@
-import argparse
 from collections.abc import Callable, Iterable, Mapping
 from datetime import datetime
 import struct
@@ -12,6 +11,8 @@ from random import normalvariate
 
 import pigpio
 from nrf24 import *
+
+
 
 data = open("src/settings/transmitt.json")
 settings = json.load(data)
@@ -37,6 +38,8 @@ nrf.open_writing_pipe(address)
     
     # Display the content of NRF24L01 device registers.
 nrf.show_registers()
+
+
 
 class Tx_Thread(threading.Thread):
     def __init__(self,data) -> None:
@@ -71,13 +74,13 @@ class Tx_Thread(threading.Thread):
             except TimeoutError:
                 print('Timeout waiting for transmission to complete.')
                 # Wait 10 seconds before sending the next reading.
-                time.sleep(10)
+                time.sleep(0.2)
                 continue
             
             if nrf.get_packages_lost() == 0:
                 self.data = f"Success: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}"
             else:
                 self.data = f"Error: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}"
-            time.sleep(1)
+            
 
      
