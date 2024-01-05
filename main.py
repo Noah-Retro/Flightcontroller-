@@ -24,7 +24,7 @@ while pygame.joystick.get_count()<=0:
     print("Controller not connected")
     pygame.joystick.init()
 
-controller = pygame.joystick.Joystick(1)
+controller = pygame.joystick.Joystick(0)
 controller.init()
 
 controllerQueue = Queue()
