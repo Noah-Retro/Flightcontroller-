@@ -58,11 +58,20 @@ class Rx_Thread(threading.Thread):
                 count += 1
                 now = datetime.now()
                  
-                # Read pipe and payload for message.               
+                # Read pipe and payload for message. 
+                pipe = nrf.data_pipe()              
                 payload = nrf.get_payload()                                             
                 print(payload)
                 # If the length of the message is 9 bytes and the first byte is 0x01, then we try to interpret the bytes
                 # sent as an example message holding a temperature and humidity sent from the "simple-sender.py" program.
+                protocol = payload[0] if len(payload) > 0 else -1            
+
+                hex = ':'.join(f'{i:02x}' for i in payload)
+
+                # Show message received as hex.
+                print(f"{now:%Y-%m-%d %H:%M:%S.%f}: pipe: {pipe}, len: {len(payload)}, bytes: {hex}, count: {count}, protocol: {protocol}")
+                
+                
                 if payload[0] == 0x01:
                     
                     for i in payload:
