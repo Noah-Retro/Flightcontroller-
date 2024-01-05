@@ -54,7 +54,7 @@ class Tx_Thread(threading.Thread):
     def run(self):
         count = 0
         send=[]
-        payload=0x00
+        payload=None
         try:
             while True:
                 if not self.sending_data.empty():
@@ -82,8 +82,9 @@ class Tx_Thread(threading.Thread):
                 # Send the payload to the address specified above.
                 
                 try:
-                    nrf.wait_until_sent()
-                    print("sented")
+                    if payload:
+                        nrf.wait_until_sent()
+                        print("sented")
                 except TimeoutError:
                     print("Timed out")
                     time.sleep(0.2)
