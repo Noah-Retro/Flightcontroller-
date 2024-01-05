@@ -26,6 +26,8 @@ if not pi.connected:
     print("Not connected to Raspberry Pi ... goodbye.")
     sys.exit()
 
+SPI_CHANNEL.MAIN_CE0
+
 nrf = NRF24(pi, 
             ce=rx_settings["ce"],
             payload_size=getattr(RF24_PAYLOAD,rx_settings["payload_size"]["value"]),
@@ -70,7 +72,7 @@ class Rx_Thread(threading.Thread):
 
                 # Show message received as hex.
                 print(f"{now:%Y-%m-%d %H:%M:%S.%f}: pipe: {pipe}, len: {len(payload)}, bytes: {hex}, count: {count}, protocol: {protocol}")
-                
+                nrf.show_registers()
                 
                 if payload[0] == 0x01:
                     
