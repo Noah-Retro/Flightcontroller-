@@ -1,0 +1,14 @@
+{
+    "rightUD":{
+        "pin":17,
+        "frequenz":50
+    },
+    "leftUD":{
+        "pin":18,
+        "frequenz":50
+    },
+    "leftRight":{
+        "pin":27,
+        "frequenz":50
+    }
+}
