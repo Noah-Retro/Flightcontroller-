@@ -68,7 +68,7 @@ class Rx_Thread(threading.Thread):
                 # sent as an example message holding a temperature and humidity sent from the "simple-sender.py" program.
                 if payload[0] == 0x01:
                     for i in payload:
-                        print(payload)
+                        print(i)
                     print("Payload rx: " + str(struct.unpack("@B"+"?"*13+"f"*6+"h"*2, payload)))
                     values = struct.unpack("<B"+"?"*13+"f"*6+"h"*2, payload)
                     self.queue.put_nowait(values)
