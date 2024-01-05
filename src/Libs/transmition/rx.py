@@ -35,7 +35,7 @@ nrf = NRF24(pi,
 nrf.set_address_bytes(len(address))
 
 # Listen on the address specified as parameter
-nrf.open_reading_pipe(RF24_RX_ADDR.P1, address)
+nrf.open_reading_pipe(RF24_RX_ADDR.P1, address,size=getattr(RF24_PAYLOAD,rx_settings["payload_size"]["value"]))
    
 # Display the content of NRF24L01 device registers.
 nrf.show_registers()
