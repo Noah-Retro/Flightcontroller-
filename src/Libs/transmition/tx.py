@@ -66,16 +66,17 @@ class Tx_Thread(threading.Thread):
                     if send[0][9] and send[0][10]:
                         pass
                     else:     
-                        payload = struct.pack("<B"+"?"*13,
+                        payload = struct.pack("<B"+"?"*13+"f"*6,
                                                 0x01,
-                                                *send[0].values()
+                                                *send[0].values(),
+                                                *send[1].values(),
                                                 )
                         nrf.reset_packages_lost()
                         nrf.send(payload)
                     print("<B"+"?"*13+"f"*6+"h"*2)
                     print(not send)
                     print(len(send[0].values()))
-                    print(len(send[1].values()))
+                    print(send[1].values())
                 print(payload)        
                 # Send the payload to the address specified above.
                 
