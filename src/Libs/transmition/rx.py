@@ -58,9 +58,7 @@ class Rx_Thread(threading.Thread):
                 count += 1
                 now = datetime.now()
                     
-                # Read pipe and payload for message.
-                nrf.reset_reading_pipes()
-                nrf.reset_packages_lost()
+                # Read pipe and payload for message.               
                 pipe = nrf.data_pipe()
                 payload = nrf.get_payload()              
                 
@@ -76,7 +74,7 @@ class Rx_Thread(threading.Thread):
                 if payload[0] == 0x01:
                     values = struct.unpack("<B"+"?"*13+"f"*6+"h"*2, payload)
                     self.queue.put_nowait(values)
-                time.sleep(1)
+                
                 
 
             
