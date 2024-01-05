@@ -55,6 +55,7 @@ class Tx_Thread(threading.Thread):
         count = 0
         send=[]
         payload=None
+        send_state = 0
         try:
             while True:
                 if not self.sending_data.empty():
@@ -66,11 +67,17 @@ class Tx_Thread(threading.Thread):
                     if send[0][9] and send[0][10]:
                         pass
                     else:     
-                        payload = struct.pack("<B"+"?"*13+"f"*6,
+                        match send_state:
+                            case 0:
+                                payload = struct.pack("<B"+"?"*13,
                                                 0x01,
-                                                *send[0].values(),
-                                                *send[1].values(),
-                                                )
+                                                *send[0].values())
+                                send_state += 1
+                            case 1:
+                                payload = struct.pack("<B"+"f"*6,
+                                                0x02,
+                                                *send[1].values())
+                                send_state = 0
                         nrf.reset_packages_lost()
                         nrf.send(payload)
                     print("<B"+"?"*13+"f"*6+"h"*2)

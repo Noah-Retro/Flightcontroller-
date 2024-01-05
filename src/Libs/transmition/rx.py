@@ -75,12 +75,14 @@ class Rx_Thread(threading.Thread):
                 nrf.show_registers()
                 
                 if payload[0] == 0x01:
-                    
-                    for i in payload:
-                        print(i)
-                    print("Payload rx: " + str(struct.unpack("<B"+"?"*13+"f"*6, payload)))
-                    values = struct.unpack("<B"+"?"*13+"f"*6, payload)
+                    print("Payload rx: " + str(struct.unpack("<B"+"?"*13, payload)))
+                    values = struct.unpack("<B"+"?"*13, payload)
                     self.queue.put_nowait(values)
+                if payload[0] == 0x02:
+                    print("Payload rx: " + str(struct.unpack("<B"+"f"*6, payload)))
+                    values = struct.unpack("<B"+"f"*6, payload)
+                    self.queue.put_nowait(values)
+                    
             time.sleep(0.1)
                 
 
