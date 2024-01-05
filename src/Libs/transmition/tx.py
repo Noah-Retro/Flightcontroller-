@@ -66,7 +66,7 @@ class Tx_Thread(threading.Thread):
                     if send[0][9] and send[0][10]:
                         pass
                     else:     
-                        payload = struct.pack("@B"+"?"*13+"f"*6+"h"*2,
+                        payload = struct.pack("<B"+"?"*13+"f"*6+"h"*2,
                                                 0x01,
                                                 *send[0].values(),
                                                 *send[1].values(),
@@ -89,6 +89,13 @@ class Tx_Thread(threading.Thread):
                     print("Timed out")
                     time.sleep(0.2)
                     continue
+                
+                if nrf.get_packages_lost() == 0:
+                    print(f"Success: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}")
+                else:
+                    print(f"Error: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}")
+
+                
                 time.sleep(1)
         except KeyboardInterrupt:
             nrf.power_down()
