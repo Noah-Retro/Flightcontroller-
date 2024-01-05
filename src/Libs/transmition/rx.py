@@ -74,7 +74,7 @@ class Rx_Thread(threading.Thread):
                 if payload[0] == 0x01:
                     values = struct.unpack("<B"+"?"*13+"f"*6+"h"*2, payload)
                     self.queue.put_nowait(values)
-                
+                time.sleep(1)
                 
 
             
