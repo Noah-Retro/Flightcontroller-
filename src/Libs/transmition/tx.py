@@ -83,6 +83,7 @@ class Tx_Thread(threading.Thread):
                 
                 try:
                     nrf.wait_until_sent()
+                    print("sented")
                 except TimeoutError:
                     print("Timed out")
                     time.sleep(0.2)

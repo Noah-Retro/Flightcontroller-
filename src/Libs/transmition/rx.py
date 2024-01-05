@@ -57,7 +57,7 @@ class Rx_Thread(threading.Thread):
                 # Count message and record time of reception.            
                 count += 1
                 now = datetime.now()
-                    
+                nrf.   
                 # Read pipe and payload for message.               
                 pipe = nrf.data_pipe()
                 payload = nrf.get_payload()              
