@@ -42,7 +42,6 @@ if __name__ == '__main__':
     rx.start()
     
     while True:
-        controllerQueueSend = controllerQueue
         if not controllerQueue.empty():
             
             for _ in range(controllerQueue.qsize()-1):
