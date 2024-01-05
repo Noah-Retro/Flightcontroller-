@@ -78,7 +78,7 @@ class Rx_Thread(threading.Thread):
                     
                     for i in payload:
                         print(i)
-                    print("Payload rx: " + str(struct.unpack("@B"+"?"*13+"f"*6+"h"*2, payload)))
+                    print("Payload rx: " + str(struct.unpack("<B"+"?"*13+"f"*6+"h"*2, payload)))
                     values = struct.unpack("<B"+"?"*13+"f"*6+"h"*2, payload)
                     self.queue.put_nowait(values)
             time.sleep(0.1)
