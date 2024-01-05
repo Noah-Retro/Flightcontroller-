@@ -40,18 +40,7 @@ if __name__ == '__main__':
     
     ps4con.start()
     app.start()
-    #rx.start()
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    rx.start()
     
     while True:
         if not controllerQueue.empty():
