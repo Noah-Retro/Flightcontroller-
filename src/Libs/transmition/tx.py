@@ -66,7 +66,7 @@ class Tx_Thread(threading.Thread):
                     if send[0][9] and send[0][10]:
                         pass
                     else:     
-                        payload = struct.pack("<B"+"?"*13+"f"*6+"h"*2,
+                        payload = struct.pack("B"+"?"*13+"f"*6+"h"*2,
                                                 0x01,
                                                 *send[0].values(),
                                                 *send[1].values(),
