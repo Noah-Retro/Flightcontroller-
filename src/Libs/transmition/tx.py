@@ -67,7 +67,7 @@ class Tx_Thread(threading.Thread):
                         pass
                     else:     
                         payload = struct.pack("@B"+"?"*13+"f"*6+"h"*2,
-                                                b'\x01',
+                                                0x01,
                                                 *send[0].values(),
                                                 *send[1].values(),
                                                 send[2][0][0],
