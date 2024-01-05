@@ -62,12 +62,13 @@ class Rx_Thread(threading.Thread):
                 payload = nrf.get_payload()              
                 
                 print(nrf.data_ready())
-                print(payload)
-                
+                               
                 
                 # If the length of the message is 9 bytes and the first byte is 0x01, then we try to interpret the bytes
                 # sent as an example message holding a temperature and humidity sent from the "simple-sender.py" program.
                 if payload[0] == 0x01:
+                    for i in payload:
+                        print(payload)
                     print("Payload rx: " + str(struct.unpack("@B"+"?"*13+"f"*6+"h"*2, payload)))
                     values = struct.unpack("<B"+"?"*13+"f"*6+"h"*2, payload)
                     self.queue.put_nowait(values)
