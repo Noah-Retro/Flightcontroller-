@@ -34,7 +34,7 @@ nrf = NRF24(pi,
             data_rate=getattr(RF24_DATA_RATE,tx_settings["data_rate"]["value"]),
             pa_level=getattr(RF24_PA,tx_settings["pa_level"]["value"]))
 nrf.set_address_bytes(len(address))
-nrf.open_writing_pipe(address)
+nrf.open_writing_pipe(address,size=getattr(RF24_PAYLOAD,tx_settings["payload_size"]["value"]))
     
     # Display the content of NRF24L01 device registers.
 nrf.show_registers()
