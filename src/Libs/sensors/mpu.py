@@ -1,26 +1,27 @@
+import FaBo9Axis_MPU9250
 import time
-from mpu9250_jmdev.registers import *
-from mpu9250_jmdev.mpu_9250 import MPU9250
+import sys
 
-mpu = MPU9250(
-    address_ak=AK8963_ADDRESS, 
-    address_mpu_master=MPU9050_ADDRESS_68, # In 0x68 Address
-    address_mpu_slave=None, 
-    bus=1,
-    gfs=GFS_1000, 
-    afs=AFS_8G, 
-    mfs=AK8963_BIT_16, 
-    mode=AK8963_MODE_C100HZ)
+mpu9250 = FaBo9Axis_MPU9250.MPU9250()
 
-mpu.configure() # Apply the settings to the registers.
+try:
+    while True:
+        accel = mpu9250.readAccel()
+        print( " ax = " , ( accel['x'] ))
+        print(" ay = " , ( accel['y'] ))
+        print(" az = " , ( accel['z'] ))
 
-while True:
+        gyro = mpu9250.readGyro()
+        print (" gx = " , ( gyro['x'] ))
+        print (" gy = " , ( gyro['y'] ))
+        print (" gz = " , ( gyro['z'] ))
 
-    print("|.....MPU9250 in 0x68 Address.....|")
-    print("Accelerometer", mpu.readAccelerometerMaster())
-    print("Gyroscope", mpu.readGyroscopeMaster())
-    print("Magnetometer", mpu.readMagnetometerMaster())
-    print("Temperature", mpu.readTemperatureMaster())
-    print("\n")
+        mag = mpu9250.readMagnet()
+        print( " mx = " , ( mag['x'] ))
+        print( " my = " , ( mag['y'] ))
+        print( " mz = " , ( mag['z'] ))
 
-    time.sleep(1)
+        time.sleep(0.1)
+
+except KeyboardInterrupt:
+    sys.exit()

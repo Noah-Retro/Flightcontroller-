@@ -4,6 +4,7 @@ from threading import Thread
 import time
 from queue import Queue
 import os
+import sys
 
 
 button_queue = Queue()
