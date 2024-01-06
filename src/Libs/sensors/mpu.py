@@ -1,7 +1,7 @@
 import os
 import sys
 import time
-import smbus2 as smbus
+import smbus
 
 from imusensor.MPU9250 import MPU9250
 
