@@ -1,21 +1,53 @@
 import os
 import sys
 import time
-import smbus
+import smbus2 as smbus
 
 from imusensor.MPU9250 import MPU9250
 
-address = 0x68
-bus = smbus.SMBus(1)
-imu = MPU9250.MPU9250(bus, address)
-imu.begin()
+class MPU_9250():
+    def __init__(self,address:int=0x68,bus:int=1) -> None:
+        self.address = address
+        self.bus = smbus.SMBus(bus)
+        self.imu = MPU9250.MPU9250(self.bus, self.address)
+        
+    def run(self):
+        self.imu.begin()
+        
+    @property
+    def accelVal(self)->list:
+        self.imu.readSensor()
+        self.imu.computeOrientation()
+        return self.imu.AccelVals
+    
+    @property
+    def gyroVal(self)->list:
+        self.imu.readSensor()
+        self.imu.computeOrientation()
+        return self.imu.GyroVals
+    
+    @property
+    def roll(self)->float:
+        self.imu.readSensor()
+        self.imu.computeOrientation()
+        return self.imu.roll
+    
+    @property
+    def pitch(self)->float:
+        self.imu.readSensor()
+        self.imu.computeOrientation()
+        return self.imu.pitch
+    
+    @property
+    def yaw(self)->float:
+        self.imu.readSensor()
+        self.imu.computeOrientation()
+        return self.imu.yaw
 
-while True:
-	imu.readSensor()
-	imu.computeOrientation()
-
-	print ("Accel x: {0} ; Accel y : {1} ; Accel z : {2}".format(imu.AccelVals[0], imu.AccelVals[1], imu.AccelVals[2]))
-	print ("Gyro x: {0} ; Gyro y : {1} ; Gyro z : {2}".format(imu.GyroVals[0], imu.GyroVals[1], imu.GyroVals[2]))
-	print ("Mag x: {0} ; Mag y : {1} ; Mag z : {2}".format(imu.MagVals[0], imu.MagVals[1], imu.MagVals[2]))
-	print ("roll: {0} ; pitch : {1} ; yaw : {2}".format(imu.roll, imu.pitch, imu.yaw))
-	time.sleep(1)
+if __name__ == '__main__':
+    sens = MPU_9250()
+    
+    while True:
+        print("Accelometer ",sens.accelVal)
+        print("Gyro ", sens.gyroVal)
+        print(f"Roll: {sens.roll}, Pitch: {sens.pitch}, Yaw: {sens.yaw}")
