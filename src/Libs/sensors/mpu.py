@@ -50,12 +50,14 @@ class MPU_9250():
         self.imu.computeOrientation()
         return self.imu.MagVals
     
-    def calliberate(self):
+    def calliberateAccelerometer(self):
         """Caliberate Accelerometer by positioning it in 6 different positions
 
 This function expects the user to keep the imu in 6 different positions while caliberation. It gives cues on when to change the position. It is expected that in all the 6 positions, at least one axis of IMU is parallel to gravity of earth and no position is same. Hence we get 6 positions namely -> +x, -x, +y, -y, +z, -z.
         """
         self.imu.caliberateAccelerometer()
+        
+    def calliberateGyro(self):    
         self.imu.caliberateGyro()
         
     def calliberateMag(self):
@@ -64,7 +66,6 @@ This function expects the user to keep the imu in 6 different positions while ca
 if __name__ == '__main__':
     sens = MPU_9250()
     sens.run()
-    sens.calliberateMag()
     
     while True:
         print("Accelometer ",sens.accelVal)
@@ -76,4 +77,5 @@ if __name__ == '__main__':
     Accelometer  [-0.18675724 -0.13408212 -9.48631028]
     Gyro  [ 0.00196677 -0.0028696   0.00085888]
     Roll: -178.7302714712781, Pitch: 0.8388532267318494, Yaw: nan
+    Mag vals:  [nan nan nan]
     """
