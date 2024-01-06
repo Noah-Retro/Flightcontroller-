@@ -1,27 +1,21 @@
-import FaBo9Axis_MPU9250
-import time
+import os
 import sys
+import time
+import smbus2 as smbus
 
-mpu9250 = FaBo9Axis_MPU9250.MPU9250()
+from imusensor.MPU9250 import MPU9250
 
-try:
-    while True:
-        accel = mpu9250.readAccel()
-        print( " ax = " , ( accel['x'] ))
-        print(" ay = " , ( accel['y'] ))
-        print(" az = " , ( accel['z'] ))
+address = 0x68
+bus = smbus.SMBus(1)
+imu = MPU9250.MPU9250(bus, address)
+imu.begin()
 
-        gyro = mpu9250.readGyro()
-        print (" gx = " , ( gyro['x'] ))
-        print (" gy = " , ( gyro['y'] ))
-        print (" gz = " , ( gyro['z'] ))
+while True:
+	imu.readSensor()
+	imu.computeOrientation()
 
-        mag = mpu9250.readMagnet()
-        print( " mx = " , ( mag['x'] ))
-        print( " my = " , ( mag['y'] ))
-        print( " mz = " , ( mag['z'] ))
-
-        time.sleep(0.1)
-
-except KeyboardInterrupt:
-    sys.exit()
+	print ("Accel x: {0} ; Accel y : {1} ; Accel z : {2}".format(imu.AccelVals[0], imu.AccelVals[1], imu.AccelVals[2]))
+	print ("Gyro x: {0} ; Gyro y : {1} ; Gyro z : {2}".format(imu.GyroVals[0], imu.GyroVals[1], imu.GyroVals[2]))
+	print ("Mag x: {0} ; Mag y : {1} ; Mag z : {2}".format(imu.MagVals[0], imu.MagVals[1], imu.MagVals[2]))
+	print ("roll: {0} ; pitch : {1} ; yaw : {2}".format(imu.roll, imu.pitch, imu.yaw))
+	time.sleep(0.1)
