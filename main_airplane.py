@@ -6,13 +6,17 @@ from queue import Queue
 import os
 
 
-data = Queue()
-tx = Rx_Thread(data)
+button_queue = Queue()
+axis_queue = Queue()
+tx = Rx_Thread(button_queue=button_queue,axis_queue=axis_queue)
 #print("Started thread in 1")
 tx.start()
 #print("Started")
 
 while True:
-    pass
+    if not button_queue.empty():
+        print(button_queue.get_nowait())
+    if not axis_queue.empty():
+        print(axis_queue.get_nowait())
     
 

@@ -43,8 +43,9 @@ nrf.open_reading_pipe(RF24_RX_ADDR.P1, address,size=getattr(RF24_PAYLOAD,rx_sett
 nrf.show_registers()
 
 class Rx_Thread(threading.Thread):
-    def __init__(self,queue:Queue) -> None:
-        self.queue=queue
+    def __init__(self,button_queue:Queue,axis_queue:Queue) -> None:
+        self.button_queue=button_queue
+        self.axis_queue = axis_queue
         super().__init__()
 
     def callback(self):
@@ -55,35 +56,24 @@ class Rx_Thread(threading.Thread):
         count = 0
 
         while True:
-            while nrf.data_ready():
-                # Count message and record time of reception.            
+            while nrf.data_ready():           
                 count += 1
                 now = datetime.now()
-                 
-                # Read pipe and payload for message. 
+                
                 pipe = nrf.data_pipe()              
                 payload = nrf.get_payload()                                             
-                print(payload)
-                # If the length of the message is 9 bytes and the first byte is 0x01, then we try to interpret the bytes
-                # sent as an example message holding a temperature and humidity sent from the "simple-sender.py" program.
+                
                 protocol = payload[0] if len(payload) > 0 else -1            
 
                 hex = ':'.join(f'{i:02x}' for i in payload)
-
-                # Show message received as hex.
-                print(f"{now:%Y-%m-%d %H:%M:%S.%f}: pipe: {pipe}, len: {len(payload)}, bytes: {hex}, count: {count}, protocol: {protocol}")
-                nrf.show_registers()
                 
                 if payload[0] == 0x01:
-                    print("Payload rx: " + str(struct.unpack("<B"+"?"*13, payload)))
                     values = struct.unpack("<B"+"?"*13, payload)
-                    self.queue.put_nowait(values)
+                    self.button_queue.put_nowait(values)
                 if payload[0] == 0x02:
-                    print("Payload rx: " + str(struct.unpack("<B"+"f"*6, payload)))
                     values = struct.unpack("<B"+"f"*6, payload)
-                    self.queue.put_nowait(values)
-                    
-            time.sleep(0.1)
+                    self.axis_queue.put_nowait(values)
+
                 
 
             

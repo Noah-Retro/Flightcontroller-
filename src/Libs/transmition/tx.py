@@ -78,20 +78,12 @@ class Tx_Thread(threading.Thread):
                                             *send[1].values())
                             send_state = 0
                         nrf.reset_packages_lost()
-                        nrf.send(payload)
-                    print("<B"+"?"*13+"f"*6+"h"*2)
-                    print(not send)
-                    print(len(send[0].values()))
-                    print(send[1].values())
-                print(payload)        
-                # Send the payload to the address specified above.
-                
+                        nrf.send(payload)                       
                 try:
                     if payload:
                         nrf.wait_until_sent()
-                        print("sented")
+
                 except TimeoutError:
-                    print("Timed out")
                     time.sleep(0.2)
                     continue
                 
@@ -99,9 +91,7 @@ class Tx_Thread(threading.Thread):
                     print(f"Success: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}")
                 else:
                     print(f"Error: lost={nrf.get_packages_lost()}, retries={nrf.get_retries()}")
-
-                
-                time.sleep(1)
+                    
         except KeyboardInterrupt:
             nrf.power_down()
             pi.stop()
