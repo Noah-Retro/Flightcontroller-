@@ -46,7 +46,7 @@ class MPU_9250():
 
 if __name__ == '__main__':
     sens = MPU_9250()
-    
+    sens.run()
     while True:
         print("Accelometer ",sens.accelVal)
         print("Gyro ", sens.gyroVal)
