@@ -43,6 +43,7 @@ python3 -m pip install -r requirements.txt
 Contributors names and contact info
 
 ex. Noah-Retro
+ex. Haelias01
 
 ## Version History
 
@@ -54,7 +55,7 @@ ex. Noah-Retro
 Inspiration, code snippets, etc.
 * [DomPizzie](https://gist.github.com/DomPizzie/7a5ff55ffa9081f2de27c315f5018afc#file-readme-template-md) README.md File 
 * [bjarne-hansen](https://github.com/bjarne-hansen/py-nrf24) nrf24 module
-* [jefmenegazzoo](https://pypi.org/project/mpu9250-jmdev) mdu9250 module
+* [niru-5](https://github.com/niru-5/imusensor/tree/master) mdu9250 module
 * [claymcleod](https://gist.github.com/claymcleod/028386b860b75e4f5472) code snippet ps4-controller in pygame
-* [Adafruit](https://learn.adafruit.com/adafruit-dc-and-stepper-motor-hat-for-raspberry-pi/installing-software) usage and examples for the Motor-Hat
+
 
