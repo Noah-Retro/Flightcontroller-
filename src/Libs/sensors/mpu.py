@@ -2,54 +2,34 @@ import os
 import sys
 import time
 import smbus
+import datetime
 
 from imusensor.MPU9250 import MPU9250
+import pandas as pd
 
 class MPU_9250():
     def __init__(self,address:int=0x68,bus:int=1) -> None:
         self.address = address
         self.bus = smbus.SMBus(bus)
         self.imu = MPU9250.MPU9250(self.bus, self.address)
-        
+        self.dataFrame_ = pd.DataFrame()
+
     def run(self):
         self.imu.begin()
         
     @property
-    def accelVal(self)->list:
-        self.imu.readSensor()
-        self.imu.computeOrientation()
-        return self.imu.AccelVals
-    
-    @property
-    def gyroVal(self)->list:
-        self.imu.readSensor()
-        self.imu.computeOrientation()
-        return self.imu.GyroVals
-    
-    @property
-    def roll(self)->float:
-        self.imu.readSensor()
-        self.imu.computeOrientation()
-        return self.imu.roll
-    
-    @property
-    def pitch(self)->float:
-        self.imu.readSensor()
-        self.imu.computeOrientation()
-        return self.imu.pitch
-    
-    @property
-    def yaw(self)->float:
-        self.imu.readSensor()
-        self.imu.computeOrientation()
-        return self.imu.yaw
-    
-    @property
-    def magVals(self):
-        self.imu.readSensor()
-        self.imu.computeOrientation()
-        return self.imu.MagVals
-    
+    def dataFrame(self)->pd.DataFrame:
+        data = {
+            "Timestamp":datetime.now(),
+            "Acceleration_X":self.imu.AccelVals[0],
+            "Acceleration_Y":self.imu.AccelVals[1],
+            "Acceleration_Z":self.imu.AccelVals[2],
+            "Gyro_X":self.imu.GyroVals[0],
+            "Gyro_Y":self.imu.GyroVals[1],
+            "Gyro_Z":self.imu.GyroVals[2]            
+        }
+        return pd.DataFrame(data)
+       
     def calliberateAccelerometer(self):
         """Caliberate Accelerometer by positioning it in 6 different positions
 
@@ -68,14 +48,5 @@ if __name__ == '__main__':
     sens.run()
     
     while True:
-        print("Accelometer ",sens.accelVal)
-        print("Gyro ", sens.gyroVal)
-        print(f"Roll: {sens.roll}, Pitch: {sens.pitch}, Yaw: {sens.yaw}")
-        print("Mag vals: ",sens.magVals)
-    """
-    Output:
-    Accelometer  [-0.18675724 -0.13408212 -9.48631028]
-    Gyro  [ 0.00196677 -0.0028696   0.00085888]
-    Roll: -178.7302714712781, Pitch: 0.8388532267318494, Yaw: nan
-    Mag vals:  [nan nan nan]
-    """
+        print(sens.dataFrame)
+ 
