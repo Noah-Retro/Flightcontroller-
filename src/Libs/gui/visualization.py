@@ -32,8 +32,18 @@ class VisualizationHandler():
 
     def plot_2d_path_on_map(self,df:pd.DataFrame, title='2D Path on Map'):
         
-        df['Accel_X_meters'] = df['Acceleration_X'].cumsum()  # Convert acceleration to displacement in x direction
-        df['Accel_Y_meters'] = df['Acceleration_Y'].cumsum()  # Convert acceleration to displacement in y direction
+        df['Time_Delta'] = pd.to_datetime(df['Timestamp']).diff().fillna(pd.Timedelta(seconds=0))
+        df['Time_Delta'] = df['Time_Delta'].astype('int64')/10**9
+        print(df['Time_Delta'])
+
+        df['Accel_X_meters'] = df['Acceleration_X']*df["Time_Delta"].apply(lambda x: x**2)  # Convert acceleration to displacement in x direction
+        df['Accel_Y_meters'] = df['Acceleration_Y']*df["Time_Delta"].apply(lambda x: x**2)  # Convert acceleration to displacement in y direction
+        df['Accel_Z_meters'] = df['Acceleration_Z']*df["Time_Delta"].apply(lambda x: x**2)
+
+        df['Accel_X_meters'] = df['Accel_X_meters'].cumsum()
+        df['Accel_Y_meters'] = df['Accel_Y_meters'].cumsum()
+        df['Accel_Z_meters'] = df['Accel_Z_meters'].cumsum()
+
         new_lon = []
         new_lat = []
         start_lat = 47.22436745102312
@@ -46,8 +56,8 @@ class VisualizationHandler():
             lon = start_lon  + (i / 6378137 ) * (180 / math.pi);
             new_lon.append(lon)
 
-        fig = sp.make_subplots(rows=2, cols=1, subplot_titles=['Map plot', 'height plot'],
-                               specs=[[{"type": "mapbox"}],[{"type": "xy"}]])
+        fig = sp.make_subplots(rows=5, cols=1, subplot_titles=['Map plot', 'height plot','path plot'],
+                               specs=[[{"type": "mapbox","rowspan":2}],[None],[{"type": "xy"}],[{"type":"scene","rowspan":2}],[None]])
 
         map2d = go.Scattermapbox(
         mode='markers+lines',
@@ -74,18 +84,29 @@ class VisualizationHandler():
             name='2D Plot'
         )
         
-        fig.add_trace(scatter_2d, row=2,col=1)
+        fig.add_trace(scatter_2d, row=3,col=1)
+
+        scatter_3d= go.Scatter3d(
+            x=df['Accel_X_meters'],
+            y=df['Accel_Y_meters'],
+            z=df['Accel_Z_meters'],
+            mode='lines',
+            name='3d Path plot'
+        )
+
+        fig.add_trace(scatter_3d, row=4,col=1)
 
         fig.update_layout(
         title=title,
         mapbox=dict(
             style='open-street-map',  # You can choose different map styles
-            zoom=20,
+            zoom=15,
             center=dict(lon=start_lon, lat=start_lat)
         ),
         showlegend=False,  # Hide individual legends for each subplot
         xaxis_title='Time',  # Adjust the x-axis title as needed
-        yaxis_title='Height (meters)'
+        yaxis_title='Height (meters)',
+        height=3000
     )
 
         return fig
