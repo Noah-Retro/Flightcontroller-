@@ -9,4 +9,5 @@ class DebugLEDHandler():
         self.progLed = self.settings["debugLEDStrip"]["progLed"]
 
 
-    def progLed
+    def progLed(self,fun):
+        pass
