@@ -94,9 +94,9 @@ class App(threading.Thread):
      
 
         #Controller settings
-        controller_file = open(self.settings_path + "/controller.json")
-        controller_data = json.load(controller_file)
-        controller_file.close()
+        with open(self.settings_path + "/controller.json") as controller_file:
+            controller_data = json.load(controller_file)
+        
 
         rumble_var = BooleanVar()
         rumble_var.set(controller_data["rumble"])
@@ -160,7 +160,7 @@ class App(threading.Thread):
 
 
 if __name__ == "__main__":
-    test = App("./src/settings")
+    test = App("Flightcontroller-/src/settings")
     
     test_thread = threading.Thread(target=test.run)
     test_thread.start()

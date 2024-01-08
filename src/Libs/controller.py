@@ -3,6 +3,7 @@ import pygame
 from queue import Queue
 import threading
 import time
+import json
 
 """
 0:"X"
@@ -32,13 +33,15 @@ hat_data: Dpad (Left/right,Up/down) Left=-1 Down=-1
 class PS4Controller(threading.Thread):
     """Class representing the PS4 controller. Pretty straightforward functionality."""
     
-    def __init__(self,controller:pygame.joystick,q:Queue,q1:Queue,*args,**kwargs):
+    def __init__(self,controller:pygame.joystick,q:Queue,q1:Queue,setting_path:str="src/settings/controller.json",*args,**kwargs):
         self.q = q
         self.q1 = q1
         self.controller = controller
         self.axis_data = None
         self.button_data = None
         self.hat_data = None
+        with open("src/settings/controller.json") as f:
+            self.settings = json.load(f.read())
         super().__init__(*args,**kwargs)
 
     def run(self):
@@ -68,6 +71,11 @@ class PS4Controller(threading.Thread):
                     self.button_data[event.button] = False
                 elif event.type == pygame.JOYHATMOTION:
                     self.hat_data[event.hat] = event.value
+
+                if self.settings["inverse_look"]:
+                    self.axis_data.update(
+                        (key, value * -1) for key, value in self.axis_data.items()
+                    )
 
                 # Insert your code on what you would like to happen for each event here!
                 # In the current setup, I have the state simply printing out to the screen.

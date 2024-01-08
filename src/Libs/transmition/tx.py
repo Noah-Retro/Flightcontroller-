@@ -13,9 +13,8 @@ import pigpio
 from nrf24 import *
 
 
-
-data = open("src/settings/transmitt.json")
-settings = json.load(data)
+with open("src/settings/transmitt.json") as data:
+    settings = json.load(data)
 tx_settings = settings["tx"]
 
 hostname = tx_settings["hostname"]

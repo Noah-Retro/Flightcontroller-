@@ -1,0 +1,37 @@
+{
+    "debugLESstrip":{
+        "pin":19,
+        "count":3,
+        "brightness":255,
+        "dataLED":{
+            "place":0,
+            "status":{
+                "noError":[0,0,0],
+                "transmittError":[255,0,0],
+                "dbError":[0,0,255],
+                "settingsError":[0,255,0],
+                "unkownError":[255,255,255]
+            }
+        },
+        "healthLED":{
+            "place":1,
+            "status":{
+                "noError":[0,0,0],
+                "voltageLow":[255,0,0],
+                "i2cError":[0,255,0],
+                "SPIError":[0,0,255],
+                "unkownError":[255,255,255]
+            }
+        },
+        "progLed":{
+            "place":2,
+            "status":{
+                "noState":[0,0,0],
+                "bootup":[255,0,0],
+                "waiting":[255,255,0],
+                "ready":[0,255,0],
+                "unkownError":[255,255,255]
+            }
+        }
+    }
+}
