@@ -1,4 +1,3 @@
-import json
 import neopixel
 import board
 import time

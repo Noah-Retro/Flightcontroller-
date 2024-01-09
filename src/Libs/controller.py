@@ -1,4 +1,3 @@
-import os
 import pygame
 from queue import Queue
 import threading

@@ -1,13 +1,9 @@
-from collections.abc import Callable, Iterable, Mapping
-from datetime import datetime
 import struct
 import sys
 import time
 from queue import Queue
 import json
 import threading
-from typing import Any
-from random import normalvariate
 
 import pigpio
 from nrf24 import *

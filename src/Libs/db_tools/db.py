@@ -1,6 +1,4 @@
 import sqlite3
-import threading
-import datetime
 import pandas as pd
 import numpy as np
 import json
