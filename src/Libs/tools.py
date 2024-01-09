@@ -30,7 +30,7 @@ class DebugLEDHandler():
         self.pixel.show()
         
     def clear(self):
-        self.pixel.fill(0,0,0)
+        self.pixel.fill((0,0,0))
 
 if __name__ == "__main__":
     DLed = DebugLEDHandler()
