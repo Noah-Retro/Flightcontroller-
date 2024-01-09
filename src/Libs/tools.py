@@ -23,7 +23,7 @@ class LEDS():
 
 class DebugLEDHandler():
     def __init__(self):
-        self.pixel = neopixel.NeoPixel(board.D18,3)
+        self.pixel = [i for i in range(100)]#neopixel.NeoPixel(board.D18,3)
         
     def progLed(self,state:Status,place:int,pin:int=19):
         self.pixel[place]=tuple(state)
@@ -31,8 +31,7 @@ class DebugLEDHandler():
 
 if __name__ == "__main__":
     DLed = DebugLEDHandler()
-    for value in Status.__dict__.values():
-        DLed.progLed(value,LEDS.DATALED)
-        DLed.progLed(value,LEDS.PROGLED)
-        DLed.progLed(value,LEDS.HEALTHLED)
-        time.sleep(1)
+    DLed.progLed(Status.UNKNOWNERROR,LEDS.DATALED)
+    DLed.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
+    DLed.progLed(Status.UNKNOWNERROR,LEDS.HEALTHLED)
+    time.sleep(1)
