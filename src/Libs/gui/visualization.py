@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import plotly.subplots as sp
@@ -9,12 +8,12 @@ import math
 
 
 class VisualizationHandler():
-    def plot_3d_coordinates(self,df, title='3D Coordinates', label='Location (meters)'):
+    def plot_3d_coordinates(self,df:pd.DataFrame, title='3D Coordinates', label='Location (meters)'):
         fig = go.Figure()
 
-        x = np.cumsum(df['Acceleration_X'])  # Cumulative sum for x-coordinate
-        y = np.cumsum(df['Acceleration_Y'])  # Cumulative sum for y-coordinate
-        z = np.cumsum(df['Acceleration_Z'])  # Cumulative sum for z-coordinate
+        x = df['Acceleration_X'].cumsum()  # Cumulative sum for x-coordinate
+        y = df['Acceleration_Y'].cumsum()  # Cumulative sum for y-coordinate
+        z = df['Acceleration_Z'].cumsum()  # Cumulative sum for z-coordinate
 
         fig.add_trace(go.Scatter3d(
             x=x,
