@@ -38,4 +38,5 @@ if __name__ == "__main__":
     DLed.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
     DLed.progLed(Status.UNKNOWNERROR,LEDS.HEALTHLED)
     time.sleep(1)
+    DLed.clear()
     
