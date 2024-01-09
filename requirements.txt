@@ -1,4 +1,5 @@
 nrf24==2.0.0
+pandas
 mpu9250-jmdev==1.0.12
 pygame==2.5.2
 pysimplegui==4.60.5
@@ -8,4 +9,4 @@ easydict
 ds4drv
 rpi_ws281x
 adafruit-circuitpython-neopixel
-tkinter
+
