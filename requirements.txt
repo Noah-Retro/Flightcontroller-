@@ -3,9 +3,7 @@ mpu9250-jmdev==1.0.12
 pygame==2.5.2
 adafruit-circuitpython-motorkit==1.6.13
 pysimplegui==4.60.5
-gitpython==3.1.40
 plotly
 smbus
 easydict
-opencv-python
 ds4drv
