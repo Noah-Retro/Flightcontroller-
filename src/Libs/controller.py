@@ -40,7 +40,7 @@ class PS4Controller(threading.Thread):
         self.button_data = None
         self.hat_data = None
         with open("src/settings/controller.json") as f:
-            self.settings = json.load(f.read())
+            self.settings = json.load(f)
         super().__init__(*args,**kwargs)
 
     def run(self):
