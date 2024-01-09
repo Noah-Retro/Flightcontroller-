@@ -31,7 +31,7 @@ class DebugLEDHandler():
 
 if __name__ == "__main__":
     DLed = DebugLEDHandler()
-    for key, value in Status.__dict__.items():
+    for value in Status.__dict__.values():
         DLed.progLed(value,LEDS.DATALED)
         DLed.progLed(value,LEDS.PROGLED)
         DLed.progLed(value,LEDS.HEALTHLED)
