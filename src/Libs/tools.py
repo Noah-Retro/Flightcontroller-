@@ -28,6 +28,9 @@ class DebugLEDHandler():
     def progLed(self,state:Status,place:int,pin:int=19):
         self.pixel[place]=tuple(state)
         self.pixel.show()
+        
+    def clear(self):
+        self.pixel.fill(0,0,0)
 
 if __name__ == "__main__":
     DLed = DebugLEDHandler()
@@ -35,3 +38,4 @@ if __name__ == "__main__":
     DLed.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
     DLed.progLed(Status.UNKNOWNERROR,LEDS.HEALTHLED)
     time.sleep(1)
+    
