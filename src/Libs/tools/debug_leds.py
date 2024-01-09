@@ -21,7 +21,7 @@ class LEDS():
     HEALTHLED=1
     PROGLED=2
 
-class DebugLEDHandler():
+class DebugLEDHandler():   
     def __init__(self):
         self.pixel = neopixel.NeoPixel(board.D18,3)
         

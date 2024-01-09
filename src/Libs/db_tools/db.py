@@ -56,14 +56,16 @@ class DbHandler():
 
 
     def storeTestData(self,numEntry:int,std_dev:float=0.05)->None:
+        
         """Populates the db with Pandas test data
 
         Args:
             numEntry (int): How many entrys will be created
         """
+        
         df = generate_smooth_random_walk(numEntry,std_dev=std_dev)
-        data = open("Flightcontroller-\src\settings\data.json")
-        settings = json.load(data)
+        with open("Flightcontroller-\src\settings\data.json") as data:
+            settings = json.load(data)
         data.close()
         flight_num = settings["fligth_num"]
 
