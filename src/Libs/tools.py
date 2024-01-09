@@ -22,7 +22,7 @@ class LEDS():
 
 class DebugLEDHandler():
     def __init__(self):
-        self.pixel = neopixel.NeoPixel(board.D19,3)
+        self.pixel = neopixel.NeoPixel(board.D18,3)
         
     def progLed(self,state:Status,place:int,pin:int=19):
         self.pixel[place]=tuple(state)
