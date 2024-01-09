@@ -1,4 +1,3 @@
-import src.Libs.autoupdate as ap
 from src.Libs.controller import PS4Controller
 from src.Libs.gui import App
 from src.Libs.transmition import Tx_Thread
@@ -11,11 +10,6 @@ from queue import Queue
 from collections import deque
 import time
 
-try:
-    if platform == "linux":
-        ap.update(os.path.dirname(os.path.abspath(__file__)))
-except Exception as e:
-    raise e
 
 pygame.init()
 pygame.joystick.init()
