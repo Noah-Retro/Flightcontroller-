@@ -1,6 +1,7 @@
 import json
 import neopixel
 import board
+import time
 
 class Status():
     NOSTATE=[0,0,0]
@@ -29,6 +30,9 @@ class DebugLEDHandler():
         self.pixel.show()
 
 if __name__ == "__main__":
-    print(tuple(Status.I2CERROR))
     DLed = DebugLEDHandler()
-    DLed.progLed(Status.UNKNOWNERROR,LEDS.DATALED)
+    for key, value in Status.__dict__.items():
+        DLed.progLed(value,LEDS.DATALED)
+        DLed.progLed(value,LEDS.PROGLED)
+        DLed.progLed(value,LEDS.HEALTHLED)
+        time.sleep(1)
