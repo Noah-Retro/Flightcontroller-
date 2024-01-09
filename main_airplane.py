@@ -22,7 +22,10 @@ db = DbHandler()
 mpu.run()
 
 while True: 
-    db.storeMPUData(mpu.dataFrame)
+    try:
+        db.storeMPUData(mpu.dataFrame)
+    except Exception as e:
+        dled.progLed(Status.DBERROR,LEDS.DATALED)
     if not button_queue.empty():
         print(button_queue.get_nowait())
     if not axis_queue.empty():
