@@ -45,6 +45,7 @@ while True:
             dled.progLed(Status.TRANSMITTERROR,LEDS.DATALED)
     except KeyboardInterrupt:
         dled.clear()
+        tx.join()
         sys.exit()
     except Exception as e:
         dled.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
