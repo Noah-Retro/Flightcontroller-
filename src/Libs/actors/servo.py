@@ -19,8 +19,8 @@ pi = pigpio.pi()
 if not pi.connected:
    exit()
 
-def scale(input:float,_min:int=950,_max:int=2100):
-    res = (_max-_min)*input
+def scale(ins:float,_min:int=950,_max:int=2100):
+    res = (_max-_min) * ins + _min
     return res
     
 
