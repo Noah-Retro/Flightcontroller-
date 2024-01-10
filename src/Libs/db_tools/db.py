@@ -3,7 +3,8 @@ import pandas as pd
 import numpy as np
 import json
 import threading
-from src.Libs.sensors import MPU_9250
+from queue import Queue
+
 
 def generate_smooth_random_walk(num_samples, std_dev=0.05):
     data = {'Timestamp': pd.date_range(start='2024-01-06', periods=num_samples, freq='S')}
@@ -17,7 +18,7 @@ def generate_smooth_random_walk(num_samples, std_dev=0.05):
 
 
 class DbHandler(threading.Thread):
-    def __init__(self,q,path:str="./src/DB/flight_data.db",schema_path:str="./src/Libs/db_tools/schema.sql") -> None:
+    def __init__(self,q:Queue,path:str="./src/DB/flight_data.db",schema_path:str="./src/Libs/db_tools/schema.sql") -> None:
         self.path = path
         self.con = sqlite3.connect(self.path,check_same_thread=False)
         self.cur = self.con.cursor()
@@ -44,12 +45,14 @@ class DbHandler(threading.Thread):
         Args:
             mpu (MPU9250): The connected MPU
         """
-        mpu = MPU_9250()
+        
         
         flight_num = self.settings["fligth_num"]
         while True:
+            if self.q.empty():
+                continue
             try:
-                df = mpu.dataFrame()
+                df = self.q.get_nowait()
                 for _ in df["Timestamp"]:
                     df["FlightNum"] = flight_num
 
