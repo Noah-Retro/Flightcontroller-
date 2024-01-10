@@ -11,7 +11,6 @@ import os
 import sys
 import sqlite3
 from src.Libs.db_tools import DbHandler
-from src.Libs.sensors import MPU_9250
 from src.Libs.actors import CustomServo
 
 
@@ -22,8 +21,6 @@ axis_queue = Queue()
 tx = Rx_Thread(button_queue=button_queue,axis_queue=axis_queue)
 tx.start()
 
-mpu = MPU_9250()
-mpu.run()
 dled.progLed(Status.BOOTUP,LEDS.PROGLED)
 
 try:
@@ -32,13 +29,11 @@ except sqlite3.OperationalError as e:
     print(e)
     dled.progLed(Status.DBERROR,LEDS.DATALED)
     
-    
+db.start()   
 dled.progLed(Status.READY,LEDS.PROGLED)
 
 
 while True: 
-    db.storeMPUData(mpu.dataFrame)
-    print(mpu.dataFrame)
     try:       
         if not axis_queue.empty():
             for _ in range(axis_queue.qsize()-1):
