@@ -2,6 +2,8 @@ import sqlite3
 import pandas as pd
 import numpy as np
 import json
+import threading
+from src.Libs.sensors import MPU_9250
 
 def generate_smooth_random_walk(num_samples, std_dev=0.05):
     data = {'Timestamp': pd.date_range(start='2024-01-06', periods=num_samples, freq='S')}
@@ -14,10 +16,10 @@ def generate_smooth_random_walk(num_samples, std_dev=0.05):
     
 
 
-class DbHandler():
+class DbHandler(threading.Thread):
     def __init__(self,path:str="./src/DB/flight_data.db",schema_path:str="./src/Libs/db_tools/schema.sql") -> None:
         self.path = path
-        self.con = sqlite3.connect(self.path)
+        self.con = sqlite3.connect(self.path,check_same_thread=False)
         self.cur = self.con.cursor()
         self.schema_path = schema_path
         
@@ -27,6 +29,8 @@ class DbHandler():
         with open(self.schema_path,encoding="utf8") as f:
             self.schema= f.read()
 
+        super().__init__()
+
     def delDb(self)->None:
         """Deletes all tables from the DB.
         The data will be lost without a recovery possibility
@@ -34,24 +38,25 @@ class DbHandler():
         self.cur.execute("Drop table mpu;")
         self.con.commit()
 
-    def storeMPUData(self,df:pd.DataFrame)->None:
+    def run(self,df:pd.DataFrame)->None:
         """stores all MPU data with timestamp of reading
 
         Args:
             mpu (MPU9250): The connected MPU
         """
-
+        mpu = MPU_9250()
         
         flight_num = self.settings["fligth_num"]
+        while True:
+            df = mpu.dataFrame
+            for _ in df["Timestamp"]:
+                df["FlightNum"] = flight_num
 
-        for _ in df["Timestamp"]:
-            df["FlightNum"] = flight_num
-
-        df.to_sql('mpu', con=self.con,
-                  schema=self.schema,
-                   if_exists='replace',
-                     index=False)
-        self.con.commit()
+            df.to_sql('mpu', con=self.con,
+                    schema=self.schema,
+                    if_exists='replace',
+                        index=False)
+            self.con.commit()
 
 
     def storeTestData(self,numEntry:int,std_dev:float=0.05)->None:

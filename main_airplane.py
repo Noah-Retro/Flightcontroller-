@@ -31,6 +31,8 @@ try:
 except sqlite3.OperationalError as e:
     print(e)
     dled.progLed(Status.DBERROR,LEDS.DATALED)
+    
+db.start()    
       
 with open("./src/settings/data.json","r") as data:
     settings = json.load(data)
