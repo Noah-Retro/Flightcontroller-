@@ -42,13 +42,17 @@ class Rx_Thread(threading.Thread):
     def __init__(self,button_queue:Queue,axis_queue:Queue) -> None:
         self.button_queue=button_queue
         self.axis_queue = axis_queue
+        self.runs = True
         super().__init__()
       
+    def join(self, timeout: float | None = None) -> None:
+        self.runs = False
+        return super().join(timeout)
 
     def run(self):
         count = 0
 
-        while True:
+        while self.runs:
             while nrf.data_ready():           
                 count += 1
                 now = datetime.now()
