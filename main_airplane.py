@@ -50,7 +50,7 @@ while True:
         if not axis_queue.empty():
             for _ in range(axis_queue.qsize()-1):
                 data = axis_queue.get_nowait()
-            servo17.setVal(data[3])
+            servo17.setVal(data[4])
             print(data)
             
     except KeyboardInterrupt:
