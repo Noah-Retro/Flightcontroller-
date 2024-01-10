@@ -19,7 +19,6 @@ pi = pigpio.pi()
 if not pi.connected:
    exit()
 
-
 class CustomServo():
     def __init__(self,pin:int) -> None:
         self.pin = pin
