@@ -53,7 +53,7 @@ class Rx_Thread(threading.Thread):
         count = 0
 
         while self.runs:
-            while nrf.data_ready():           
+            while nrf.data_ready() and self.runs:           
                 count += 1
                 now = datetime.now()
                 

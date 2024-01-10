@@ -15,7 +15,7 @@ from src.Libs.sensors import MPU_9250
 from src.Libs.actors import CustomServo
 
 
-servo17 = CustomServo(17,clamp_min=1)
+servo17 = CustomServo(17,clamp_min=0.5,clamp_max=1.5)
 
 button_queue = Queue()
 axis_queue = Queue()
