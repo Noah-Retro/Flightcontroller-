@@ -45,7 +45,8 @@ while True:
         #    dled.progLed(Status.NOSTATE,LEDS.DATALED)
         
         if not axis_queue.empty():
-            print(axis_queue.get_nowait())
+            for _ in range(axis_queue.qsize()-1):
+                print(axis_queue.get_nowait())
             
     except KeyboardInterrupt:
         dled.clear()
