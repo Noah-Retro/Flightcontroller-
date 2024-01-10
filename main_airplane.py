@@ -24,7 +24,7 @@ tx.start()
 
 mpu = MPU_9250()
 mpu.run()
-dled.progLed(Status.READY,LEDS.HEALTHLED)
+dled.progLed(Status.BOOTUP,LEDS.PROGLED)
 dled.show()
 try:
     db = DbHandler()
@@ -32,6 +32,8 @@ except sqlite3.OperationalError as e:
     dled.progLed(Status.DBERROR,LEDS.DATALED)
     dled.show()
     
+dled.progLed(Status.READY,LEDS.PROGLED)
+dled.show()
 
 while True: 
     try:
@@ -50,6 +52,8 @@ while True:
     except Exception as e:
         dled.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
     else:
+        dled.progLed(Status.NOSTATE,LEDS.HEALTHLED)
+        dled.progLed(Status.NOSTATE,LEDS.PROGLED)
         dled.show()
     
 
