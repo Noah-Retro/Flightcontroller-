@@ -42,23 +42,19 @@ dled.progLed(Status.READY,LEDS.PROGLED)
 
 def main():
     while True: 
-        
-        mpu.dataFrame
+        db.storeMPUData(mpu.dataFrame)
         try:       
             if not axis_queue.empty():
                 for _ in range(axis_queue.qsize()-1):
                     data = axis_queue.get_nowait()
                 servo17.setVal(data[4])
-            
                 
         except KeyboardInterrupt:
-            db.storeMPUData(mpu.dataFrame)
             dled.clear()
             tx.join()
             sys.exit()
         
         except Exception as e:
-            db.storeMPUData(mpu.dataFrame)
             print(e)
             dled.clear()
             dled.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
