@@ -60,12 +60,12 @@ while True:
     
     except Exception as e:
         dled.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
+        dled.show()
     
     else:
         dled.progLed(Status.NOSTATE,LEDS.HEALTHLED)
         dled.progLed(Status.READY,LEDS.PROGLED)
         dled.show()
     
-    finally:
-        dled.clear()
+        
 
