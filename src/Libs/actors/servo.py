@@ -51,7 +51,7 @@ while True:
 
             pi.set_servo_pulsewidth(g, width[g])
 
-            # print(g, width[g])
+            print(g, width[g])
 
             width[g] += step[g]
 
@@ -60,10 +60,6 @@ while True:
                 width[g] += step[g]
 
         time.sleep(0.1)
-        pi.set_servo_pulsewidth(17,MAX_WIDTH)
-        time.sleep(0.5)
-        pi.set_servo_pulsewidth(17,MIN_WIDTH)
-        time.sleep(0.5)
 
     except KeyboardInterrupt:
         for g in G:
