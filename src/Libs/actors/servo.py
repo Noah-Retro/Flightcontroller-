@@ -62,11 +62,11 @@ while True:
       time.sleep(0.1)
 
    except KeyboardInterrupt:
-      break
+        for g in G:
+            pi.set_servo_pulsewidth(g, 0)
 
-print("\nTidying up")
+        pi.stop()
 
-for g in G:
-   pi.set_servo_pulsewidth(g, 0)
 
-pi.stop()
+
+
