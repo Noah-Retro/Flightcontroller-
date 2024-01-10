@@ -12,40 +12,42 @@ import time
 import random
 import pigpio
 
-NUM_GPIO=32
 
-MIN_WIDTH=950
-MAX_WIDTH=2100
-
-step = [0]*NUM_GPIO
-width = [0]*NUM_GPIO
-used = [False]*NUM_GPIO
 
 pi = pigpio.pi()
 
 if not pi.connected:
    exit()
 
-
-def scale(input:float,_min:int=MIN_WIDTH,_max:int=MAX_WIDTH):
+def scale(input:float,_min:int=950,_max:int=2100):
     res = (_max-_min)*input
     return res
     
 
-while True:
-
-    try:
-
-        for i in range(100):
-            r = i/100 + 1
-            pi.set_servo_pulsewidth(17, scale(r))
-            time.sleep(0.1)
-
-    except KeyboardInterrupt:
+class CustomServo():
+    def __init__(self,pin:int) -> None:
+        self.pin = pin
+        self.MIN_WIDTH=950
+        self.MAX_WIDTH=2100
         
-        pi.set_servo_pulsewidth(17, 0)
+    def setVal(self,input:float):
+        pi.set_servo_pulsewidth(self.pin,scale(input))
+        
+    def stop(self):
+        pi.set_servo_pulsewidth(self.pin,0)
 
-        pi.stop()
+if __name__=="__main__":
+    servo = CustomServo(17)
+    while True:
+        try:
+            for i in range(100):
+                r = i/100 + 1
+                servo.setVal(17, scale(r))
+                time.sleep(0.1)
+
+        except KeyboardInterrupt:
+            pi.set_servo_pulsewidth(17, 0)
+            pi.stop()
 
 
 
