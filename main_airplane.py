@@ -29,6 +29,7 @@ dled.show()
 try:
     db = DbHandler()
 except sqlite3.OperationalError as e:
+    print(e)
     dled.progLed(Status.DBERROR,LEDS.DATALED)
     dled.show()
     
@@ -40,6 +41,7 @@ while True:
         try:
             db.storeMPUData(mpu.dataFrame)
         except Exception as e:
+            print(e)
             dled.progLed(Status.DBERROR,LEDS.DATALED)
         else:
             dled.progLed(Status.NOSTATE,LEDS.DATALED)
