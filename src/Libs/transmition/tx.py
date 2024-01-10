@@ -50,7 +50,7 @@ class Tx_Thread(threading.Thread):
         count = 0
         send=[]
         payload=None
-        send_state = 0
+        send_state = 1
         try:
             while True:
                 if not self.sending_data.empty():
@@ -62,7 +62,7 @@ class Tx_Thread(threading.Thread):
                     if send[0][9] and send[0][10]:
                         pass
                     else:     
-                        if send_state == 0:
+                        if send_state == 0: #Not active
                             payload = struct.pack("<B"+"?"*13,
                                             0x01,
                                             *send[0].values())
@@ -71,7 +71,7 @@ class Tx_Thread(threading.Thread):
                             payload = struct.pack("<B"+"f"*6,
                                             0x02,
                                             *send[1].values())
-                            send_state = 0
+                            send_state = 1
                         nrf.reset_packages_lost()
                         nrf.send(payload)                       
                 try:

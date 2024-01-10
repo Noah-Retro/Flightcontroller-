@@ -26,7 +26,7 @@ class CustomServo():
         self.MAX_WIDTH=2100
     
     def scale(self,ins:float,_min:int=950,_max:int=2100):
-        res = (_max-_min) * ins + _min
+        res = (_max-_min) * (ins+1)/2 + _min
         return int(res)
         
     def setVal(self,ins:int):
@@ -42,7 +42,7 @@ if __name__=="__main__":
     while True:
         try:
             for i in range(100):
-                r = (i+ 0.01)/100 
+                r = (i+ 0.01)/50 
                 print(r)
                 servof.setVal(r)
                 time.sleep(0.1)
