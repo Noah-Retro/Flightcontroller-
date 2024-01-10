@@ -43,10 +43,7 @@ class Rx_Thread(threading.Thread):
         self.button_queue=button_queue
         self.axis_queue = axis_queue
         super().__init__()
-
-    def callback(self):
-        nrf.power_down()
-        pi.stop()      
+      
 
     def run(self):
         count = 0
