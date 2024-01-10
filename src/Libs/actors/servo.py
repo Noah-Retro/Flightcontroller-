@@ -30,7 +30,8 @@ class CustomServo():
         self.MIN_WIDTH=950
         self.MAX_WIDTH=2100
         
-    def setVal(self,ins:float):
+    def setVal(self,ins:int):
+        print(ins)
         pi.set_servo_pulsewidth(self.pin,scale(ins))
         
     def stop(self):
