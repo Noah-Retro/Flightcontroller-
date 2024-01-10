@@ -45,9 +45,9 @@ class Rx_Thread(threading.Thread):
         self.runs = True
         super().__init__()
       
-    def join(self, timeout: float | None = None) -> None:
+    def join(self) -> None:
         self.runs = False
-        return super().join(timeout)
+        return super().join()
 
     def run(self):
         count = 0
