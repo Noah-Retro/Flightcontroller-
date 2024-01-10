@@ -10,9 +10,6 @@ from src.Libs.db_tools import DbHandler
 from src.Libs.tools import DebugLEDHandler,LEDS,Status
 from src.Libs.sensors import MPU_9250
 
-print(os.path.abspath('.'))
-
-
 
 dled = DebugLEDHandler()
 dled.progLed(Status.BOOTUP,LEDS.PROGLED)
