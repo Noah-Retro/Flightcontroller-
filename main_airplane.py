@@ -47,7 +47,7 @@ while True:
         dled.clear()
         sys.exit()
     except Exception as e:
-        dled.progLed(Status.UNKNOWNERROR,LEDS.HEALTHLED)
+        dled.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
     else:
         dled.show()
     
