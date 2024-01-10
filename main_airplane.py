@@ -51,6 +51,7 @@ while True:
             for _ in range(axis_queue.qsize()-1):
                 data = axis_queue.get_nowait()
             servo17.setVal(data[3])
+            print(data)
             
     except KeyboardInterrupt:
         dled.clear()
