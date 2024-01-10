@@ -19,20 +19,20 @@ pi = pigpio.pi()
 if not pi.connected:
    exit()
 
-def scale(ins:float,_min:int=950,_max:int=2100):
-    res = (_max-_min) * ins + _min
-    return int(res)
-    
 
 class CustomServo():
     def __init__(self,pin:int) -> None:
         self.pin = pin
         self.MIN_WIDTH=950
         self.MAX_WIDTH=2100
+    
+    def scale(self,ins:float,_min:int=950,_max:int=2100):
+        res = (_max-_min) * ins + _min
+        return int(res)
         
     def setVal(self,ins:int):
-        print(ins)
-        pi.set_servo_pulsewidth(self.pin,scale(ins))
+        print(self.pin,": ",self.scale(ins))
+        pi.set_servo_pulsewidth(self.pin,self.scale(ins))
         
     def stop(self):
         pi.set_servo_pulsewidth(self.pin,0)
@@ -45,8 +45,7 @@ if __name__=="__main__":
             for i in range(100):
                 r = (i+ 0.01)/100 
                 print(r)
-                print(scale(r))
-                pi.set_servo_pulsewidth(17,scale(r))
+                servof.setVal(r)
                 time.sleep(0.1)
 
         except KeyboardInterrupt:
