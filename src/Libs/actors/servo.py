@@ -41,7 +41,7 @@ if __name__=="__main__":
     while True:
         try:
             for i in range(100):
-                r = i/100 + 0.01
+                r = (i+ 0.01)/100 
                 print(r)
                 print(scale(r))
                 servof.setVal(scale(r))
