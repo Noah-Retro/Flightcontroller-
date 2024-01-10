@@ -36,8 +36,9 @@ while True:
 
     try:
 
-        for i in range(1,0.1):
-            pi.set_servo_pulsewidth(17, i)
+        for i in range(100):
+            r = i/100
+            pi.set_servo_pulsewidth(17, r)
             time.sleep(0.1)
 
     except KeyboardInterrupt:
