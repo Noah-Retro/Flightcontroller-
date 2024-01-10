@@ -34,14 +34,15 @@ dled.progLed(Status.READY,LEDS.PROGLED)
 dled.show()
 
 while True: 
+    db.storeMPUData(mpu.dataFrame)
     try:
-        try:
-            db.storeMPUData(mpu.dataFrame)
-        except sqlite3.OperationalError as e:
-            print(e)
-            dled.progLed(Status.DBERROR,LEDS.DATALED)
-        else:
-            dled.progLed(Status.NOSTATE,LEDS.DATALED)
+        #try:
+        
+        #except sqlite3.OperationalError as e:
+        #    print(e)
+        #    dled.progLed(Status.DBERROR,LEDS.DATALED)
+        #else:
+        #    dled.progLed(Status.NOSTATE,LEDS.DATALED)
         
         if not axis_queue.empty():
             print(axis_queue.get_nowait())
