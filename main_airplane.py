@@ -23,8 +23,11 @@ axis_queue = Queue()
 tx = Rx_Thread(button_queue=button_queue,axis_queue=axis_queue)
 tx.start()
 
-mpu = MPU_9250()
-
+with open("./src/settings/data.json","r") as data:
+    settings = json.load(data)
+with open("./src/settings/data.json","w") as data:
+    settings["fligth_num"]+=1
+    data.write(json.dumps(settings,indent=4))
 
 try:
     db = DbHandler()
@@ -34,11 +37,7 @@ except sqlite3.OperationalError as e:
     
 db.start()    
       
-with open("./src/settings/data.json","r") as data:
-    settings = json.load(data)
-with open("./src/settings/data.json","w") as data:
-    settings["fligth_num"]+=1
-    data.write(json.dumps(settings,indent=4))
+
 
 dled.progLed(Status.READY,LEDS.PROGLED)
 
