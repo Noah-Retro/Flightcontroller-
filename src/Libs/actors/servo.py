@@ -46,7 +46,7 @@ if __name__=="__main__":
                 r = (i+ 0.01)/100 
                 print(r)
                 print(scale(r))
-                pi.set_servo_pulsewidth(scale(r))
+                pi.set_servo_pulsewidth(17,scale(r))
                 time.sleep(0.1)
 
         except KeyboardInterrupt:
