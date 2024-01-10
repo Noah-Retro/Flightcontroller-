@@ -40,7 +40,7 @@ while True:
     try:
         try:
             db.storeMPUData(mpu.dataFrame)
-        except Exception as e:
+        except sqlite3.OperationalError as e:
             print(e)
             dled.progLed(Status.DBERROR,LEDS.DATALED)
         else:
