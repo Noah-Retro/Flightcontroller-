@@ -41,6 +41,8 @@ while True:
             db.storeMPUData(mpu.dataFrame)
         except Exception as e:
             dled.progLed(Status.DBERROR,LEDS.DATALED)
+        else:
+            dled.progLed(Status.NOSTATE,LEDS.DATALED)
         
         if not axis_queue.empty():
             print(axis_queue.get_nowait())
