@@ -29,7 +29,8 @@ class CustomServo():
         self.clamp_max = clamp_max
     
     def scale(self,ins:float):
-        res = (self.MAX_WIDTH-self.MIN_WIDTH) * np.clip((ins+1)/2,self.clamp_min,self.clamp_max) + self.MAX_WIDTH        return int(res)
+        res = (self.MAX_WIDTH-self.MIN_WIDTH) * np.clip((ins+1)/2,self.clamp_min,self.clamp_max) + self.MAX_WIDTH        
+        return int(res)
         
     def setVal(self,ins:int):
         pi.set_servo_pulsewidth(self.pin,self.scale(ins))
