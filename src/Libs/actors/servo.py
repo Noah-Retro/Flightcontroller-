@@ -12,7 +12,7 @@ import time
 import random
 import pigpio
 
-NUM_GPIO=17
+NUM_GPIO=32
 
 MIN_WIDTH=1000
 MAX_WIDTH=2000
