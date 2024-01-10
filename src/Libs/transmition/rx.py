@@ -63,9 +63,9 @@ class Rx_Thread(threading.Thread):
 
                 hex = ':'.join(f'{i:02x}' for i in payload)
                 
-                if payload[0] == 0x01:
-                    values = struct.unpack("<B"+"?"*13, payload)
-                    self.button_queue.put_nowait(values)
+                #if payload[0] == 0x01:
+                #    values = struct.unpack("<B"+"?"*13, payload)
+                #    self.button_queue.put_nowait(values)
                 if payload[0] == 0x02:
                     values = struct.unpack("<B"+"f"*6, payload)
                     self.axis_queue.put_nowait(values)

@@ -16,7 +16,7 @@ print(os.path.abspath('.'))
 
 dled = DebugLEDHandler()
 dled.progLed(Status.BOOTUP,LEDS.HEALTHLED)
-
+dled.show()
 button_queue = Queue()
 axis_queue = Queue()
 tx = Rx_Thread(button_queue=button_queue,axis_queue=axis_queue)
@@ -24,11 +24,13 @@ tx.start()
 
 mpu = MPU_9250()
 mpu.run()
-
+dled.progLed(Status.READY,LEDS.HEALTHLED)
+dled.show()
 try:
     db = DbHandler()
 except sqlite3.OperationalError as e:
     dled.progLed(Status.DBERROR,LEDS.DATALED)
+    dled.show()
     
 
 while True: 
@@ -37,8 +39,6 @@ while True:
             db.storeMPUData(mpu.dataFrame)
         except Exception as e:
             dled.progLed(Status.DBERROR,LEDS.DATALED)
-        if not button_queue.empty():
-            print(button_queue.get_nowait())
         if not axis_queue.empty():
             print(axis_queue.get_nowait())
         else:
@@ -46,7 +46,9 @@ while True:
     except KeyboardInterrupt:
         dled.clear()
         sys.exit()
+    except Exception as e:
+        dled.progLed(Status.UNKNOWNERROR,LEDS.HEALTHLED)
     else:
-        dled.clear()
+        dled.show()
     
 
