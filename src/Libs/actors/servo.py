@@ -35,7 +35,7 @@ else:
    
 for g in G:
    used[g] = True
-   step[g] = random.randrange(5, 25)
+   step[g] = 5
    if step[g] % 2 == 0:
       step[g] = -step[g]
    width[g] = random.randrange(MIN_WIDTH, MAX_WIDTH+1)
