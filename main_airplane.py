@@ -15,7 +15,7 @@ from src.Libs.sensors import MPU_9250
 from src.Libs.actors import CustomServo
 
 
-servo17 = CustomServo(17,clamp_min=0.5,clamp_max=1.5)
+servo17 = CustomServo(17,clamp_min=0,clamp_max=2)
 
 button_queue = Queue()
 axis_queue = Queue()
@@ -43,7 +43,6 @@ while True:
             for _ in range(axis_queue.qsize()-1):
                 data = axis_queue.get_nowait()
             servo17.setVal(data[4])
-            print(data)
             
     except KeyboardInterrupt:
         dled.clear()
