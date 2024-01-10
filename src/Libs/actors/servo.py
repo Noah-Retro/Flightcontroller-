@@ -15,6 +15,7 @@ import pigpio
 
 
 pi = pigpio.pi()
+pi.stop()
 
 if not pi.connected:
    exit()
