@@ -9,11 +9,14 @@ import sqlite3
 from src.Libs.db_tools import DbHandler
 from src.Libs.tools import DebugLEDHandler,LEDS,Status
 from src.Libs.sensors import MPU_9250
-
+from src.Libs.actors import CustomServo
 
 dled = DebugLEDHandler()
 dled.progLed(Status.BOOTUP,LEDS.PROGLED)
 dled.show()
+
+servo17 = CustomServo(17)
+
 button_queue = Queue()
 axis_queue = Queue()
 tx = Rx_Thread(button_queue=button_queue,axis_queue=axis_queue)
@@ -46,7 +49,8 @@ while True:
         
         if not axis_queue.empty():
             for _ in range(axis_queue.qsize()-1):
-                print(axis_queue.get_nowait())
+                data = axis_queue.get_nowait()
+            servo17.setVal(data[3])
             
     except KeyboardInterrupt:
         dled.clear()
