@@ -4,13 +4,13 @@ import time
 
 class Status():
     NOSTATE=[0,0,0]
+    UNKNOWNERROR=[255,255,255]
+    
     BOOTUP=[255,0,0]
     READY=[0,255,0]
-    UNKNOWNERROR=[255,255,255]
+    
     VOLTAGELOW=[255,0,0]
-    I2CERROR=[0,255,0]
-    SPIERROR=[0,0,255]
-    TRANSMITTERROR=[255,0,0]
+    
     DBERROR=[0,0,255]
     SETTINGSERROR=[0,255,0]
        
