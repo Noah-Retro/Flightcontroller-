@@ -38,7 +38,7 @@ class DbHandler(threading.Thread):
         self.cur.execute("Drop table mpu;")
         self.con.commit()
 
-    def run(self,df:pd.DataFrame)->None:
+    def run(self)->None:
         """stores all MPU data with timestamp of reading
 
         Args:
