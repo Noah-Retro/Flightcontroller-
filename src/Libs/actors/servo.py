@@ -20,7 +20,7 @@ if not pi.connected:
    exit()
 
 def scale(input:float,_min:int=950,_max:int=2100):
-    res = _max*input-_min
+    res = (_max-_min)*input
     return res
     
 
