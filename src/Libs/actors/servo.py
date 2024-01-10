@@ -26,40 +26,19 @@ pi = pigpio.pi()
 if not pi.connected:
    exit()
 
-if len(sys.argv) == 1:
-   G = [4]
-else:
-   G = []
-   for a in sys.argv[1:]:
-      G.append(int(a))
-   
-for g in G:
-   used[g] = True
-   step[g] = 5
-   if step[g] % 2 == 0:
-      step[g] = -step[g]
-   width[g] = random.randrange(MIN_WIDTH, MAX_WIDTH+1)
 
-print("Sending servos pulses to GPIO {}, control C to stop.".
-   format(' '.join(str(g) for g in G)))
+def scale(input:float,_min:int=MIN_WIDTH,_max:int=MAX_WIDTH):
+    res = (_max-_min)*input
+    return res
+    
 
 while True:
 
     try:
 
-        for g in G:
-
-            pi.set_servo_pulsewidth(g, width[g])
-
-            print(g, width[g])
-
-            width[g] += step[g]
-
-            if width[g]<MIN_WIDTH or width[g]>MAX_WIDTH:
-                step[g] = -step[g]
-                width[g] += step[g]
-
-        time.sleep(0.1)
+        for i in range(1,0.1):
+            pi.set_servo_pulsewidth(17, i)
+            time.sleep(0.1)
 
     except KeyboardInterrupt:
         for g in G:
