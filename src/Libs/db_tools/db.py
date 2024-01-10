@@ -2,9 +2,6 @@ import sqlite3
 import pandas as pd
 import numpy as np
 import json
-import threading
-from src.Libs.sensors import MPU_9250
-
 
 def generate_smooth_random_walk(num_samples, std_dev=0.05):
     data = {'Timestamp': pd.date_range(start='2024-01-06', periods=num_samples, freq='S')}
@@ -17,17 +14,18 @@ def generate_smooth_random_walk(num_samples, std_dev=0.05):
     
 
 
-class DbHandler(threading.Thread):
+class DbHandler():
     def __init__(self,path:str="./src/DB/flight_data.db",schema_path:str="./src/Libs/db_tools/schema.sql") -> None:
         self.path = path
         self.con = sqlite3.connect(self.path)
         self.cur = self.con.cursor()
         self.schema_path = schema_path
-        self.mpu = MPU_9250()
-        self.mpu.run()
+        
+        with open("./src/settings/data.json") as data:
+            self.settings = json.load(data)
+
         with open(self.schema_path,encoding="utf8") as f:
             self.con.executescript(f.read())
-        super().__init__()
 
     def delDb(self)->None:
         """Deletes all tables from the DB.
@@ -36,24 +34,24 @@ class DbHandler(threading.Thread):
         self.cur.execute("Drop table mpu;")
         self.con.commit()
 
-    def run(self)->None:
-                    
-        data = open("./src/settings/data.json")
-        while True:
-            df = self.mpu.dataFrame
-            
-            settings = json.load(data)
-            data.close()
-            flight_num = settings["fligth_num"]
+    def storeMPUData(self,df:pd.DataFrame)->None:
+        """stores all MPU data with timestamp of reading
 
-            for _ in df["Timestamp"]:
-                df["FlightNum"] = flight_num
+        Args:
+            mpu (MPU9250): The connected MPU
+        """
 
-            df.to_sql('mpu', con=self.con,
-                    schema=open(self.schema_path,encoding="utf8").read(),
-                    if_exists='replace',
-                        index=False)
-            self.con.commit()
+        
+        flight_num = self.settings["fligth_num"]
+
+        for _ in df["Timestamp"]:
+            df["FlightNum"] = flight_num
+
+        df.to_sql('mpu', con=self.con,
+                  schema=open(self.schema_path,encoding="utf8").read(),
+                   if_exists='replace',
+                     index=False)
+        self.con.commit()
 
 
     def storeTestData(self,numEntry:int,std_dev:float=0.05)->None:
