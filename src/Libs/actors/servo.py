@@ -21,7 +21,7 @@ if not pi.connected:
 
 def scale(ins:float,_min:int=950,_max:int=2100):
     res = (_max-_min) * ins + _min
-    return res
+    return int(res)
     
 
 class CustomServo():
