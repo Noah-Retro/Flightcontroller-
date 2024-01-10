@@ -10,6 +10,7 @@ from queue import Queue
 import os
 import sys
 import sqlite3
+import json
 from src.Libs.db_tools import DbHandler
 from src.Libs.actors import CustomServo
 from src.Libs.sensors import MPU_9250
@@ -30,6 +31,11 @@ except sqlite3.OperationalError as e:
     print(e)
     dled.progLed(Status.DBERROR,LEDS.DATALED)
       
+with open("./src/settings/data.json","rw") as data:
+    settings = json.load(data)
+    settings["fligth_num"]+=1
+    data.write(json.dumps(settings,indent=4))
+
 dled.progLed(Status.READY,LEDS.PROGLED)
 
 
