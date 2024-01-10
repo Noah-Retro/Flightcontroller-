@@ -25,7 +25,7 @@ class DbHandler():
             self.settings = json.load(data)
 
         with open(self.schema_path,encoding="utf8") as f:
-            self.con.executescript(f.read())
+            self.schema= f.read()
 
     def delDb(self)->None:
         """Deletes all tables from the DB.
@@ -48,7 +48,7 @@ class DbHandler():
             df["FlightNum"] = flight_num
 
         df.to_sql('mpu', con=self.con,
-                  schema=open(self.schema_path,encoding="utf8").read(),
+                  schema=self.schema,
                    if_exists='replace',
                      index=False)
         self.con.commit()
@@ -72,7 +72,7 @@ class DbHandler():
             df["FlightNum"] = flight_num
 
         df.to_sql('mpu', con=self.con,
-                  schema=open(self.schema_path,encoding="utf8").read(),
+                  schema=self.schema,
                    if_exists='replace',
                      index=False)
         self.con.commit()
