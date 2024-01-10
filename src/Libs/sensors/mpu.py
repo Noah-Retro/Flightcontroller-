@@ -15,7 +15,7 @@ class MPU_9250():
         
 
     def dataFrame(self)->pd.DataFrame:
-        self.imu.readRawSensor()
+        self.imu.readSensor()
         data = {
             "Timestamp":datetime.datetime.now(),
             "Acceleration_X":self.imu.AccelVals[0],
@@ -25,8 +25,7 @@ class MPU_9250():
             "Gyro_Y":self.imu.GyroVals[1],
             "Gyro_Z":self.imu.GyroVals[2]            
         }
-        r = pd.DataFrame(data,index=[0])
-        return r
+        return data
        
     def calliberateAccelerometer(self):
         """Caliberate Accelerometer by positioning it in 6 different positions

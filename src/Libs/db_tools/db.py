@@ -52,7 +52,7 @@ class DbHandler(threading.Thread):
             if self.q.empty():
                 continue
             try:
-                df = self.q.get_nowait()
+                df = pd.DataFrame(self.q.get_nowait())
                 for _ in df["Timestamp"]:
                     df["FlightNum"] = flight_num
 
