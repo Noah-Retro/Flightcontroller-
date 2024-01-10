@@ -38,7 +38,7 @@ class DbHandler():
             mpu (MPU9250): The connected MPU
         """
 
-        data = open("Flightcontroller-\src\settings\data.json")
+        data = open("./src/settings/data.json")
         settings = json.load(data)
         data.close()
         flight_num = settings["fligth_num"]
