@@ -60,6 +60,7 @@ while True:
     
     except Exception as e:
         print(e)
+        dled.clear()
         dled.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
         dled.show()
     
