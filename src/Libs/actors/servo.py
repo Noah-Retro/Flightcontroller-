@@ -30,7 +30,6 @@ class CustomServo():
         return int(res)
         
     def setVal(self,ins:int):
-        print(self.pin,": ",self.scale(ins))
         pi.set_servo_pulsewidth(self.pin,self.scale(ins))
         
     def stop(self):
