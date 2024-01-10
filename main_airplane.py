@@ -41,7 +41,7 @@ dled.progLed(Status.READY,LEDS.PROGLED)
 
 
 while True: 
-    #db.storeMPUData(mpu.dataFrame)
+    db.storeMPUData(mpu.dataFrame)
     try:       
         if not axis_queue.empty():
             for _ in range(axis_queue.qsize()-1):
