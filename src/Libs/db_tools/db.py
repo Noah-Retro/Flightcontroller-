@@ -46,12 +46,13 @@ class DbHandler(threading.Thread):
             mpu (MPU9250): The connected MPU
         """
         
-        
+        mpu = MPU_9250()
         flight_num = self.settings["fligth_num"]
         while True:
-            mpu = MPU_9250()
+            
             try:
                 df = mpu.dataFrame()
+                print(mpu.dataFrame())
                 for _ in df["Timestamp"]:
                     df["FlightNum"] = flight_num
 

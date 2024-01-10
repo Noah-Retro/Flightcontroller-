@@ -46,8 +46,6 @@ dled.progLed(Status.READY,LEDS.PROGLED)
 def main():
     while True: 
         #db.storeMPUData(mpu.dataFrame)
-        mpuqueue.put_nowait(mpu.dataFrame())
-        print(mpu.dataFrame())
         try:       
             if not axis_queue.empty():
                 for _ in range(axis_queue.qsize()-1):
