@@ -15,7 +15,7 @@ def generate_smooth_random_walk(num_samples, std_dev=0.05):
 
 
 class DbHandler():
-    def __init__(self,path:str="./Flightcontroller-/src/DB/flight_data.db",schema_path:str="Flightcontroller-/src/Libs/db_tools/schema.sql") -> None:
+    def __init__(self,path:str="/src/DB/flight_data.db",schema_path:str="Flightcontroller-/src/Libs/db_tools/schema.sql") -> None:
         self.path = path
         self.con = sqlite3.connect(self.path)
         self.cur = self.con.cursor()
