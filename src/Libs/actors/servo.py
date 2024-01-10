@@ -30,7 +30,8 @@ class CustomServo():
     
     def scale(self,ins:float):
         print(np.clip((ins+1),self.clamp_min,self.clamp_max))
-        res = (self.MAX_WIDTH-self.MIN_WIDTH) * np.clip((ins+1),self.clamp_min,self.clamp_max)/(self.clamp_max-self.clamp_max) + self.MAX_WIDTH        
+        print((self.clamp_max-self.clamp_max))
+        res = (self.MAX_WIDTH-self.MIN_WIDTH) * (np.clip((ins+1),self.clamp_min,self.clamp_max)/(self.clamp_max-self.clamp_max)) + self.MAX_WIDTH        
         print(res)
         return int(res)
         
