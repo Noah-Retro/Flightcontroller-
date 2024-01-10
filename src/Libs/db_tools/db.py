@@ -17,12 +17,12 @@ def generate_smooth_random_walk(num_samples, std_dev=0.05):
 
 
 class DbHandler(threading.Thread):
-    def __init__(self,path:str="./src/DB/flight_data.db",schema_path:str="./src/Libs/db_tools/schema.sql") -> None:
+    def __init__(self,q,path:str="./src/DB/flight_data.db",schema_path:str="./src/Libs/db_tools/schema.sql") -> None:
         self.path = path
         self.con = sqlite3.connect(self.path,check_same_thread=False)
         self.cur = self.con.cursor()
         self.schema_path = schema_path
-        
+        self.q = q
         with open("./src/settings/data.json") as data:
             self.settings = json.load(data)
 

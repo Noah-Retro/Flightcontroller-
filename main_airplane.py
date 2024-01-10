@@ -13,8 +13,6 @@ import sqlite3
 import json
 from src.Libs.db_tools import DbHandler
 from src.Libs.actors import CustomServo
-from src.Libs.sensors import MPU_9250
-import timeit
 
 servo17 = CustomServo(17,clamp_min=0,clamp_max=2)
 
@@ -29,8 +27,10 @@ with open("./src/settings/data.json","w") as data:
     settings["fligth_num"]+=1
     data.write(json.dumps(settings,indent=4))
 
+mpuqueue = Queue()
+
 try:
-    db = DbHandler()
+    db = DbHandler(q=mpuqueue)
 except sqlite3.OperationalError as e:
     print(e)
     dled.progLed(Status.DBERROR,LEDS.DATALED)
