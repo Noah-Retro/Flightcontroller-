@@ -7,10 +7,8 @@ GPIO.setup(servoPIN, GPIO.OUT)
 
 def setAngle(angle):
     duty = angle / 18 + 2
-    GPIO.output(03, True)
     p.ChangeDutyCycle(duty)
     time.sleep(1)
-    GPIO.output(03, False)
     p.ChangeDutyCycle(0)
 
 p = GPIO.PWM(servoPIN, 50) # GPIO 17 als PWM mit 50Hz
