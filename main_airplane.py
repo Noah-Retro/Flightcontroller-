@@ -15,7 +15,7 @@ print(os.path.abspath('.'))
 
 
 dled = DebugLEDHandler()
-dled.progLed(Status.BOOTUP,LEDS.HEALTHLED)
+dled.progLed(Status.BOOTUP,LEDS.PROGLED)
 dled.show()
 button_queue = Queue()
 axis_queue = Queue()
@@ -41,16 +41,20 @@ while True:
             db.storeMPUData(mpu.dataFrame)
         except Exception as e:
             dled.progLed(Status.DBERROR,LEDS.DATALED)
+        
         if not axis_queue.empty():
             print(axis_queue.get_nowait())
         else:
             dled.progLed(Status.TRANSMITTERROR,LEDS.DATALED)
+    
     except KeyboardInterrupt:
         dled.clear()
         tx.join()
         sys.exit()
+    
     except Exception as e:
         dled.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
+    
     else:
         dled.progLed(Status.NOSTATE,LEDS.HEALTHLED)
         dled.progLed(Status.NOSTATE,LEDS.PROGLED)
