@@ -15,7 +15,7 @@ dled = DebugLEDHandler()
 dled.progLed(Status.BOOTUP,LEDS.PROGLED)
 dled.show()
 
-servo17 = CustomServo(17)
+servo17 = CustomServo(17,clip_min=1)
 
 button_queue = Queue()
 axis_queue = Queue()

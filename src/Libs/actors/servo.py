@@ -11,6 +11,7 @@ import sys
 import time
 import random
 import pigpio
+import numpy as np
 
 
 
@@ -20,13 +21,13 @@ if not pi.connected:
    exit()
 
 class CustomServo():
-    def __init__(self,pin:int) -> None:
+    def __init__(self,pin:int,clamp_min:int=0,clamp_max:int=2) -> None:
         self.pin = pin
         self.MIN_WIDTH=950
         self.MAX_WIDTH=2100
     
     def scale(self,ins:float,_min:int=950,_max:int=2100):
-        res = (_max-_min) * (ins+1)/2 + _min
+        res = (_max-_min) * np.clip((ins+1)/2) + _min
         return int(res)
         
     def setVal(self,ins:int):
