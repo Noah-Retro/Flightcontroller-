@@ -48,7 +48,7 @@ class DbHandler(threading.Thread):
         
         flight_num = self.settings["fligth_num"]
         while True:
-            df = mpu.dataFrame
+            df = mpu.dataFrame()
             for _ in df["Timestamp"]:
                 df["FlightNum"] = flight_num
 

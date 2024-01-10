@@ -13,7 +13,7 @@ class MPU_9250():
         self.dataFrame_ = pd.DataFrame()
       
         
-    @property
+
     def dataFrame(self)->pd.DataFrame:
         self.imu.readRawSensor()
         data = {
