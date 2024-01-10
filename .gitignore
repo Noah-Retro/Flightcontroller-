@@ -50,6 +50,6 @@ coverage.xml
 docs/_build/
 
 #DB stuff
-DB/
+#DB/
 Notes/
 log/
