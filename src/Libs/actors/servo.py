@@ -20,7 +20,7 @@ if not pi.connected:
    exit()
 
 def scale(input:float,_min:int=950,_max:int=2100):
-    res = (_max-_min)*input
+    res = _max*input-_min
     return res
     
 
@@ -37,14 +37,14 @@ class CustomServo():
         pi.set_servo_pulsewidth(self.pin,0)
 
 if __name__=="__main__":
-    servo = CustomServo(17)
+    servof = CustomServo(17)
     while True:
         try:
             for i in range(100):
                 r = i/100 + 1
                 print(r)
                 print(scale(r))
-                servo.setVal(scale(r))
+                servof.setVal(scale(r))
                 time.sleep(0.1)
 
         except KeyboardInterrupt:
