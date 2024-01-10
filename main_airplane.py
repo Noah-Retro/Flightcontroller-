@@ -46,5 +46,7 @@ while True:
     except KeyboardInterrupt:
         dled.clear()
         sys.exit()
+    else:
+        dled.clear()
     
 
