@@ -27,7 +27,7 @@ class DbHandler(threading.Thread):
         self.mpu.run()
         with open(self.schema_path,encoding="utf8") as f:
             self.con.executescript(f.read())
-        super.__init__(self)
+        super().__init__()
 
     def delDb(self)->None:
         """Deletes all tables from the DB.
