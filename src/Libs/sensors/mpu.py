@@ -17,7 +17,7 @@ class MPU_9250():
     @property
     def dataFrame(self)->pd.DataFrame:
         data = {
-            "Timestamp":datetime.now(),
+            "Timestamp":datetime.datetime.now(),
             "Acceleration_X":self.imu.AccelVals[0],
             "Acceleration_Y":self.imu.AccelVals[1],
             "Acceleration_Z":self.imu.AccelVals[2],
