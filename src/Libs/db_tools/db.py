@@ -54,7 +54,7 @@ class DbHandler(threading.Thread):
 
             df.to_sql('mpu', con=self.con,
                     schema=self.schema,
-                    if_exists='replace',
+                    if_exists='append',
                         index=False)
             self.con.commit()
 
