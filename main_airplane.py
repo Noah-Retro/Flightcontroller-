@@ -1,3 +1,7 @@
+from src.Libs.tools import DebugLEDHandler,LEDS,Status
+dled = DebugLEDHandler()
+dled.progLed(Status.BOOTUP,LEDS.PROGLED)
+
 import nrf24
 from src.Libs.transmition import Rx_Thread
 from threading import Thread
@@ -7,13 +11,9 @@ import os
 import sys
 import sqlite3
 from src.Libs.db_tools import DbHandler
-from src.Libs.tools import DebugLEDHandler,LEDS,Status
 from src.Libs.sensors import MPU_9250
 from src.Libs.actors import CustomServo
 
-dled = DebugLEDHandler()
-dled.progLed(Status.BOOTUP,LEDS.PROGLED)
-dled.show()
 
 servo17 = CustomServo(17,clamp_min=1)
 
@@ -25,28 +25,20 @@ tx.start()
 mpu = MPU_9250()
 mpu.run()
 dled.progLed(Status.BOOTUP,LEDS.PROGLED)
-dled.show()
+
 try:
     db = DbHandler()
 except sqlite3.OperationalError as e:
     print(e)
     dled.progLed(Status.DBERROR,LEDS.DATALED)
-    dled.show()
+    
     
 dled.progLed(Status.READY,LEDS.PROGLED)
-dled.show()
+
 
 while True: 
     db.storeMPUData(mpu.dataFrame)
-    try:
-        #try:
-        
-        #except sqlite3.OperationalError as e:
-        #    print(e)
-        #    dled.progLed(Status.DBERROR,LEDS.DATALED)
-        #else:
-        #    dled.progLed(Status.NOSTATE,LEDS.DATALED)
-        
+    try:       
         if not axis_queue.empty():
             for _ in range(axis_queue.qsize()-1):
                 data = axis_queue.get_nowait()
@@ -62,12 +54,14 @@ while True:
         print(e)
         dled.clear()
         dled.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
-        dled.show()
-    
+        
     else:
         dled.progLed(Status.NOSTATE,LEDS.HEALTHLED)
         dled.progLed(Status.READY,LEDS.PROGLED)
-        dled.show()
+        
+    finally:
+        dled.clear()
+        
     
         
 
