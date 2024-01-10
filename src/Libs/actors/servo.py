@@ -45,23 +45,27 @@ print("Sending servos pulses to GPIO {}, control C to stop.".
 
 while True:
 
-   try:
+    try:
 
-      for g in G:
+        for g in G:
 
-         pi.set_servo_pulsewidth(g, width[g])
+            pi.set_servo_pulsewidth(g, width[g])
 
-         # print(g, width[g])
+            # print(g, width[g])
 
-         width[g] += step[g]
-
-         if width[g]<MIN_WIDTH or width[g]>MAX_WIDTH:
-            step[g] = -step[g]
             width[g] += step[g]
 
-      time.sleep(0.1)
+            if width[g]<MIN_WIDTH or width[g]>MAX_WIDTH:
+                step[g] = -step[g]
+                width[g] += step[g]
 
-   except KeyboardInterrupt:
+        time.sleep(0.1)
+        pi.set_servo_pulsewidth(17,MAX_WIDTH)
+        time.sleep(0.5)
+        pi.set_servo_pulsewidth(17,MIN_WIDTH)
+        time.sleep(0.5)
+
+    except KeyboardInterrupt:
         for g in G:
             pi.set_servo_pulsewidth(g, 0)
 
