@@ -15,7 +15,6 @@ from src.Libs.db_tools import DbHandler
 from src.Libs.actors import CustomServo
 from src.Libs.sensors import MPU_9250
 
-
 servo17 = CustomServo(17,clamp_min=0,clamp_max=2)
 
 button_queue = Queue()
