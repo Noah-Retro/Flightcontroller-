@@ -16,6 +16,7 @@ class MPU_9250():
         
     @property
     def dataFrame(self)->pd.DataFrame:
+        self.imu.readSensor()
         data = {
             "Timestamp":datetime.datetime.now(),
             "Acceleration_X":self.imu.AccelVals[0],
