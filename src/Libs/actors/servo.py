@@ -14,8 +14,8 @@ import pigpio
 
 NUM_GPIO=32
 
-MIN_WIDTH=1000
-MAX_WIDTH=2000
+MIN_WIDTH=750
+MAX_WIDTH=2250
 
 step = [0]*NUM_GPIO
 width = [0]*NUM_GPIO
