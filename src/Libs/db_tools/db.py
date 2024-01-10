@@ -48,15 +48,18 @@ class DbHandler(threading.Thread):
         
         flight_num = self.settings["fligth_num"]
         while True:
-            df = mpu.dataFrame()
-            for _ in df["Timestamp"]:
-                df["FlightNum"] = flight_num
+            try:
+                df = mpu.dataFrame()
+                for _ in df["Timestamp"]:
+                    df["FlightNum"] = flight_num
 
-            df.to_sql('mpu', con=self.con,
-                    schema=self.schema,
-                    if_exists='append',
-                        index=False)
-            self.con.commit()
+                df.to_sql('mpu', con=self.con,
+                        schema=self.schema,
+                        if_exists='append',
+                            index=False)
+                self.con.commit()
+            except:
+                break
 
 
     def storeTestData(self,numEntry:int,std_dev:float=0.05)->None:

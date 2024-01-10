@@ -53,6 +53,7 @@ def main():
         except KeyboardInterrupt:
             dled.clear()
             tx.join()
+            db.join()
             sys.exit()
         
         except Exception as e:
