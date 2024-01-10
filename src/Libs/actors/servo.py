@@ -42,6 +42,7 @@ if __name__=="__main__":
         try:
             for i in range(100):
                 r = i/100 + 1
+                print(r)
                 servo.setVal(scale(r))
                 time.sleep(0.1)
 
