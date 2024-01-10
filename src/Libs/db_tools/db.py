@@ -4,7 +4,7 @@ import numpy as np
 import json
 import threading
 from queue import Queue
-
+from src.Libs.sensors import MPU_9250
 
 def generate_smooth_random_walk(num_samples, std_dev=0.05):
     data = {'Timestamp': pd.date_range(start='2024-01-06', periods=num_samples, freq='S')}
@@ -49,10 +49,9 @@ class DbHandler(threading.Thread):
         
         flight_num = self.settings["fligth_num"]
         while True:
-            if self.q.empty():
-                continue
+            mpu = MPU_9250()
             try:
-                df = pd.DataFrame(self.q.get_nowait())
+                df = mpu.dataFrame()
                 for _ in df["Timestamp"]:
                     df["FlightNum"] = flight_num
 

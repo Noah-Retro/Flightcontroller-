@@ -25,7 +25,8 @@ class MPU_9250():
             "Gyro_Y":self.imu.GyroVals[1],
             "Gyro_Z":self.imu.GyroVals[2]            
         }
-        return data
+        r = pd.DataFrame(data,index=[0])
+        return r
        
     def calliberateAccelerometer(self):
         """Caliberate Accelerometer by positioning it in 6 different positions

@@ -13,7 +13,7 @@ import sqlite3
 import json
 from src.Libs.db_tools import DbHandler
 from src.Libs.actors import CustomServo
-from src.Libs.sensors import MPU_9250
+
 
 servo17 = CustomServo(17,clamp_min=0,clamp_max=2)
 
@@ -29,7 +29,7 @@ with open("./src/settings/data.json","w") as data:
     data.write(json.dumps(settings,indent=4))
 
 mpuqueue = Queue()
-mpu = MPU_9250()
+
 
 try:
     db = DbHandler(q=mpuqueue)
