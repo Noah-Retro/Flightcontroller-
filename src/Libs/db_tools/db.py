@@ -52,7 +52,6 @@ class DbHandler(threading.Thread):
             
             try:
                 df = mpu.dataFrame()
-                print(mpu.dataFrame())
                 for _ in df["Timestamp"]:
                     df["FlightNum"] = flight_num
 
