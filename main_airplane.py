@@ -59,6 +59,7 @@ while True:
         sys.exit()
     
     except Exception as e:
+        print(e)
         dled.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
         dled.show()
     
