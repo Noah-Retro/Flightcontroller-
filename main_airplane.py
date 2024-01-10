@@ -23,7 +23,7 @@ tx = Rx_Thread(button_queue=button_queue,axis_queue=axis_queue)
 tx.start()
 
 mpu = MPU_9250()
-mpu.run()
+
 
 try:
     db = DbHandler()

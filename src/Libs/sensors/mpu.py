@@ -9,14 +9,13 @@ class MPU_9250():
         self.address = address
         self.bus = smbus.SMBus(bus)
         self.imu = MPU9250.MPU9250(self.bus, self.address)
-        self.dataFrame_ = pd.DataFrame()
-
-    def run(self):
         self.imu.begin()
+        self.dataFrame_ = pd.DataFrame()
+      
         
     @property
     def dataFrame(self)->pd.DataFrame:
-        self.imu.readSensor()
+        self.imu.readRawSensor()
         data = {
             "Timestamp":datetime.datetime.now(),
             "Acceleration_X":self.imu.AccelVals[0],
