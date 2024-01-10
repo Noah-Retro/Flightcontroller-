@@ -5,7 +5,6 @@ import time
 class Status():
     NOSTATE=[0,0,0]
     BOOTUP=[255,0,0]
-    WAITING=[255,255,0]
     READY=[0,255,0]
     UNKNOWNERROR=[255,255,255]
     VOLTAGELOW=[255,0,0]

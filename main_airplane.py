@@ -44,9 +44,7 @@ while True:
         
         if not axis_queue.empty():
             print(axis_queue.get_nowait())
-        else:
-            dled.progLed(Status.TRANSMITTERROR,LEDS.DATALED)
-    
+            
     except KeyboardInterrupt:
         dled.clear()
         tx.join()
@@ -57,7 +55,7 @@ while True:
     
     else:
         dled.progLed(Status.NOSTATE,LEDS.HEALTHLED)
-        dled.progLed(Status.NOSTATE,LEDS.PROGLED)
+        dled.progLed(Status.READY,LEDS.PROGLED)
         dled.show()
     
 
