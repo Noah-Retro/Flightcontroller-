@@ -9,6 +9,8 @@ from src.Libs.db_tools import DbHandler
 from src.Libs.tools import DebugLEDHandler,LEDS,Status
 from src.Libs.sensors import MPU_9250
 
+print(os.path.abspath('.'))
+
 button_queue = Queue()
 axis_queue = Queue()
 tx = Rx_Thread(button_queue=button_queue,axis_queue=axis_queue)
