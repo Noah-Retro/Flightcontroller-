@@ -51,7 +51,9 @@ class Rx_Thread(threading.Thread):
 
     def run(self):
         count = 0
-
+        g:bytes=b'0'
+        b:bytes=b'0'
+        file_send=False
         while self.runs:
             while nrf.data_ready() and self.runs:           
                 count += 1
@@ -64,6 +66,16 @@ class Rx_Thread(threading.Thread):
 
                 hex = ':'.join(f'{i:02x}' for i in payload)
                 
+
+                #Test settings transmition
+                if file_send and payload[0] != 0x03 and payload != 0x04:
+                    with open("src/settings/transmitt.json","w") as tx_file:
+                        tx_file.write(b[1:].decode())
+                    with open("src/settings/motors.json","w") as tx_file:
+                        tx_file.write(g[1:].decode())
+
+
+
                 #if payload[0] == 0x01:
                 #    values = struct.unpack("<B"+"?"*13, payload)
                 #    self.button_queue.put_nowait(values)
@@ -71,6 +83,20 @@ class Rx_Thread(threading.Thread):
                     values = struct.unpack("<B"+"f"*6, payload)
                     self.axis_queue.put_nowait(values)
 
+                if payload[0] == 0x03:
+                    payload.pop(0)
+                    file_send = True
+                    for k in payload:
+                        k:int
+                        g+=k.to_bytes()
+
+                if payload[0] == 0x03:
+                    payload.pop(0)
+                    file_send = True
+                    for k in payload:
+                        k:int
+                        g+=k.to_bytes()
+                    
                 
 
             

@@ -3,6 +3,26 @@ from tkinter import *
 from tkinter import ttk
 import threading
 import json
+from slider import Slider as DobbleSlider
+
+vals={
+    "rightUD":None,
+    "leftUD":None,
+    "leftRight":None,
+    "throtleR":None,
+    "throtleL":None
+}
+pins={
+    "rightUD":None,
+    "leftUD":None,
+    "leftRight":None,
+    "throtleR":None,
+    "throtleL":None
+}
+
+def storePin(val:int,name:str) -> None:
+    pins[name]=val
+
 
 def settings_dropdown(master:ttk.Frame,settings_name:str,label_text:str,data:dict)->StringVar:
     """Packs a Label and a Dropdown Menue in the master frame
@@ -27,6 +47,33 @@ def settings_dropdown(master:ttk.Frame,settings_name:str,label_text:str,data:dic
     dropdown.pack()
     return var
 
+def motor_frame(master,motor_data,name:str) -> Frame:
+        frame_motor = ttk.Frame(
+            master=master
+        )
+        var = tk.IntVar(value=motor_data[name]["pin"])
+
+        label = Label(frame_motor,text=name)
+        label.pack()
+
+        options = [x for x in range(53)]
+        dropdown= ttk.OptionMenu(frame_motor,var,*options,command=lambda x:storePin(val=x,name=name))
+        dropdown.pack()
+        frame_motor.pack()
+
+        label = Label(frame_motor,text=f"{name} clamp")
+        label.pack()
+
+        sl = DobbleSlider(frame_motor,
+                          max_val=2,
+                          show_value=True,
+                          init_lis=[motor_data[name]["clamp_min"],motor_data[name]["clamp_max"]])
+        sl.pack()
+        def getback(val):
+            vals[name]=val
+
+        sl.setValueChageCallback(lambda x: getback(x))
+        return frame_motor
 
 class App(threading.Thread):             
     def __init__(self,settings_path):
@@ -57,9 +104,8 @@ class App(threading.Thread):
 
         tabControl.pack()
 
-        transmittions_file = open(self.settings_path + "/transmitt.json")
-        transmittions_data = json.load(transmittions_file)
-        transmittions_file.close()
+        with open(self.settings_path + "/transmitt.json") as transmittions_file:
+            transmittions_data = json.load(transmittions_file)
 
         payload_var = settings_dropdown(master=transmition_settings_tab,
                           settings_name="payload_size",
@@ -77,15 +123,14 @@ class App(threading.Thread):
                           data=transmittions_data)
 
         def transmittions_save():
-            file = open(self.settings_path+"/transmitt.json",mode="w")
-            transmittions_data["tx"]["payload_size"]["value"] = payload_var.get()
-            transmittions_data["tx"]["data_rate"]["value"] = data_rate_var.get()
-            transmittions_data["tx"]["pa_level"]["value"] = pa_level_var.get()
-            transmittions_data["rx"]["payload_size"]["value"] = payload_var.get()
-            transmittions_data["rx"]["data_rate"]["value"] = data_rate_var.get()
-            transmittions_data["rx"]["pa_level"]["value"] = pa_level_var.get()
-            file.write(json.dumps(transmittions_data,indent=4))
-            file.close()
+            with open(self.settings_path+"/transmitt.json",mode="w")  as file:
+                transmittions_data["tx"]["payload_size"]["value"] = payload_var.get()
+                transmittions_data["tx"]["data_rate"]["value"] = data_rate_var.get()
+                transmittions_data["tx"]["pa_level"]["value"] = pa_level_var.get()
+                transmittions_data["rx"]["payload_size"]["value"] = payload_var.get()
+                transmittions_data["rx"]["data_rate"]["value"] = data_rate_var.get()
+                transmittions_data["rx"]["pa_level"]["value"] = pa_level_var.get()
+                file.write(json.dumps(transmittions_data,indent=4))
 
         transmition_button_save = ttk.Button(transmition_settings_tab,
                                              command=transmittions_save,
@@ -139,20 +184,45 @@ class App(threading.Thread):
         sensitivity_y.pack()
 
         def controller_save():
-            file = open(self.settings_path+"/controller.json",mode="w")
-            controller_data["rumble"]=rumble_var.get()
-            controller_data["inverse_look"]=inverse_look_var.get()
-            controller_data["sensitivity_x"]=sensitivity_x_var.get()
-            controller_data["sensitivity_y"]=sensitivity_y_var.get()
-            file.write(json.dumps(controller_data,indent=4))
-            file.close()
+            with open(self.settings_path+"/controller.json",mode="w") as file:
+                controller_data["rumble"]=rumble_var.get()
+                controller_data["inverse_look"]=inverse_look_var.get()
+                controller_data["sensitivity_x"]=sensitivity_x_var.get()
+                controller_data["sensitivity_y"]=sensitivity_y_var.get()
+                file.write(json.dumps(controller_data,indent=4))
 
         controller_save_button = ttk.Button(controller_settings_tab,
                                             command=controller_save,
                                             text="Save")
-
         controller_save_button.pack()
 
+
+        with open(self.settings_path + "/motors.json") as motors_file:
+            motor_data = json.load(motors_file)
+
+        motor_frame(master=motor_settings_tab,motor_data=motor_data,name="rightUD").pack()
+        motor_frame(master=motor_settings_tab,motor_data=motor_data,name="leftUD").pack()
+        motor_frame(master=motor_settings_tab,motor_data=motor_data,name="leftRight").pack()
+        motor_frame(master=motor_settings_tab,motor_data=motor_data,name="throtleR").pack()
+        motor_frame(master=motor_settings_tab,motor_data=motor_data,name="throtleL").pack()
+
+        def motor_save():
+            for k,v in vals.items():
+                if v == None:
+                    continue
+                motor_data[k]["clamp_min"]=v[0]
+                motor_data[k]["clamp_max"]=v[1]
+            for k,v in pins.items():
+                if v==None:
+                    continue
+                motor_data[k]["pin"]=v
+            with open(self.settings_path+"/motors.json",mode="w")  as file:
+                file.write(json.dumps(motor_data,indent=4))
+
+        controller_save_button = ttk.Button(motor_settings_tab,
+                                            command=motor_save,
+                                            text="Save")
+        controller_save_button.pack()
 
         info_text = ttk.Label(self.root,text="Changes will only be done after a restart of the controller unit.")
         info_text.pack(anchor=tk.S)
@@ -164,4 +234,3 @@ if __name__ == "__main__":
     
     test_thread = threading.Thread(target=test.run)
     test_thread.start()
-    print("Hey")

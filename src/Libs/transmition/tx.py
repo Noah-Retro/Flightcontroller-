@@ -4,7 +4,7 @@ import time
 from queue import Queue
 import json
 import threading
-
+import math
 import pigpio
 from nrf24 import *
 
@@ -60,15 +60,29 @@ class Tx_Thread(threading.Thread):
                     if not send:
                         continue
                     if send[0][9] and send[0][10]:
-                        pass
+                        with open("Flightcontroller-/src/settings/motors.json") as data:
+                            b = bytes(data.read(),'utf-8')
+                        for i in range(int(math.ceil(len(b)/31))):
+                            s = list(b[i*31:i*31+31])
+                            s[:0]=[0x03]
+                            nrf.send(s)
+                            nrf.wait_until_sent()
+                        with open("Flightcontroller-/src/settings/transmitt.json") as data:
+                            b = bytes(data.read(),'utf-8')
+                        for i in range(int(math.ceil(len(b)/31))):
+                            s = list(b[i*31:i*31+31])
+                            s[:0]=[0x04]
+                            nrf.send(s)
+                            nrf.wait_until_sent()
+                        
                     else:     
                         if send_state == 0: #Not active
-                            payload = struct.pack("<B"+"?"*13,
+                            payload = struct.pack("<B"+"?"*13, #Button data
                                             0x01,
                                             *send[0].values())
                             send_state += 1
                         elif send_state == 1:
-                            payload = struct.pack("<B"+"f"*6,
+                            payload = struct.pack("<B"+"f"*6, #Axis data
                                             0x02,
                                             *send[1].values())
                             send_state = 1

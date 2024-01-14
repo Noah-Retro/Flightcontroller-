@@ -7,12 +7,12 @@
 # servo_demo.py          # Send servo pulses to GPIO 4.
 # servo_demo.py 23 24 25 # Send servo pulses to GPIO 23, 24, 25.
 
+import datetime
 import sys
 import time
 import random
 import pigpio
 import numpy as np
-
 
 
 pi = pigpio.pi()

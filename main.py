@@ -25,7 +25,7 @@ controllerQueue = Queue()
 controllerQueueSend = Queue()
 
 ps4con = PS4Controller(controller=controller,q=controllerQueue,q1=controllerQueueSend)
-rx = Tx_Thread(controllerQueueSend)
+tx = Tx_Thread(controllerQueueSend)
 app=App("src/settings")
 
 controllerData = []
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     
     ps4con.start()
     app.start()
-    rx.start()
+    tx.start()
     
     while True:
         if not controllerQueue.empty():

@@ -1,22 +1,30 @@
 {
-    "rightUD":{
-        "pin":17,
-        "frequenz":50
+    "rightUD": {
+        "pin": 17,
+        "frequenz": 50,
+        "clamp_max": 2,
+        "clamp_min": 0
     },
-    "leftUD":{
-        "pin":18,
-        "frequenz":50
+    "leftUD": {
+        "pin": 18,
+        "frequenz": 50,
+        "clamp_max": 2,
+        "clamp_min": 0
     },
-    "leftRight":{
-        "pin":27,
-        "frequenz":50
+    "leftRight": {
+        "pin": 27,
+        "frequenz": 50,
+        "clamp_max": 2,
+        "clamp_min": 0
     },
-    "throtleR":{
-        "max":95,
-        "min":10
+    "throtleR": {
+        "pin": 0,
+        "clamp_max": 1.5,
+        "clamp_min": 0
     },
-    "throtleL":{
-        "max":95,
-        "min":10
+    "throtleL": {
+        "pin": 0,
+        "clamp_max": 1.5,
+        "clamp_min": 0
     }
 }
