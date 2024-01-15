@@ -3,6 +3,15 @@ import time
 from typing import Any
 
 
+def timer(func):
+    def wrapper(*args,**kwargs):
+        start = time.perf_counter_ns()
+        func(*args,**kwargs)
+        end = time.perf_counter_ns()
+        print(f"Delta: {(end-start)/1000000}ms")
+    return wrapper
+        
+@timer
 def test_file_send():
     import math
     with open("Flightcontroller-/src/settings/transmitt.json") as data:
@@ -22,7 +31,7 @@ def test_file_send():
     g = g[1:].decode()
     print(g)
 
-
+@timer
 def test_visualization():
     from db_tools import DbHandler
     from gui import VisualizationHandler
@@ -47,20 +56,24 @@ def run(num):
         delta = stop-start
         print(f"elapsed time {num}:\n delta:{delta/1000000} start:{start/1000000} stop:{stop/1000000}\n")
 
-if __name__ == "__main__":
-
+def test_process_thread():
     bp1 = th.Thread(target=run,args=(1,))
     bp2 = th.Thread(target=run,args=(2,))
     bp3 = th.Thread(target=run,args=(3,))
     bp1.start()
     bp2.start()
     bp3.start()
-    bp4 = mp.Process(target=run,args=(4,))
+    bp4 = mp.Process(target=run,args=(4,),name="Big Data Process")
     bp5 = mp.Process(target=run,args=(5,))
     bp6 = mp.Process(target=run,args=(6,))
     bp4.start()
     bp5.start()
     bp6.start()
+
+
+if __name__ == "__main__":
+    pass
+
 
 
    

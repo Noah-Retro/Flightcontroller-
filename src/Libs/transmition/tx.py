@@ -62,18 +62,23 @@ class Tx_Thread(threading.Thread):
                     if send[0][9] and send[0][10]:
                         with open("Flightcontroller-/src/settings/motors.json") as data:
                             b = bytes(data.read(),'utf-8')
+                            
                         for i in range(int(math.ceil(len(b)/31))):
                             s = list(b[i*31:i*31+31])
                             s[:0]=[0x03]
                             nrf.send(s)
                             nrf.wait_until_sent()
+
                         with open("Flightcontroller-/src/settings/transmitt.json") as data:
                             b = bytes(data.read(),'utf-8')
+
                         for i in range(int(math.ceil(len(b)/31))):
                             s = list(b[i*31:i*31+31])
                             s[:0]=[0x04]
                             nrf.send(s)
                             nrf.wait_until_sent()
+                        nrf.send(0x05)
+                        nrf.wait_until_sent()
                         
                     else:     
                         if send_state == 0: #Not active

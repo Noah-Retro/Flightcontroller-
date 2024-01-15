@@ -66,16 +66,6 @@ class Rx_Thread(threading.Thread):
 
                 hex = ':'.join(f'{i:02x}' for i in payload)
                 
-
-                #Test settings transmition
-                if file_send and payload[0] != 0x03 and payload != 0x04:
-                    with open("src/settings/transmitt.json","w") as tx_file:
-                        tx_file.write(b[1:].decode())
-                    with open("src/settings/motors.json","w") as tx_file:
-                        tx_file.write(g[1:].decode())
-
-
-
                 #if payload[0] == 0x01:
                 #    values = struct.unpack("<B"+"?"*13, payload)
                 #    self.button_queue.put_nowait(values)
@@ -90,14 +80,17 @@ class Rx_Thread(threading.Thread):
                         k:int
                         g+=k.to_bytes()
 
-                if payload[0] == 0x03:
+                if payload[0] == 0x04:
                     payload.pop(0)
                     file_send = True
                     for k in payload:
                         k:int
-                        g+=k.to_bytes()
-                    
+                        b+=k.to_bytes()
                 
-
-            
-
+                if payload[0]==0x05:
+                    with open("Flightcontroller-/src/settings/motors.json") as motor_file:
+                        g = g.decode()
+                        motor_file.write(g)
+                    with open("Flightcontroller-/src/settings/transmitt.json") as transmit_file:
+                        b = b.decode()
+                        transmit_file.write(b)
