@@ -87,7 +87,7 @@ class Rx_Thread(threading.Thread):
                     payload.pop(0)
                     for k in payload:
                         k:int
-                        b+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little')
+                        b+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little').decode()
                 
                 if payload[0]==0x05:
                     
