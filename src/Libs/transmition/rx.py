@@ -92,10 +92,10 @@ class Rx_Thread(threading.Thread):
                 
                 if payload[0]==0x05:
                     dled.progLed(Status.FILETRANSMMITT,LEDS.DATALED)
-                    with open("src/settings/motors.json") as motor_file:
+                    with open("src/settings/motors.json",mode="w") as motor_file:
                         g = g.decode()
                         print(g)
                         motor_file.write(g)
-                    with open("src/settings/transmitt.json") as transmit_file:
+                    with open("src/settings/transmitt.json",mode="w") as transmit_file:
                         b = b.decode()
                         transmit_file.write(b)
