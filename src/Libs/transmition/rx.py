@@ -52,8 +52,8 @@ class Rx_Thread(threading.Thread):
 
     def run(self):
         count = 0
-        g:bytes=b'0'
-        b:bytes=b'0'
+        g:str=""
+        b:str=""
         listd=[]
         file_send=False
         while self.runs:
@@ -97,3 +97,5 @@ class Rx_Thread(threading.Thread):
                     with open("src/settings/transmitt.json",mode="w") as transmit_file:
                         b = b.decode()
                         transmit_file.write(b)
+                    g=""
+                    b=""
