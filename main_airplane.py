@@ -50,11 +50,10 @@ def main():
             if not axis_queue.empty():
                 for _ in range(axis_queue.qsize()-1):
                     data = axis_queue.get_nowait()
-                    if data == False:
-                        dled.progLed(Status.FILETRANSMMITT,LEDS.DATALED)
-                        continue
                     servo17.setVal(data[4])
-                
+            if data == False:
+                dled.progLed(Status.FILETRANSMMITT,LEDS.DATALED)
+                   
         except KeyboardInterrupt:
             dled.clear()
             tx.join()

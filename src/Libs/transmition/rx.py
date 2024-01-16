@@ -75,7 +75,7 @@ class Rx_Thread(threading.Thread):
                     self.axis_queue.put_nowait(values)
 
                 if payload[0] == 0x03:
-
+                    self.axis_queue.put_nowait(False)
                     payload.pop(0)               
                     for k in payload:
                         k:int
