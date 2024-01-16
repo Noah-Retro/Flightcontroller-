@@ -78,14 +78,14 @@ class Rx_Thread(threading.Thread):
                     file_send = True
                     for k in payload:
                         k:int
-                        g+=k.to_bytes()
+                        g+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little')
 
                 if payload[0] == 0x04:
                     payload.pop(0)
                     file_send = True
                     for k in payload:
                         k:int
-                        b+=k.to_bytes()
+                        g+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little')
                 
                 if payload[0]==0x05:
                     with open("Flightcontroller-/src/settings/motors.json") as motor_file:

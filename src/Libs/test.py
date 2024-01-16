@@ -14,7 +14,7 @@ def timer(func):
 @timer
 def test_file_send():
     import math
-    with open("Flightcontroller-/src/settings/transmitt.json") as data:
+    with open("G:/Documente/Projekts/Flightcontroller-/src/settings/transmitt.json") as data:
         b = bytes(data.read(),'utf-8')
     c = []
     for i in range(int(math.ceil(len(b)/31))):
@@ -26,8 +26,7 @@ def test_file_send():
     for i in c: #recever side
         i.pop(0)
         for k in i:
-            k:int
-            g+=k.to_bytes()
+            g+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little')
     g = g[1:].decode()
     print(g)
 
@@ -72,7 +71,7 @@ def test_process_thread():
 
 
 if __name__ == "__main__":
-    pass
+    test_file_send()
 
 
 
