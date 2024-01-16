@@ -88,9 +88,9 @@ class Rx_Thread(threading.Thread):
                         g+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little')
                 
                 if payload[0]==0x05:
-                    with open("Flightcontroller-/src/settings/motors.json") as motor_file:
+                    with open("src/settings/motors.json") as motor_file:
                         g = g.decode()
                         motor_file.write(g)
-                    with open("Flightcontroller-/src/settings/transmitt.json") as transmit_file:
+                    with open("src/settings/transmitt.json") as transmit_file:
                         b = b.decode()
                         transmit_file.write(b)
