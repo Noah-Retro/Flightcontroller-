@@ -3,15 +3,15 @@ import board
 import time
 
 class Status():
-    NOSTATE=[0,0,0]
+    NOSTATE=[0,0,0]#Allgemein
     UNKNOWNERROR=[255,255,255]
     
-    BOOTUP=[255,0,0]
+    BOOTUP=[255,0,0]#ProgLed
     READY=[0,255,0]
     
-    VOLTAGELOW=[255,0,0]
+    VOLTAGELOW=[255,0,0]#Health led
     
-    DBERROR=[0,0,255]
+    DBERROR=[0,0,255]#Data Led
     SETTINGSERROR=[0,255,0]
     FILETRANSMMITT=[255,0,0]
        

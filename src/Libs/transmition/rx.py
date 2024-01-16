@@ -94,6 +94,7 @@ class Rx_Thread(threading.Thread):
                 if payload[0]==0x05:
                     with open("src/settings/motors.json") as motor_file:
                         g = g.decode()
+                        print(g)
                         motor_file.write(g)
                     with open("src/settings/transmitt.json") as transmit_file:
                         b = b.decode()
