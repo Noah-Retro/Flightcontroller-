@@ -78,20 +78,20 @@ class Rx_Thread(threading.Thread):
 
                 if payload[0] == 0x03:
                     dled.progLed(Status.FILETRANSMMITT,LEDS.DATALED)
-                    payload.pop(0)
-                    file_send = True
+                    payload.pop(0)                 
                     for k in payload:
                         k:int
                         g+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little')
 
                 if payload[0] == 0x04:
+                    dled.progLed(Status.FILETRANSMMITT,LEDS.DATALED)
                     payload.pop(0)
-                    file_send = True
                     for k in payload:
                         k:int
-                        g+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little')
+                        b+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little')
                 
                 if payload[0]==0x05:
+                    dled.progLed(Status.FILETRANSMMITT,LEDS.DATALED)
                     with open("src/settings/motors.json") as motor_file:
                         g = g.decode()
                         print(g)
