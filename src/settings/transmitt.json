@@ -54,8 +54,7 @@
         "pa_level": {
             "options": [
                 "MIN",
-                "MAX",
-                "NONE"
+                "MAX"
             ],
             "value": "MIN"
         }

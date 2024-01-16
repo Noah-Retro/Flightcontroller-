@@ -93,8 +93,8 @@ class Rx_Thread(threading.Thread):
                     
                     with open("src/settings/motors.json",mode="w") as motor_file:
                         print(g)
-                        motor_file.write(b)
+                        motor_file.write(g)
                     with open("src/settings/transmitt.json",mode="w") as transmit_file:
-                        transmit_file.write(g)
+                        transmit_file.write(b)
                     g=""
                     b=""
