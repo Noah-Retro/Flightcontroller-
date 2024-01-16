@@ -52,7 +52,7 @@ def main():
                     data = axis_queue.get_nowait()
                     if data == False:
                         dled.progLed(Status.FILETRANSMMITT,LEDS.DATALED)
-                        return
+                        continue
                     servo17.setVal(data[4])
                 
         except KeyboardInterrupt:
