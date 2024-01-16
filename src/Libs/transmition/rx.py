@@ -5,7 +5,7 @@ import json
 import threading
 from typing import Any
 from queue import Queue
-from multiprocessing import Process
+
 import pigpio
 from nrf24 import *
 
@@ -38,7 +38,7 @@ nrf.open_reading_pipe(RF24_RX_ADDR.P1, address,size=getattr(RF24_PAYLOAD,rx_sett
 # Display the content of NRF24L01 device registers.
 nrf.show_registers()
 
-class Rx_Thread(Process):
+class Rx_Thread(threading.Thread):
     def __init__(self,button_queue:Queue,axis_queue:Queue) -> None:
         self.button_queue=button_queue
         self.axis_queue = axis_queue
