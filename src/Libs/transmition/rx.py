@@ -95,7 +95,6 @@ class Rx_Thread(threading.Thread):
                         print(g)
                         motor_file.write(g)
                     with open("src/settings/transmitt.json",mode="w") as transmit_file:
-                        b = b.decode()
                         transmit_file.write(b)
                     g=""
                     b=""
