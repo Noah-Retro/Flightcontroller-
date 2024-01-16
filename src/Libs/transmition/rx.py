@@ -5,6 +5,7 @@ import json
 import threading
 from typing import Any
 from queue import Queue
+from src.Libs.tools import DebugLEDHandler,Status,LEDS
 
 import pigpio
 from nrf24 import *
@@ -23,6 +24,8 @@ if not pi.connected:
     sys.exit()
 
 SPI_CHANNEL.MAIN_CE0
+
+dled = DebugLEDHandler()
 
 nrf = NRF24(pi, 
             ce=rx_settings["ce"],
@@ -74,6 +77,7 @@ class Rx_Thread(threading.Thread):
                     self.axis_queue.put_nowait(values)
 
                 if payload[0] == 0x03:
+                    dled.progLed(Status.FILETRANSMMITT,LEDS.DATALED)
                     payload.pop(0)
                     file_send = True
                     for k in payload:

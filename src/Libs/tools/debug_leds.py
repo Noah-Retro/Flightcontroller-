@@ -13,6 +13,7 @@ class Status():
     
     DBERROR=[0,0,255]
     SETTINGSERROR=[0,255,0]
+    FILETRANSMMITT=[255,0,0]
        
 class LEDS():   
     DATALED=0
