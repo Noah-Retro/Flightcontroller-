@@ -5,7 +5,7 @@ import json
 import threading
 from queue import Queue
 from src.Libs.sensors import MPU_9250
-
+import multiprocessing
 def generate_smooth_random_walk(num_samples, std_dev=0.05):
     data = {'Timestamp': pd.date_range(start='2024-01-06', periods=num_samples, freq='S')}
     columns = ['Timestamp', 'Acceleration_X', 'Acceleration_Y', 'Acceleration_Z', 'Gyro_X', 'Gyro_Y', 'Gyro_Z']
@@ -17,7 +17,7 @@ def generate_smooth_random_walk(num_samples, std_dev=0.05):
     
 
 
-class DbHandler(threading.Thread):
+class DbHandler(multiprocessing.Process):
     def __init__(self,q:Queue,path:str="./src/DB/flight_data.db",schema_path:str="./src/Libs/db_tools/schema.sql") -> None:
         self.path = path
         self.con = sqlite3.connect(self.path,check_same_thread=False)
