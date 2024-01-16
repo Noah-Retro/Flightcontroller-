@@ -56,6 +56,7 @@ class Rx_Thread(threading.Thread):
         count = 0
         g:bytes=b'0'
         b:bytes=b'0'
+        listd=[]
         file_send=False
         while self.runs:
             while nrf.data_ready() and self.runs:           
@@ -78,6 +79,7 @@ class Rx_Thread(threading.Thread):
 
                 if payload[0] == 0x03:
                     dled.progLed(Status.FILETRANSMMITT,LEDS.DATALED)
+                    payload.pop(0)
                     payload.pop(0)                 
                     for k in payload:
                         k:int
@@ -85,6 +87,7 @@ class Rx_Thread(threading.Thread):
 
                 if payload[0] == 0x04:
                     dled.progLed(Status.FILETRANSMMITT,LEDS.DATALED)
+                    payload.pop(0)
                     payload.pop(0)
                     for k in payload:
                         k:int
