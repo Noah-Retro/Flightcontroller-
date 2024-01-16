@@ -25,8 +25,6 @@ if not pi.connected:
 
 SPI_CHANNEL.MAIN_CE0
 
-dled = DebugLEDHandler()
-
 nrf = NRF24(pi, 
             ce=rx_settings["ce"],
             payload_size=getattr(RF24_PAYLOAD,rx_settings["payload_size"]["value"]),
@@ -78,7 +76,7 @@ class Rx_Thread(threading.Thread):
                     self.axis_queue.put_nowait(values)
 
                 if payload[0] == 0x03:
-                    dled.progLed(Status.FILETRANSMMITT,LEDS.DATALED)
+                    
                     payload.pop(0)
                     payload.pop(0)                 
                     for k in payload:
@@ -86,7 +84,7 @@ class Rx_Thread(threading.Thread):
                         g+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little')
 
                 if payload[0] == 0x04:
-                    dled.progLed(Status.FILETRANSMMITT,LEDS.DATALED)
+                    
                     payload.pop(0)
                     payload.pop(0)
                     for k in payload:
@@ -94,7 +92,7 @@ class Rx_Thread(threading.Thread):
                         b+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little')
                 
                 if payload[0]==0x05:
-                    dled.progLed(Status.FILETRANSMMITT,LEDS.DATALED)
+                    
                     with open("src/settings/motors.json",mode="w") as motor_file:
                         g = g.decode()
                         print(g)
