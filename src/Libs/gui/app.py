@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk
 import threading
 import json
-from src.libs.gui.slider import Slider as DobbleSlider
+from src.Libs.gui.slider import Slider as DobbleSlider
 
 vals={
     "rightUD":None,
