@@ -8,9 +8,7 @@ from queue import Queue
 
 import pigpio
 from nrf24 import *
-from src.Libs.tools import DebugLEDHandler, LEDS, Status
 
-dbl = DebugLEDHandler()
 
 data = open("src/settings/transmitt.json")
 settings = json.load(data)
@@ -24,8 +22,6 @@ pi = pigpio.pi(hostname, port)
 if not pi.connected:
     print("Not connected to Raspberry Pi ... goodbye.")
     sys.exit()
-
-SPI_CHANNEL.MAIN_CE0
 
 nrf = NRF24(pi, 
             ce=rx_settings["ce"],
