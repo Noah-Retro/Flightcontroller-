@@ -15,10 +15,18 @@ from src.Libs.db_tools import DbHandler
 from src.Libs.actors import CustomServo,CustomBrushless
 
 
-servo17 = CustomServo(17,clamp_min=0,clamp_max=2)
+servoRL = CustomServo(17,clamp_min=0,clamp_max=2)
+servoUDR = CustomServo(27,clamp_min=0,clamp_max=2)
+servoUDL = CustomServo(22,clamp_min=0,clamp_max=2)
 throtleR = CustomBrushless(26,clamp_min=0,clamp_max=1.5)
-throtleR.arm()
-servos = [servo17,throtleR]
+throtleL = CustomBrushless(19,clamp_min=0,clamp_max=1.5)
+servos = [
+    servoRL, 
+    servoUDR,
+    servoUDL,
+    throtleR,
+    throtleL
+]
 
 button_queue = Queue()
 axis_queue = Queue()
@@ -53,7 +61,7 @@ def main():
             if not axis_queue.empty():
                 for _ in range(axis_queue.qsize()-1):
                     data = axis_queue.get_nowait()
-                    servo17.setVal(data[4])
+                    servoRL.setVal(data[4])
                     throtleR.setVal(data[2]*-1)
                 if data == None:
                     dled.progLed(Status.FILE_TRANSMITT,LEDS.DATALED)

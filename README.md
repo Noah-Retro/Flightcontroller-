@@ -21,8 +21,16 @@ Das Programm beinhaltet eine Schnittstelle mit einem NRF24l01+ Modul und zwei RP
 * Just download
 * install requirements.txt
 * setup Bluethooth
-* wire the circut
 * connect display to master Raspi
+
+## wire the circut
+![Alt-text](img\rpgpios.png?raw=true "GPIO")
+
+
+
+
+
+
 * test it
 
 ### Executing program

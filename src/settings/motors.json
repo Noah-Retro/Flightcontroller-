@@ -21,12 +21,12 @@
         "zero": 1
     },
     "throtleR": {
-        "pin": 37,
+        "pin": 26,
         "clamp_max": 1.5,
         "clamp_min": 0
     },
     "throtleL": {
-        "pin": 0,
+        "pin": 19,
         "clamp_max": 1.5052631578947369,
         "clamp_min": 0
     }

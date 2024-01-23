@@ -81,7 +81,7 @@ class App(threading.Thread):
         self.root.protocol("WM_DELETE_WINDOW",self.callback)
         
         #Tabs
-        tabControl = ttk.Notebook(self.root)
+        tabControl = ttk.Notebook(self.root,width=w)
         
         transmition_settings_tab = ttk.Frame(tabControl)
         tabControl.add(transmition_settings_tab, text = "Transmition")
@@ -90,7 +90,13 @@ class App(threading.Thread):
         tabControl.add(controller_settings_tab, text = "Controller")
         
         motor_settings_tab = ttk.Frame(tabControl)
-        tabControl.add(motor_settings_tab, text="Motors")
+        tabControl.add(motor_settings_tab, text="Motors UD")
+
+        motor_settings_tab_2 = ttk.Frame(tabControl)
+        tabControl.add(motor_settings_tab_2, text="Motors LR")
+
+        motor_settings_tab_3 = ttk.Frame(tabControl)
+        tabControl.add(motor_settings_tab_3, text="Motors Th")
 
         tabControl.pack()
 
@@ -192,9 +198,9 @@ class App(threading.Thread):
 
         motor_frame(master=motor_settings_tab,motor_data=motor_data,name="rightUD").pack()
         motor_frame(master=motor_settings_tab,motor_data=motor_data,name="leftUD").pack()
-        motor_frame(master=motor_settings_tab,motor_data=motor_data,name="leftRight").pack()
-        motor_frame(master=motor_settings_tab,motor_data=motor_data,name="throtleR").pack()
-        motor_frame(master=motor_settings_tab,motor_data=motor_data,name="throtleL").pack()
+        motor_frame(master=motor_settings_tab_2,motor_data=motor_data,name="leftRight").pack()
+        motor_frame(master=motor_settings_tab_3,motor_data=motor_data,name="throtleR").pack()
+        motor_frame(master=motor_settings_tab_3,motor_data=motor_data,name="throtleL").pack()
 
         def motor_save():
             for k,v in vals.items():
@@ -213,10 +219,14 @@ class App(threading.Thread):
             with open(self.settings_path+"/motors.json",mode="w")  as file:
                 file.write(json.dumps(motor_data,indent=4))
 
-        controller_save_button = ttk.Button(motor_settings_tab,
-                                            command=motor_save,
-                                            text="Save")
-        controller_save_button.pack()
+        def motor_save_button(master)->ttk.Button:
+            motor_save_button = ttk.Button(motor_settings_tab,
+                                                command=motor_save,
+                                                text="Save")
+            return motor_save_button
+        motor_save_button(motor_settings_tab).pack()
+        motor_save_button(motor_settings_tab_2).pack()
+        motor_save_button(motor_settings_tab_3).pack()
 
         info_text = ttk.Label(self.root,text="Changes will only be done after a restart of the controller unit and the rc plan.\nTransmitt file to the rc Plane with the buttons (PS+options).\nDO NOT RESTART THE CONTROLLER WHILE TRANSMITTING THE FILES! ('D' Led red)\nRestart the controller and the plane after transfer.\nFor licence and other informations read the README.md and the licence file.")
         info_text.pack(anchor=tk.S)

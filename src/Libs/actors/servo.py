@@ -69,9 +69,9 @@ class CustomBrushless(Motor):
         pi.set_servo_pulsewidth(self.pin, 0)
         time.sleep(2)
         pi.set_servo_pulsewidth(self.pin, self.MAX_WIDTH)
-        time.sleep(10)
+        time.sleep(4)
         pi.set_servo_pulsewidth(self.pin, self.MIN_WIDTH)
-        time.sleep(10)
+        time.sleep(2)
      
 
 if __name__=="__main__":
