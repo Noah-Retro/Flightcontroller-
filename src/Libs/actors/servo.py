@@ -49,14 +49,14 @@ class CustomServo(Motor):
         self.zero = zero
     
     def scale(self,ins:float):
-        res = (self.MAX_WIDTH-self.MIN_WIDTH) * (np.clip((ins+1+(self.zero-1)),self.clamp_min,self.clamp_max)/(self.clamp_max)) + self.MIN_WIDTH        
+        res = (self.MAX_WIDTH-self.MIN_WIDTH) * (np.clip((ins+(self.zero)),self.clamp_min,self.clamp_max)/(self.clamp_max)) + self.MIN_WIDTH        
         return int(res)
 
 class CustomBrushless(Motor):
     def __init__(self,pin:int,clamp_min:float=0,clamp_max:float=2) -> None:
         self.pin = pin
-        self.MIN_WIDTH=950
-        self.MAX_WIDTH=2100
+        self.MIN_WIDTH=700
+        self.MAX_WIDTH=2000
         self.clamp_min = clamp_min
         self.clamp_max = clamp_max
 
