@@ -12,10 +12,12 @@ import sys
 import sqlite3
 import json
 from src.Libs.db_tools import DbHandler
-from src.Libs.actors import CustomServo
+from src.Libs.actors import CustomServo,CustomBrushless
 
 
 servo17 = CustomServo(17,clamp_min=0,clamp_max=2)
+throtleR = CustomBrushless(37,clamp_min=0,clamp_max=1.5)
+
 
 button_queue = Queue()
 axis_queue = Queue()
@@ -51,6 +53,7 @@ def main():
                 for _ in range(axis_queue.qsize()-1):
                     data = axis_queue.get_nowait()
                 servo17.setVal(data[4])
+                throtleR.setVal(data[2]*-1)
                 
         except KeyboardInterrupt:
             dled.clear()

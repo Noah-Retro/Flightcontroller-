@@ -1,3 +1,6 @@
-from .servo import CustomServo
+from .servo import CustomServo,CustomBrushless
 
-__all__ = ['CustomServo']
+__all__ = [
+    'CustomServo',
+    'CustomBrushless'
+]
