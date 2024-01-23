@@ -61,14 +61,14 @@ or
 python3 -m pip install -r requirements.txt
 ```
 
-* run on the controller in the directory of this file$
-'''
+* run on the controller in the directory of this file
+```
 python main.py
-'''
+```
 * run via ssh or somthin 
-'''
+```
 sudo pyton main_airplaine.py
-'''
+```
 
 ## Authors
 
