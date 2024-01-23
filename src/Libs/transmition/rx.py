@@ -81,14 +81,14 @@ class Rx_Thread(threading.Thread):
                         g+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little').decode()
 
                 if payload[0] == 0x04:
-                    
+                    self.axis_queue.put_nowait(False)
                     payload.pop(0)
                     for k in payload:
                         k:int
                         b+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little').decode()
                 
                 if payload[0]==0x05:
-                    
+                    self.axis_queue.put_nowait(False)
                     with open("src/settings/motors.json",mode="w") as motor_file:
                         print(g)
                         motor_file.write(g)

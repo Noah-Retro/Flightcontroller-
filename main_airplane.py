@@ -54,6 +54,8 @@ def main():
                     data = axis_queue.get_nowait()
                 servo17.setVal(data[4])
                 throtleR.setVal(data[2]*-1)
+                if data == None:
+                    dled.progLed(Status.FILE_TRANSMITT,LEDS.DATALED)
                 
         except KeyboardInterrupt:
             dled.clear()
