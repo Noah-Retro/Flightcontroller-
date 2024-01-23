@@ -12,14 +12,17 @@ Das Programm beinhaltet eine Schnittstelle mit einem NRF24l01+ Modul und zwei RP
 
 * RASPBERRY PI * 2
 * NRF24l01 + * 2
-* I2C Gyrosensor
-* "Motor-Hat" shield (Adafruit)
+* I2C MPU9250
+* Display for Raspi
 * Ps4 controller
 
 ### Installing
 
 * Just download
 * install requirements.txt
+* setup Bluethooth
+* wire the circut
+* connect display to master Raspi
 * test it
 
 ### Executing program
