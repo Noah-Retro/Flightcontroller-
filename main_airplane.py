@@ -41,7 +41,7 @@ except sqlite3.OperationalError as e:
     
 db.start()    
       
-
+data=[]
 
 dled.progLed(Status.READY,LEDS.PROGLED)
 
