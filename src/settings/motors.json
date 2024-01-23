@@ -3,19 +3,22 @@
         "pin": 17,
         "frequenz": 50,
         "clamp_max": 2,
-        "clamp_min": 0
+        "clamp_min": 0,
+        "zero": 1.0
     },
     "leftUD": {
         "pin": 18,
         "frequenz": 50,
         "clamp_max": 2,
-        "clamp_min": 0
+        "clamp_min": 0,
+        "zero": 1
     },
     "leftRight": {
         "pin": 27,
         "frequenz": 50,
         "clamp_max": 2,
-        "clamp_min": 0
+        "clamp_min": 0,
+        "zero": 1
     },
     "throtleR": {
         "pin": 0,

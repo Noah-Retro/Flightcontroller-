@@ -67,6 +67,8 @@ class Slider(Frame):
         self.bars: List[Bar] = []
         self.selected_idx = None  # current selection bar index
         for value in self.init_lis:
+            if value == None:
+                break
             pos = (value - min_val) / (max_val - min_val)
             ids = []
             bar: Bar = {"Pos": pos, "Ids": ids, "Value": value}

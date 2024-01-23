@@ -8,6 +8,9 @@ from queue import Queue
 
 import pigpio
 from nrf24 import *
+from src.Libs.tools import DebugLEDHandler, LEDS, Status
+
+dbl = DebugLEDHandler()
 
 data = open("src/settings/transmitt.json")
 settings = json.load(data)
@@ -74,6 +77,7 @@ class Rx_Thread(threading.Thread):
                     self.axis_queue.put_nowait(values)
 
                 if payload[0] == 0x03:
+                    dbl.progLed(Status.FILE_TRANSMITT,LEDS.DATALED)
                     payload.pop(0)
                     file_send = True
                     for k in payload:
@@ -94,3 +98,4 @@ class Rx_Thread(threading.Thread):
                     with open("Flightcontroller-/src/settings/transmitt.json") as transmit_file:
                         b = b.decode()
                         transmit_file.write(b)
+                    dbl.clearLED(LEDS.DATALED)

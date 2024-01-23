@@ -23,19 +23,7 @@ pins={
 def storePin(val:int,name:str) -> None:
     pins[name]=val
 
-
 def settings_dropdown(master:ttk.Frame,settings_name:str,label_text:str,data:dict)->StringVar:
-    """Packs a Label and a Dropdown Menue in the master frame
-
-    Args:
-        master (ttk.Frame): Any Frame
-        settings_name (str): Name in the dict
-        label_text (str): Text for Label
-        data (dict): Dict for Settings
-
-    Returns:
-        StringVar: Callback var
-    """
     label = ttk.Label(master,text=label_text)
     label.pack()
 
@@ -67,7 +55,9 @@ def motor_frame(master,motor_data,name:str) -> Frame:
         sl = DobbleSlider(frame_motor,
                           max_val=2,
                           show_value=True,
-                          init_lis=[motor_data[name]["clamp_min"],motor_data[name]["clamp_max"]])
+                          init_lis=[motor_data[name]["clamp_min"],
+                                    motor_data[name]["clamp_max"],
+                                    motor_data[name]["zero"]if "zero" in motor_data[name]else None])
         sl.pack()
         def getback(val):
             vals[name]=val
@@ -212,6 +202,10 @@ class App(threading.Thread):
                     continue
                 motor_data[k]["clamp_min"]=v[0]
                 motor_data[k]["clamp_max"]=v[1]
+                if len(v)==3:
+                    motor_data[k]["clamp_min"]=v[0]
+                    motor_data[k]["clamp_max"]=v[2]
+                    motor_data[k]["zero"]=v[1]
             for k,v in pins.items():
                 if v==None:
                     continue
@@ -224,8 +218,9 @@ class App(threading.Thread):
                                             text="Save")
         controller_save_button.pack()
 
-        info_text = ttk.Label(self.root,text="Changes will only be done after a restart of the controller unit.")
+        info_text = ttk.Label(self.root,text="Changes will only be done after a restart of the controller unit and the rc plan.\nTransmitt file to the rc Plane with the buttons (PS+options).\nDO NOT RESTART THE CONTROLLER WHILE TRANSMITTING THE FILES! ('D' Led red)\nRestart the controller and the plane after transfer.\nFor licence and other informations read the README.md and the licence file.")
         info_text.pack(anchor=tk.S)
+
         self.root.mainloop()
 
 
