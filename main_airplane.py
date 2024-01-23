@@ -17,7 +17,7 @@ from src.Libs.actors import CustomServo,CustomBrushless
 
 servo17 = CustomServo(17,clamp_min=0,clamp_max=2)
 throtleR = CustomBrushless(26,clamp_min=0,clamp_max=1.5)
-
+servos = [servo17,throtleR]
 
 button_queue = Queue()
 axis_queue = Queue()
@@ -61,7 +61,10 @@ def main():
             dled.clear()
             tx.join()
             db.join()
+            for i in servos:
+                i.stop()
             sys.exit()
+            
         
         except Exception as e:
             print(e)
@@ -74,6 +77,8 @@ def main():
             
         finally:
             dled.clear()
+            
+
         
 main()        
 
