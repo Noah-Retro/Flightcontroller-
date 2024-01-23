@@ -27,7 +27,7 @@
     },
     "throtleL": {
         "pin": 0,
-        "clamp_max": 1.4,
+        "clamp_max": 1.5052631578947369,
         "clamp_min": 0
     }
 }
