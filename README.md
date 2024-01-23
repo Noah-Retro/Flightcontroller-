@@ -57,5 +57,6 @@ Inspiration, code snippets, etc.
 * [bjarne-hansen](https://github.com/bjarne-hansen/py-nrf24) nrf24 module
 * [niru-5](https://github.com/niru-5/imusensor/tree/master) mdu9250 module
 * [claymcleod](https://gist.github.com/claymcleod/028386b860b75e4f5472) code snippet ps4-controller in pygame
+* [MenxLi](https://github.com/MenxLi/tkSliderWidget) Slider Class
 
 
