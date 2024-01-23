@@ -54,8 +54,9 @@ class Rx_Thread(threading.Thread):
 
     def run(self):
         count = 0
-        g:bytes=b'0'
-        b:bytes=b'0'
+        g:str=""
+        b:str=""
+        listd=[]
         file_send=False
         while self.runs:
             while nrf.data_ready() and self.runs:           
@@ -77,25 +78,35 @@ class Rx_Thread(threading.Thread):
                     self.axis_queue.put_nowait(values)
 
                 if payload[0] == 0x03:
+<<<<<<< HEAD
                     dbl.progLed(Status.FILE_TRANSMITT,LEDS.DATALED)
                     payload.pop(0)
                     file_send = True
+=======
+                    self.axis_queue.put_nowait(False)
+                    payload.pop(0)               
+>>>>>>> 7829a63af13a5c19d5408c550ba171d533387a7e
                     for k in payload:
                         k:int
-                        g+=k.to_bytes()
+                        g+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little').decode()
 
                 if payload[0] == 0x04:
+                    
                     payload.pop(0)
-                    file_send = True
                     for k in payload:
                         k:int
-                        b+=k.to_bytes()
+                        b+=k.to_bytes((k.bit_length()+7)//8,byteorder = 'little').decode()
                 
                 if payload[0]==0x05:
-                    with open("Flightcontroller-/src/settings/motors.json") as motor_file:
-                        g = g.decode()
+                    
+                    with open("src/settings/motors.json",mode="w") as motor_file:
+                        print(g)
                         motor_file.write(g)
-                    with open("Flightcontroller-/src/settings/transmitt.json") as transmit_file:
-                        b = b.decode()
+                    with open("src/settings/transmitt.json",mode="w") as transmit_file:
                         transmit_file.write(b)
+<<<<<<< HEAD
                     dbl.clearLED(LEDS.DATALED)
+=======
+                    g=""
+                    b=""
+>>>>>>> 7829a63af13a5c19d5408c550ba171d533387a7e
