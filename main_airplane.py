@@ -63,10 +63,10 @@ def main():
             db.join()
             sys.exit()
         
-        except Exception as e:
-            print(e)
-            dled.clear()
-            dled.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
+        #except Exception as e:
+        #    print(e)
+        #    dled.clear()
+        #    dled.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
             
         else:
             dled.progLed(Status.NOSTATE,LEDS.HEALTHLED)
