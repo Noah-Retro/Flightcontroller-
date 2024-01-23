@@ -43,7 +43,6 @@ python3 -m pip install -r requirements.txt
 Contributors names and contact info
 
 ex. Noah-Retro
-ex. Haelias01
 
 ## Version History
 
