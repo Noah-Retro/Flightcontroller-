@@ -24,7 +24,7 @@ Das Programm beinhaltet eine Schnittstelle mit einem NRF24l01+ Modul und zwei RP
 * connect display to master Raspi
 
 ## wire the circut
-![Alt-text](img\rpgpios.png?raw=true "GPIO")
+![Alt-text](img/rpgpios.png?raw=true "GPIO")
 
 
 
