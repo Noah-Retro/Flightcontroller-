@@ -14,12 +14,24 @@ import json
 from src.Libs.db_tools import DbHandler
 from src.Libs.actors import CustomServo,CustomBrushless
 
+with open(".src/settings/motors.json") as motors_file:
+            motor_data = json.load(motors_file)
 
-servoRL = CustomServo(17,clamp_min=0,clamp_max=2)
-servoUDR = CustomServo(27,clamp_min=0,clamp_max=2)
-servoUDL = CustomServo(22,clamp_min=0,clamp_max=2)
-throtleR = CustomBrushless(26,clamp_min=0,clamp_max=1.5)
-throtleL = CustomBrushless(19,clamp_min=0,clamp_max=1.5)
+servoRL = CustomServo(motor_data["leftRight"]["pin"],
+                      clamp_min=motor_data["leftRight"]["clamp_min"],
+                      clamp_max=motor_data["leftRight"]["clamp_max"])
+servoUDR = CustomServo(motor_data["rightUD"]["pin"],
+                      clamp_min=motor_data["rightUD"]["clamp_min"],
+                      clamp_max=motor_data["rightUD"]["clamp_max"])
+servoUDL = CustomServo(motor_data["leftUD"]["pin"],
+                      clamp_min=motor_data["leftUD"]["clamp_min"],
+                      clamp_max=motor_data["leftUD"]["clamp_max"])
+throtleR = CustomBrushless(motor_data["throtleR"]["pin"],
+                      clamp_min=motor_data["throtleR"]["clamp_min"],
+                      clamp_max=motor_data["throtleR"]["clamp_max"])
+throtleL = CustomBrushless(motor_data["throtleL"]["pin"],
+                      clamp_min=motor_data["throtleL"]["clamp_min"],
+                      clamp_max=motor_data["throtleL"]["clamp_max"])
 servos = [
     servoRL, 
     servoUDR,

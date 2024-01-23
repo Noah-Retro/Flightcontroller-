@@ -4,11 +4,11 @@ Simple overview of use/purpose.
 
 ## Description
 
-Das Programm beinhaltet eine Schnittstelle mit einem NRF24l01+ Modul und zwei RPIs. In diesem Programm wird die Kommunikation und die Steuerung eines Modelles mit einer Schubvektorsteuerung erstellt.
+A radio controlled Airplane code for python. Controlled by an PS4 controller and transmitted via NRF24. With a GUI, flexible settings, data recording and data visualization see: src/Libs/visualization if it works 🤷‍♂️.
 
 ## Getting Started
 
-### Hardwear
+### Hardware
 
 * RASPBERRY PI * 2
 * NRF24l01 + * 2
@@ -67,7 +67,7 @@ python main.py
 ```
 * run via ssh or somthin 
 ```
-sudo pyton main_airplaine.py
+sudo python main_airplaine.py
 ```
 
 ## Authors
@@ -78,8 +78,8 @@ ex. Noah-Retro
 
 ## Version History
 
-* 0.1
-    * In work
+* 1.0
+    * Release
 
 ## Acknowledgments
 
