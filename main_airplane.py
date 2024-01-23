@@ -52,8 +52,8 @@ def main():
             if not axis_queue.empty():
                 for _ in range(axis_queue.qsize()-1):
                     data = axis_queue.get_nowait()
-                servo17.setVal(data[4])
-                throtleR.setVal(data[2]*-1)
+                    servo17.setVal(data[4])
+                    throtleR.setVal(data[2]*-1)
                 if data == None:
                     dled.progLed(Status.FILE_TRANSMITT,LEDS.DATALED)
                 
@@ -63,10 +63,10 @@ def main():
             db.join()
             sys.exit()
         
-        #except Exception as e:
-        #    print(e)
-        #    dled.clear()
-        #    dled.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
+        except Exception as e:
+            print(e)
+            dled.clear()
+            dled.progLed(Status.UNKNOWNERROR,LEDS.PROGLED)
             
         else:
             dled.progLed(Status.NOSTATE,LEDS.HEALTHLED)
