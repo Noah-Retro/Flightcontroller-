@@ -63,7 +63,16 @@ class CustomBrushless(Motor):
     def scale(self,ins:float):
         res = (self.MAX_WIDTH-self.MIN_WIDTH) * (np.clip((ins),self.clamp_min,self.clamp_max)/(self.clamp_max)) + self.MIN_WIDTH        
         print(res)
-        return int(res)      
+        return int(res) 
+
+    def arm(self): #This is the arming procedure of an ESC 
+        pi.set_servo_pulsewidth(self.pin, 0)
+        time.sleep(1)
+        pi.set_servo_pulsewidth(self.pin, self.MAX_WIDTH)
+        time.sleep(1)
+        pi.set_servo_pulsewidth(self.pin, self.MIN_WIDTH)
+        time.sleep(1)
+     
 
 if __name__=="__main__":
     servof = CustomServo(17)

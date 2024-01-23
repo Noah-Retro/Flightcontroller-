@@ -17,6 +17,7 @@ from src.Libs.actors import CustomServo,CustomBrushless
 
 servo17 = CustomServo(17,clamp_min=0,clamp_max=2)
 throtleR = CustomBrushless(26,clamp_min=0,clamp_max=1.5)
+throtleR.arm()
 servos = [servo17,throtleR]
 
 button_queue = Queue()
