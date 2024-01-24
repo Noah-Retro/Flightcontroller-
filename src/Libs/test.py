@@ -1,6 +1,10 @@
 from collections.abc import Callable, Iterable, Mapping
+from math import sqrt
+import math
 import time
 from typing import Any
+
+from numpy import roots
 
 
 def timer(func):
@@ -70,9 +74,22 @@ def test_process_thread():
     bp5.start()
     bp6.start()
 
+def upRot():
+    l2 = [(math.sin(x),math.cos(x))for x in range(360)]
+    lr = l2
+    #List from -1 to 1 in 0.01 steps
+    el=[]
+    print(l2[0])
+    for lift,rotation in lr:
+        res = (rotation+lift)/2
+        el.append(res)
+        print(f"Das Resultat ist: {res} von {rotation} und {lift} Grad: {0}")
+    print(min(el),max(el))
+
+
 
 if __name__ == "__main__":
-    pass
+    upRot()
 
 
 

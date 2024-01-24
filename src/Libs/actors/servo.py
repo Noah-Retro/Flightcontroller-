@@ -33,7 +33,7 @@ class Motor(Protocol):
     def scale(self,ins:float):
         raise NotImplementedError    
         
-    def setVal(self,ins:int):
+    def setVal(self,ins:float):
         pi.set_servo_pulsewidth(self.pin,self.scale(ins))
         
     def stop(self):
@@ -62,7 +62,6 @@ class CustomBrushless(Motor):
 
     def scale(self,ins:float):
         res = (self.MAX_WIDTH-self.MIN_WIDTH) * (np.clip((ins),self.clamp_min,self.clamp_max)/(self.clamp_max)) + self.MIN_WIDTH        
-        print(res)
         return int(res) 
 
     def arm(self): #This is the arming procedure of an ESC 

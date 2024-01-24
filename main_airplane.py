@@ -73,8 +73,10 @@ def main():
             if not axis_queue.empty():
                 for _ in range(axis_queue.qsize()-1):
                     data = axis_queue.get_nowait()
-                    servoRL.setVal(data[4])
+                    servoRL.setVal((data[3] *-1+ data[6])/2)
                     throtleR.setVal(data[2]*-1)
+                    servoUDL.setVal((data[4]*-1 + data[5])/2)
+                    servoUDR.setVal((data[4] + data[5])/2)
                 if data == None:
                     dled.progLed(Status.FILE_TRANSMITT,LEDS.DATALED)
                 
