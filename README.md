@@ -65,7 +65,7 @@ python3 -m pip install -r requirements.txt
 ```
 python main.py
 ```
-* run via ssh or somthin 
+* run via ssh or somtehing for the airplain 
 ```
 sudo python main_airplaine.py
 ```
