@@ -74,7 +74,7 @@ class CustomBrushless(Motor):
      
 
 if __name__=="__main__":
-    servof = CustomBrushless(17)
+    servof = CustomBrushless(26)
     
     
     try:
