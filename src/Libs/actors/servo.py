@@ -1,11 +1,3 @@
-#!/usr/bin/env python
-
-# servo_demo.py
-# 2016-10-07
-# Public Domain
-
-# servo_demo.py          # Send servo pulses to GPIO 4.
-# servo_demo.py 23 24 25 # Send servo pulses to GPIO 23, 24, 25.
 
 import datetime
 import sys
