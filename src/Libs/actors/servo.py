@@ -42,7 +42,7 @@ class Motor(Protocol):
 class CustomServo(Motor):
     def __init__(self,pin:int,clamp_min:float=0,clamp_max:float=2,zero:float=1) -> None:
         self.pin = pin
-        self.MIN_WIDTH=700
+        self.MIN_WIDTH=950
         self.MAX_WIDTH=2100
         self.clamp_min = clamp_min
         self.clamp_max = clamp_max

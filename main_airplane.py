@@ -77,6 +77,7 @@ def main():
                     throtleR.setVal(data[2]*-1)
                     servoUDL.setVal((data[4]*-1 + data[5])/2)
                     servoUDR.setVal((data[4] + data[5])/2)
+                    print(data)
                 if data == None:
                     dled.progLed(Status.FILE_TRANSMITT,LEDS.DATALED)
                 
