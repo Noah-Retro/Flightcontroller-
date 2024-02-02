@@ -90,7 +90,6 @@ class Rx_Thread(threading.Thread):
                 if payload[0]==0x05:
                     self.axis_queue.put_nowait(False)
                     with open("src/settings/motors.json",mode="w") as motor_file:
-                        print(g)
                         motor_file.write(g)
                     with open("src/settings/transmitt.json",mode="w") as transmit_file:
                         transmit_file.write(b)
