@@ -7,7 +7,7 @@
         "zero": 1.0
     },
     "leftUD": {
-        "pin": 18,
+        "pin": 22,
         "frequenz": 50,
         "clamp_max": 2,
         "clamp_min": 0,
