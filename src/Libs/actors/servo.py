@@ -76,19 +76,15 @@ class CustomBrushless(Motor):
      
 
 if __name__=="__main__":
-    servof = CustomServo(17)
+    servof = CustomBrushless(17)
     
-    while True:
-        try:
-            for i in range(100):
-                r = (i+ 0.01)/50 
-                print(r)
-                servof.setVal(r)
-                time.sleep(0.1)
+    
+    try:
+        servof.arm()
 
-        except KeyboardInterrupt:
-            pi.set_servo_pulsewidth(17, 0)
-            pi.stop()
+    except KeyboardInterrupt:
+        pi.set_servo_pulsewidth(17, 0)
+        pi.stop()
 
 
 
