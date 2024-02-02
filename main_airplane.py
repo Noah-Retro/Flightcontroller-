@@ -14,7 +14,7 @@ import json
 from src.Libs.db_tools import DbHandler
 from src.Libs.actors import CustomServo,CustomBrushless
 
-with open(".src/settings/motors.json") as motors_file:
+with open("/src/settings/motors.json") as motors_file:
             motor_data = json.load(motors_file)
 
 servoRL = CustomServo(motor_data["leftRight"]["pin"],
