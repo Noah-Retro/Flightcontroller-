@@ -80,7 +80,7 @@ def main():
                     print(data)
                 if data == None:
                     dled.progLed(Status.FILE_TRANSMITT,LEDS.DATALED)
-                print("test")
+                
 
         except KeyboardInterrupt:
             dled.clear()
