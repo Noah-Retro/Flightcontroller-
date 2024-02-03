@@ -37,7 +37,7 @@ class CustomServo(Motor):
         self.MIN_WIDTH=700
         self.MAX_WIDTH=2000
         self.clamp_min = clamp_min
-        self.clamp_max = clamp_max
+        self.clamp_max = clamp_max #
         self.zero = zero
     
     def scale(self,ins:float):
