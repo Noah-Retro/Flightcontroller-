@@ -42,8 +42,6 @@ class CustomServo(Motor):
     
     def scale(self,ins:float):
         res = (self.MAX_WIDTH-self.MIN_WIDTH) * (np.clip((ins+(self.zero)),self.clamp_min,self.clamp_max)/(self.clamp_max)) + self.MIN_WIDTH        
-        if res <=800:
-            res =0
         return int(res)
 
 class CustomBrushless(Motor):
@@ -56,6 +54,8 @@ class CustomBrushless(Motor):
 
     def scale(self,ins:float):
         res = (self.MAX_WIDTH-self.MIN_WIDTH) * (np.clip((ins),self.clamp_min,self.clamp_max)/(self.clamp_max)) + self.MIN_WIDTH        
+        if res <= 800:
+            res = 0
         return int(res) 
 
     def arm(self): #This is the arming procedure of an ESC 
