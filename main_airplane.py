@@ -66,21 +66,26 @@ except Exception as e:
     
 db.start()    
       
-data=[None for i in range(6)]
+data=None
 
 dled.progLed(Status.READY,LEDS.PROGLED)
 
 def main():
+    global data
     while True: 
         #db.storeMPUData(mpu.dataFrame)
         try:       
             if not axis_queue.empty():
                 for _ in range(axis_queue.qsize()-1):
                     data = axis_queue.get_nowait()
+                
+                if data == None:
+                     continue
+
                 if data == False:
                     dled.progLed(Status.FILE_TRANSMITT,LEDS.DATALED)
                     continue
-
+                
                 servoRL.setVal((data[3] *-1+ data[6])/2)
                 throtleR.setVal(data[2]*-1)
                 throtleL.setVal(data[2]*-1)
