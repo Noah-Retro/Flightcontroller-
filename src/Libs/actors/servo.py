@@ -34,7 +34,7 @@ class Motor(Protocol):
 class CustomServo(Motor):
     def __init__(self,pin:int,clamp_min:float=0,clamp_max:float=2,zero:float=1) -> None:
         self.pin = pin
-        self.MIN_WIDTH=1000
+        self.MIN_WIDTH=700
         self.MAX_WIDTH=2000
         self.clamp_min = clamp_min
         self.clamp_max = clamp_max
@@ -47,7 +47,7 @@ class CustomServo(Motor):
 class CustomBrushless(Motor):
     def __init__(self,pin:int,clamp_min:float=0,clamp_max:float=2) -> None:
         self.pin = pin
-        self.MIN_WIDTH=850
+        self.MIN_WIDTH=1000
         self.MAX_WIDTH=2000
         self.clamp_min = clamp_min
         self.clamp_max = clamp_max
