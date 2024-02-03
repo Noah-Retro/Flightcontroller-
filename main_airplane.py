@@ -82,7 +82,7 @@ def main():
                     throtleR.setVal(data[2]*-1)
                     throtleL.setVal(data[2]*-1)
                     servoUDL.setVal((data[4] + data[5])/2)
-                    servoUDR.setVal(((data[4] + data[5])*-1)/2)
+                    servoUDR.setVal(((data[4] + data[5]))/2)
                     print(data,testdata)
                     print(((data[4] + data[5])*-1)/2,(data[4] + data[5])/2)
                     

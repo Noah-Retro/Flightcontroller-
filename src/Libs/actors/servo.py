@@ -42,7 +42,7 @@ class CustomServo(Motor):
     
     def scale(self,ins:float):
         res = (self.MAX_WIDTH-self.MIN_WIDTH) * (np.clip((ins+(self.zero)),self.clamp_min,self.clamp_max)/(self.clamp_max)) + self.MIN_WIDTH        
-        print(res,self.__class__.__name__)
+        print(res)
         return int(res)
 
 class CustomBrushless(Motor):
@@ -55,7 +55,7 @@ class CustomBrushless(Motor):
 
     def scale(self,ins:float):
         res = (self.MAX_WIDTH-self.MIN_WIDTH) * (np.clip((ins),self.clamp_min,self.clamp_max)/(self.clamp_max)) + self.MIN_WIDTH        
-        if res <= 800:
+        if res <= 1000:
             res = 700
         return int(res) 
 
