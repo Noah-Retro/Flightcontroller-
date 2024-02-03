@@ -61,8 +61,8 @@ class Rx_Thread(threading.Thread):
                 
                 pipe = nrf.data_pipe()              
                 payload = nrf.get_payload()                                             
-                print(payload)
-                
+                if payload == b'':
+                    continue 
                 
                 #if payload[0] == 0x01:
                 #    values = struct.unpack("<B"+"?"*13, payload)
