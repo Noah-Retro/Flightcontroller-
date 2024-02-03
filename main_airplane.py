@@ -66,12 +66,9 @@ except Exception as e:
     
 db.start()    
       
-data=None
-
 dled.progLed(Status.READY,LEDS.PROGLED)
 
 def main():
-    global data
     while True: 
         #db.storeMPUData(mpu.dataFrame)
         try:       
@@ -79,9 +76,6 @@ def main():
                 for _ in range(axis_queue.qsize()-1):
                     data = axis_queue.get_nowait()
                 
-                if data == None:
-                     continue
-
                 if data == False:
                     dled.progLed(Status.FILE_TRANSMITT,LEDS.DATALED)
                     continue
