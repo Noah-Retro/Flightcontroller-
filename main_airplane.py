@@ -20,13 +20,16 @@ with open("src/settings/motors.json") as motors_file:
 
 servoRL = CustomServo(motor_data["leftRight"]["pin"],
                       clamp_min=motor_data["leftRight"]["clamp_min"],
-                      clamp_max=motor_data["leftRight"]["clamp_max"])
+                      clamp_max=motor_data["leftRight"]["clamp_max"],
+                      zero=motor_data["leftRight"]["zero"])
 servoUDR = CustomServo(motor_data["rightUD"]["pin"],
                       clamp_min=motor_data["rightUD"]["clamp_min"],
-                      clamp_max=motor_data["rightUD"]["clamp_max"])
+                      clamp_max=motor_data["rightUD"]["clamp_max"],
+                      zero=motor_data["rightUD"]["zero"])
 servoUDL = CustomServo(motor_data["leftUD"]["pin"],
                       clamp_min=motor_data["leftUD"]["clamp_min"],
-                      clamp_max=motor_data["leftUD"]["clamp_max"])
+                      clamp_max=motor_data["leftUD"]["clamp_max"],
+                      zero=motor_data["leftUD"]["zero"])
 throtleR = CustomBrushless(motor_data["throtleR"]["pin"],
                       clamp_min=motor_data["throtleR"]["clamp_min"],
                       clamp_max=motor_data["throtleR"]["clamp_max"])
