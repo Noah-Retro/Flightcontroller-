@@ -61,10 +61,8 @@ class Rx_Thread(threading.Thread):
                 
                 pipe = nrf.data_pipe()              
                 payload = nrf.get_payload()                                             
+                print(payload)
                 
-                protocol = payload[0] if len(payload) > 0 else -1            
-
-                hex = ':'.join(f'{i:02x}' for i in payload)
                 
                 #if payload[0] == 0x01:
                 #    values = struct.unpack("<B"+"?"*13, payload)
