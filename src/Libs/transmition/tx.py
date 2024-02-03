@@ -95,7 +95,7 @@ class Tx_Thread(threading.Thread):
                         nrf.send(payload)                       
                 try:
                     if payload:
-                        nrf.wait_until_sent()
+                        nrf.send(payload)
 
                 except TimeoutError:
                     time.sleep(0.2)
