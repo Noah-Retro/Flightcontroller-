@@ -77,18 +77,13 @@ def main():
                     if data == False:
                         dled.progLed(Status.FILE_TRANSMITT,LEDS.DATALED)
                         continue
-                    testdata = copy.deepcopy(data)
+
                     servoRL.setVal((data[3] *-1+ data[6])/2)
                     throtleR.setVal(data[2]*-1)
                     throtleL.setVal(data[2]*-1)
                     servoUDL.setVal((data[4] + data[5])/2)
-                    servoUDR.setVal(((data[4] + data[5]))/2)
-                    print(data,testdata)
-                    print(((data[4] + data[5])*-1)/2,(data[4] + data[5])/2)
-                    
+                    servoUDR.setVal(((data[4] + data[5]))/2)                  
                 
-                
-
         except KeyboardInterrupt:
             dled.clear()
             tx.join()
