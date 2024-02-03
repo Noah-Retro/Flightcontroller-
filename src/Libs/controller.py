@@ -87,6 +87,27 @@ class PS4Controller(threading.Thread):
                 #pprint.pprint(self.axis_data.keys())
                 #pprint.pprint(self.hat_data.keys())
 
+    def get_input(self):
+        for event in pygame.event.get():
+            if event.type == pygame.JOYAXISMOTION:
+                self.axis_data[event.axis] = round(event.value,2)
+            elif event.type == pygame.JOYBUTTONDOWN:
+                self.button_data[event.button] = True
+            elif event.type == pygame.JOYBUTTONUP:
+                self.button_data[event.button] = False
+            elif event.type == pygame.JOYHATMOTION:
+                self.hat_data[event.hat] = event.value
+
+            if self.settings["inverse_look"]:
+                self.axis_data.update(
+                    (key, value * -1) for key, value in self.axis_data.items()
+                )
+
+            # Insert your code on what you would like to happen for each event here!
+            # In the current setup, I have the state simply printing out to the screen.
+            #self.queue.put({**self.button_data,**self.axis_data,**self.hat_data})
+            return[self.button_data,self.axis_data,self.hat_data]
+
 
 if __name__ == "__main__":
     pygame.init()
