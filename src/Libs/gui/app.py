@@ -220,7 +220,7 @@ class App(threading.Thread):
                 file.write(json.dumps(motor_data,indent=4))
 
         def motor_save_button(master)->ttk.Button:
-            motor_save_button = ttk.Button(motor_settings_tab,
+            motor_save_button = ttk.Button(master,
                                                 command=motor_save,
                                                 text="Save")
             return motor_save_button
