@@ -67,13 +67,14 @@ class CustomBrushless(Motor):
 
 if __name__=="__main__":
     servof = CustomBrushless(26)
-    
+    pi.set_servo_pulsewidth(13, 0)
+    pi.set_servo_pulsewidth(19, 0)
     
     try:
         servof.arm()
 
     except KeyboardInterrupt:
-        pi.set_servo_pulsewidth(17, 0)
+        pi.set_servo_pulsewidth(26, 0)
         pi.stop()
 
 
