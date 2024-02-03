@@ -56,7 +56,7 @@ mpuqueue = Queue()
 
 try:
     db = DbHandler(q=mpuqueue)
-except sqlite3.OperationalError as e:
+except Exception as e:
     print(e)
     dled.progLed(Status.DBERROR,LEDS.DATALED)
     
