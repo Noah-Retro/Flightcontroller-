@@ -49,16 +49,14 @@ class Rx_Thread(threading.Thread):
         return super().join()
 
     def run(self):
-        count = 0
         g:str=""
         b:str=""
         listd=[]
         file_send=False
         while self.runs:
             while nrf.data_ready() and self.runs:           
-                count += 1
                 now = datetime.now()
-                
+                print(payload)
                 pipe = nrf.data_pipe()              
                 payload = nrf.get_payload()                                             
                 if payload == b'':
