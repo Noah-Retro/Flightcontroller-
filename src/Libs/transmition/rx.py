@@ -58,8 +58,7 @@ class Rx_Thread(threading.Thread):
                 now = datetime.now()
                 
                 pipe = nrf.data_pipe()              
-                payload = nrf.get_payload()     
-                print(payload)                                        
+                payload = nrf.get_payload()                                           
                 if payload == b'':
                     continue 
                 

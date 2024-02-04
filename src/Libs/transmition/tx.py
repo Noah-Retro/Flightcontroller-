@@ -91,8 +91,7 @@ class Tx_Thread(threading.Thread):
                                             *sends[1].values())
                             send_state = 1
                         nrf.reset_packages_lost()
-                        nrf.send(payload)    
-                    print(payload)                   
+                        nrf.send(payload)                      
                 try:
                     if payload:
                         nrf.wait_until_sent()
