@@ -78,7 +78,6 @@ class Tx_Thread(threading.Thread):
                             nrf.send(s)
                             nrf.wait_until_sent()
                         nrf.send(0x05)
-                        nrf.wait_until_sent()
                         
                     else:     
                         if send_state == 0: #Not active
@@ -95,7 +94,7 @@ class Tx_Thread(threading.Thread):
                         nrf.send(payload)                       
                 try:
                     if payload:
-                        nrf.send(payload)
+                        nrf.wait_until_sent()
 
                 except TimeoutError:
                     time.sleep(0.2)
