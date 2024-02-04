@@ -80,11 +80,11 @@ def main():
                     dled.progLed(Status.FILE_TRANSMITT,LEDS.DATALED)
                     data=[0,0,0,-1,0,0,-1]
 
-                servoRL.setVal((data[3] *-1+ data[6])/2)
+                servoRL.setVal((data[3] + data[6]*-1)/2)
                 throtleR.setVal(data[2]*-1)
                 throtleL.setVal(data[2]*-1)
-                servoUDL.setVal((data[4] + data[5])/2)
-                servoUDR.setVal((data[4] + data[5]*-1)/2)               
+                servoUDL.setVal((data[4] + data[5]*-1)/2)
+                servoUDR.setVal((data[4] + data[5])/2)               
                 
         except KeyboardInterrupt:
             dled.clear()
