@@ -4,7 +4,7 @@ import math
 import time
 from typing import Any
 
-from numpy import roots
+from numpy import roots,clip,interp
 
 
 def timer(func):
@@ -89,7 +89,19 @@ def upRot():
 
 
 if __name__ == "__main__":
-    upRot()
+    maxw = 2000
+    minw= 950
+    zero = 0.4
+    for i in range(200):
+        xn = (((i-100)/100))
+        print(interp(xn,[-1,1-zero],[950,2000]))
+    print(interp(0,[-1,1-zero],[950,2000]))
+        
+
+        
+        
+
+    
 
 
 
