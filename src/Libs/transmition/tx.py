@@ -48,18 +48,18 @@ class Tx_Thread(threading.Thread):
 
     def run(self):
         count = 0
-        send=[]
+        sends=[]
         payload=None
         send_state = 1
         try:
             while True:
                 if not self.sending_data.empty():
                     for _ in range(self.sending_data.qsize()-1):
-                        send=self.sending_data.get_nowait()
+                        sends=self.sending_data.get_nowait()
                 
-                    if not send:
+                    if not sends:
                         continue
-                    if send[0][9] and send[0][10]:
+                    if sends[0][9] and sends[0][10]:
                         with open("src/settings/motors.json") as data:
                             b = bytes(data.read(),'utf-8')
                             
@@ -83,15 +83,16 @@ class Tx_Thread(threading.Thread):
                         if send_state == 0: #Not active
                             payload = struct.pack("<B"+"?"*13, #Button data
                                             0x01,
-                                            *send[0].values())
+                                            *sends[0].values())
                             send_state += 1
                         elif send_state == 1:
                             payload = struct.pack("<B"+"f"*6, #Axis data
                                             0x02,
-                                            *send[1].values())
+                                            *sends[1].values())
                             send_state = 1
                         nrf.reset_packages_lost()
-                        nrf.send(payload)                       
+                        nrf.send(payload)    
+                    print(payload)                   
                 try:
                     if payload:
                         nrf.wait_until_sent()
