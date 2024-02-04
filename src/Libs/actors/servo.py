@@ -56,7 +56,7 @@ class CustomBrushless(Motor):
         self.clamp_max = np.interp(clamp_max -1,[-1,1],[self.MIN_WIDTH,self.MAX_WIDTH])
 
     def scale(self,ins:float):
-        res = np.interp(ins,[-1,1],[self.clamp_min,self.clamp_max])
+        res = np.interp(ins,[0,1],[self.clamp_min,self.clamp_max])
         return int(res) 
 
     def arm(self): #This is the arming procedure of an ESC 
