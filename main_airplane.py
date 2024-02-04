@@ -83,7 +83,7 @@ def main():
                 servoRL.setVal((data[3] + data[6]*-1)/2)
                 throtleR.setVal(data[2]*-1)
                 throtleL.setVal(data[2]*-1)
-                servoUDL.setVal((data[4] + data[5]*-1)/2)
+                servoUDL.setVal((data[4]*-1 + data[5]*-1)/2)
                 servoUDR.setVal((data[4] + data[5])/2)               
                 
         except KeyboardInterrupt:
