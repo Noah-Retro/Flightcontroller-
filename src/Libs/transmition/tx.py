@@ -7,9 +7,14 @@ import threading
 import math
 import pigpio
 from nrf24 import *
+import controller
+import pygame
+
+from src.Libs.tools.paths import MOTORS_SETTINGS_PATH, TRANSMITT_SETTINGS_PATH
 
 
-with open("src/settings/transmitt.json") as data:
+
+with open(TRANSMITT_SETTINGS_PATH) as data:
     settings = json.load(data)
 tx_settings = settings["tx"]
 
@@ -34,12 +39,19 @@ nrf.open_writing_pipe(address,size=getattr(RF24_PAYLOAD,tx_settings["payload_siz
     # Display the content of NRF24L01 device registers.
 nrf.show_registers()
 
+def file_to_bytearray(prefix:bytes,file_path:str):
+    with open() as data:
+        b = bytes(data.read(),'utf-8')
+            
+        for i in range(int(math.ceil(len(b)/31))):
+            s = list(b[i*31:i*31+31])
+            s[:0]=[prefix]
+            yield s
 
 
 class Tx_Thread(threading.Thread):
-    def __init__(self,sending_data:Queue,is_setting:bool=False) -> None:
-        self.sending_data = sending_data
-        self.is_setting = is_setting
+    def __init__(self) -> None:
+        self.controller = controller.PS4Controller()
         super().__init__()
 
     def callback(self):
@@ -47,48 +59,31 @@ class Tx_Thread(threading.Thread):
         pi.stop()
 
     def run(self):
-        count = 0
-        sends=[]
+        sends=self.controller.get_data()
         payload=None
         send_state = 1
         try:
             while True:
-                if not self.sending_data.empty():
-                    for _ in range(self.sending_data.qsize()-1):
-                        sends=self.sending_data.get_nowait()
-                
-                    if not sends:
-                        continue
-                    if sends[0][9] and sends[0][10]:
-                        with open("src/settings/motors.json") as data:
-                            b = bytes(data.read(),'utf-8')
-                            
-                        for i in range(int(math.ceil(len(b)/31))):
-                            s = list(b[i*31:i*31+31])
-                            s[:0]=[0x03]
+                if sends:
+                                    
+                    if sends[9] and sends[10]:
+                        for s in file_to_bytearray(0x03,MOTORS_SETTINGS_PATH):
                             nrf.send(s)
                             nrf.wait_until_sent()
 
-                        with open("src/settings/transmitt.json") as data:
-                            b = bytes(data.read(),'utf-8')
-
-                        for i in range(int(math.ceil(len(b)/31))):
-                            s = list(b[i*31:i*31+31])
-                            s[:0]=[0x04]
+                        for s in file_to_bytearray(0x04,TRANSMITT_SETTINGS_PATH):
                             nrf.send(s)
                             nrf.wait_until_sent()
+
                         nrf.send(0x05)
                         
                     else:     
                         if send_state == 0: #Not active
-                            payload = struct.pack("<B"+"?"*13, #Button data
-                                            0x01,
-                                            *sends[0].values())
-                            send_state += 1
+                            send_state = 1
                         elif send_state == 1:
                             payload = struct.pack("<B"+"f"*6, #Axis data
                                             0x02,
-                                            *sends[1].values())
+                                            *sends[:5])
                             send_state = 1
                         nrf.reset_packages_lost()
                         nrf.send(payload)                      

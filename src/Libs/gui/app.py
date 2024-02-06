@@ -4,6 +4,7 @@ from tkinter import ttk
 import threading
 import json
 from src.Libs.gui.slider import Slider as DobbleSlider
+from src.Libs.tools.paths import SETTINGS_PATH
 
 vals={
     "rightUD":None,
@@ -235,7 +236,7 @@ class App(threading.Thread):
 
 
 if __name__ == "__main__":
-    test = App("Flightcontroller-/src/settings")
+    test = App(SETTINGS_PATH)
     
     test_thread = threading.Thread(target=test.run)
     test_thread.start()

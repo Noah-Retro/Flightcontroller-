@@ -14,8 +14,9 @@ import sqlite3
 import json
 from src.Libs.db_tools import DbHandler
 from src.Libs.actors import CustomServo,CustomBrushless
+from src.Libs.tools.paths import MOTORS_SETTINGS_PATH,CONTROLLER_SETTINGS_PATH,DATA_SETTINGS_PATH
 
-with open("src/settings/motors.json") as motors_file:
+with open(MOTORS_SETTINGS_PATH) as motors_file:
             motor_data = json.load(motors_file)
 
 servoRL = CustomServo(motor_data["leftRight"]["pin"],
@@ -49,9 +50,9 @@ axis_queue = Queue()
 tx = Rx_Thread(button_queue=button_queue,axis_queue=axis_queue)
 tx.start()
 
-with open("src/settings/data.json","r") as data:
+with open(DATA_SETTINGS_PATH,"r") as data:
     settings = json.load(data)
-with open("src/settings/data.json","w") as data:
+with open(DATA_SETTINGS_PATH,"w") as data:
     settings["fligth_num"]+=1
     data.write(json.dumps(settings,indent=4))
 
@@ -108,6 +109,6 @@ def main():
             dled.clear()
             
 
-        
-main()        
+if __name__ ==  "__main__":        
+    main()      
 
