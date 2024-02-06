@@ -1,5 +1,5 @@
 import copy
-from src.Libs.tools import DebugLEDHandler,LEDS,Status
+from src.Libs.tools.debug_leds import DebugLEDHandler,LEDS,Status
 dled = DebugLEDHandler()
 dled.progLed(Status.BOOTUP,LEDS.PROGLED)
 
