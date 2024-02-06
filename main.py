@@ -11,6 +11,7 @@ from collections import deque
 import time
 
 
+
 tx = Tx_Thread()
 app=App(SETTINGS_PATH)
 
