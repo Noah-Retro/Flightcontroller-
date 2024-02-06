@@ -1,3 +1,4 @@
+import queue
 import pygame
 from queue import Queue
 import threading
@@ -32,7 +33,7 @@ hat_data: Dpad (Left/right,Up/down) Left=-1 Down=-1
 class PS4Controller(threading.Thread):
     """Class representing the PS4 controller. Pretty straightforward functionality."""
     
-    def __init__(self,controller:pygame.joystick,q:Queue,q1:Queue,setting_path:str="src/settings/controller.json",*args,**kwargs):
+    def __init__(self,controller:pygame.joystick.JoystickType,q:Queue,q1:Queue,setting_path:str="src/settings/controller.json",*args,**kwargs):
         self.q = q
         self.q1 = q1
         self.controller = controller
@@ -86,23 +87,35 @@ class PS4Controller(threading.Thread):
                 #pprint.pprint([self.button_data,self.axis_data,self.hat_data])
                 #pprint.pprint(self.axis_data.keys())
                 #pprint.pprint(self.hat_data.keys())
+    def get_data(self):
+        if not self.axis_data:
+            self.axis_data = {0:0.0,1:0.0,2:0.0,3:0.0,4:0.0,5:0.0}
+
+        if not self.button_data:
+            self.button_data = {}
+            for i in range(self.controller.get_numbuttons()):
+                self.button_data[i] = False
+
+        if not self.hat_data:
+            self.hat_data = {}
+            for i in range(self.controller.get_numhats()):
+                self.hat_data[i] = (0, 0)
+            
+        for i in range(self.controller.get_numaxes()):
+            print(self.controller.get_axis(i))
 
 
 if __name__ == "__main__":
     pygame.init()
     pygame.joystick.init()
-    
-    controllerQueue = Queue()
-    
-    controller = pygame.joystick.Joystick(0)
-    
-    controller.init()
-    
-    ps4 = PS4Controller(controller=controller,q=controllerQueue)
-    ps4.start()
+    j = pygame.joystick.Joystick(0)
+    q = queue.Queue()
+    q1 = queue.Queue()
+    con = PS4Controller(controller=j,q=q,q1=q1)
     while True:
-        if not controllerQueue.empty():
-            print(controllerQueue.get_nowait())
-        time.sleep(1)
+        con.get_data()
+    
+    
+    
         
     
