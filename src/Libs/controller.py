@@ -103,6 +103,7 @@ class PS4Controller(threading.Thread):
             
         for i in range(self.controller.get_numaxes()):
             print(self.controller.get_axis(i))
+        time.sleep(1)
 
 
 if __name__ == "__main__":
