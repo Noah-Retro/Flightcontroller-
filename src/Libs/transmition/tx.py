@@ -12,8 +12,6 @@ import pygame
 
 from src.Libs.tools.paths import MOTORS_SETTINGS_PATH, TRANSMITT_SETTINGS_PATH
 
-pygame.joystick.init()
-
 with open(TRANSMITT_SETTINGS_PATH) as data:
     settings = json.load(data)
 tx_settings = settings["tx"]
