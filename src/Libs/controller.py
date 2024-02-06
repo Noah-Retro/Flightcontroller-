@@ -103,7 +103,7 @@ class PS4Controller(threading.Thread):
         pygame.event.pump()    
         for i in range(self.controller.get_numaxes()-1):
             print(self.controller.get_axis(i))
-            self.controller.
+            print(self.controller.get_power_level())
         time.sleep(1)
 
 
