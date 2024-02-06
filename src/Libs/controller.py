@@ -104,6 +104,7 @@ class PS4Controller(threading.Thread):
         for i in range(self.controller.get_numaxes()-1):
             print(self.controller.get_axis(i))
             print(self.controller.get_power_level())
+        print(self.controller.get_numaxes())
         time.sleep(1)
 
 
