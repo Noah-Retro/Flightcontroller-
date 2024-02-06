@@ -100,9 +100,10 @@ class PS4Controller(threading.Thread):
             self.hat_data = {}
             for i in range(self.controller.get_numhats()):
                 self.hat_data[i] = (0, 0)
-            
+        pygame.event.pump()    
         for i in range(self.controller.get_numaxes()-1):
             print(self.controller.get_axis(i))
+            self.controller.
         time.sleep(1)
 
 
