@@ -7,7 +7,7 @@ import threading
 import math
 import pigpio
 from nrf24 import *
-import src.Libs.controller
+from src.Libs.controller import PS4Controller
 import pygame
 
 from src.Libs.tools.paths import MOTORS_SETTINGS_PATH, TRANSMITT_SETTINGS_PATH
@@ -51,7 +51,7 @@ def file_to_bytearray(prefix:bytes,file_path:str):
 
 class Tx_Thread(threading.Thread):
     def __init__(self) -> None:
-        self.controller = controller.PS4Controller()
+        self.controller = PS4Controller()
         super().__init__()
 
     def callback(self):
