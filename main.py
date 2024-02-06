@@ -1,4 +1,3 @@
-from src.Libs.controller import PS4Controller
 from src.Libs.gui import App, visualization
 from src.Libs.tools.paths import SETTINGS_PATH
 from src.Libs.transmition import Tx_Thread

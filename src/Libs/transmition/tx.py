@@ -7,7 +7,7 @@ import threading
 import math
 import pigpio
 from nrf24 import *
-import controller
+import src.Libs.controller
 import pygame
 
 from src.Libs.tools.paths import MOTORS_SETTINGS_PATH, TRANSMITT_SETTINGS_PATH
