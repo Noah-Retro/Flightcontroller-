@@ -59,31 +59,27 @@ class Tx_Thread(threading.Thread):
     def run(self):
         sends=self.controller.get_data()
         payload=None
-        send_state = 1
         try:
             while True:
-                if sends:          
-                    if sends[9] and sends[10]:
-                        for s in file_to_bytearray(0x03,MOTORS_SETTINGS_PATH):
-                            nrf.send(s)
-                            nrf.wait_until_sent()
+                if not sends:
+                    continue          
+                if sends[9] and sends[10]:
+                    for s in file_to_bytearray(0x03,MOTORS_SETTINGS_PATH):
+                        nrf.send(s)
+                        nrf.wait_until_sent()
 
-                        for s in file_to_bytearray(0x04,TRANSMITT_SETTINGS_PATH):
-                            nrf.send(s)
-                            nrf.wait_until_sent()
+                    for s in file_to_bytearray(0x04,TRANSMITT_SETTINGS_PATH):
+                        nrf.send(s)
+                        nrf.wait_until_sent()
+                    nrf.send(0x05)   
 
-                        nrf.send(0x05)
-                        
-                    else:     
-                        if send_state == 0: #Not active
-                            send_state = 1
-                        elif send_state == 1:
-                            payload = struct.pack("<B"+"f"*6, #Axis data
-                                            0x02,
-                                            *sends[:5])
-                            send_state = 1
-                        nrf.reset_packages_lost()
-                        nrf.send(payload)                      
+                else:     
+                    payload = struct.pack("<B"+"f"*6, #Axis data
+                                    0x02,
+                                    *sends[:5])
+                    nrf.reset_packages_lost()
+                    nrf.send(payload) 
+
                 try:
                     if payload:
                         nrf.wait_until_sent()
