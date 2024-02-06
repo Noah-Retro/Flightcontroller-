@@ -29,6 +29,7 @@ class PS4Controller:
     """Class representing the PS4 controller. Pretty straightforward functionality."""
     
     def __init__(self,setting_path:str="src/settings/controller.json",*args,**kwargs):
+        pygame.joystick.init()
         self.controller = pygame.joystick.Joystick(0)
         self.axis_data = None
 
