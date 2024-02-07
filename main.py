@@ -10,7 +10,7 @@ from queue import Queue
 from collections import deque
 import time
 
-
+pygame.init()
 
 tx = Tx_Thread()
 app=App(SETTINGS_PATH)
