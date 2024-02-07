@@ -76,7 +76,7 @@ class Tx_Thread(threading.Thread):
                 else:     
                     payload = struct.pack("<B"+"f"*6, #Axis data
                                     0x02,
-                                    *sends[:5])
+                                    *sends[:6])
                     nrf.reset_packages_lost()
                     nrf.send(payload) 
 
