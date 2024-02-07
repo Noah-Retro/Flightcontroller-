@@ -57,12 +57,11 @@ class Tx_Thread(threading.Thread):
         pi.stop()
 
     def run(self):
-        sends=self.controller.get_data()
+        
         payload=None
         try:
             while True:
-                if not sends:
-                    continue          
+                sends=self.controller.get_data()        
                 if sends[6] and sends[7]:
                     for s in file_to_bytearray(0x03,MOTORS_SETTINGS_PATH):
                         nrf.send(s)
