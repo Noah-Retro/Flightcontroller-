@@ -31,7 +31,7 @@ class PS4Controller:
         """
         r = []
         if not self.axis_data:
-            self.axis_data = {0:0.0,1:0.0,2:0.0,3:0.0,4:0.0,5:0.0}
+            self.axis_data = [0,0,0,0,0,0,0,0]
 
         pygame.event.pump()    
         for i in range(self.controller.get_numaxes()):
