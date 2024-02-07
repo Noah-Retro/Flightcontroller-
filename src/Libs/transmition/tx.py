@@ -63,7 +63,7 @@ class Tx_Thread(threading.Thread):
             while True:
                 if not sends:
                     continue          
-                if sends[9] and sends[10]:
+                if sends[6] and sends[7]:
                     for s in file_to_bytearray(0x03,MOTORS_SETTINGS_PATH):
                         nrf.send(s)
                         nrf.wait_until_sent()
