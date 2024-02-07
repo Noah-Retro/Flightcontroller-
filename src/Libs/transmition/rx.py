@@ -67,7 +67,8 @@ class Rx_Thread(threading.Thread):
                 #    self.button_queue.put_nowait(values)
                 if payload[0] == 0x02:
                     values = struct.unpack("<B"+"f"*6, payload)
-                    self.axis_queue.put_nowait(values)
+                    if self.axis_queue.qsize()==0:
+                        self.axis_queue.put_nowait(values)
 
                 if payload[0] == 0x03:
                     self.axis_queue.put_nowait(False)
