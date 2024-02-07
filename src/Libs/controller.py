@@ -32,12 +32,15 @@ class PS4Controller:
         if not self.axis_data:
             self.axis_data = [0,0,0,0,0,0,0,0]
 
+        if self.controller.get_button(8):
+            self.controller.quit()
+            return
+        
         pygame.event.pump()    
         for i in range(self.controller.get_numaxes()):
             r.append(self.controller.get_axis(i))
         r.append(self.controller.get_button(10))
         r.append(self.controller.get_button(9))
-        print(r)
         return r
 
 
