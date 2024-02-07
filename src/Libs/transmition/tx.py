@@ -38,7 +38,7 @@ nrf.open_writing_pipe(address,size=getattr(RF24_PAYLOAD,tx_settings["payload_siz
 nrf.show_registers()
 
 def file_to_bytearray(prefix:bytes,file_path:str):
-    with open() as data:
+    with open(file_path) as data:
         b = bytes(data.read(),'utf-8')
             
         for i in range(int(math.ceil(len(b)/31))):
