@@ -38,7 +38,6 @@ class PS4Controller:
             r.append(self.controller.get_axis(i))
         r.append(self.controller.get_button(10))
         r.append(self.controller.get_button(9))
-        print(r)
         return r
 
 
