@@ -5,6 +5,7 @@ import json
 import threading
 from typing import Any
 from queue import Queue
+import multiprocessing
 
 import pigpio
 from nrf24 import *
@@ -37,7 +38,7 @@ nrf.open_reading_pipe(RF24_RX_ADDR.P1, address,size=getattr(RF24_PAYLOAD,rx_sett
 # Display the content of NRF24L01 device registers.
 nrf.show_registers()
 
-class Rx_Thread(threading.Thread):
+class Rx_Thread(multiprocessing.Process):
     def __init__(self,button_queue:Queue,axis_queue:Queue) -> None:
         self.button_queue=button_queue
         self.axis_queue = axis_queue
@@ -67,7 +68,7 @@ class Rx_Thread(threading.Thread):
                 #    self.button_queue.put_nowait(values)
                 if payload[0] == 0x02:
                     values = struct.unpack("<B"+"f"*6, payload)
-                    if self.axis_queue.qsize()==0:
+                    if self.axis_queue.qsize()<2:
                         self.axis_queue.put_nowait(values)
 
                 if payload[0] == 0x03:
