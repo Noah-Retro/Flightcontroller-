@@ -5,26 +5,6 @@ import threading
 import time
 import json
 
-"""
-0:"X"
-1:"O"
-2:Dreieck
-3:Quadrat
-4:L1
-5:R1
-6:L2
-7:R2
-8:share
-9:option
-10:PS button
-11:L3
-12:R3
-Axisdata:{
-    
-}
-hat_data: Dpad (Left/right,Up/down) Left=-1 Down=-1
-"""
-
 class PS4Controller:
     """Class representing the PS4 controller. Pretty straightforward functionality."""
     
