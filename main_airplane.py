@@ -73,6 +73,7 @@ def main():
     while True: 
         try:       
             if not axis_queue.empty():
+                print(axis_queue.qsize())
                 for _ in range(axis_queue.qsize()-1):
                     data = axis_queue.get_nowait()
 
