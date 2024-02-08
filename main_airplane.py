@@ -65,11 +65,12 @@ except Exception as e:
     print(e)
     dled.progLed(Status.DBERROR,LEDS.DATALED)
     
-db.start()    
+#db.start()    
       
 dled.progLed(Status.READY,LEDS.PROGLED)
 
 def main():
+    print("Prog start")
     while True: 
         try:       
             if not axis_queue.empty():
