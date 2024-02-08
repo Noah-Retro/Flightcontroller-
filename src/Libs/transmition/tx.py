@@ -86,7 +86,7 @@ class Tx_Thread(threading.Thread):
                         nrf.wait_until_sent()
                         
                     end = time.time_ns()
-                    print(end-start)
+                    print((end-start)/10e-6)
                 except TimeoutError:
                     time.sleep(0.2)
                     continue
