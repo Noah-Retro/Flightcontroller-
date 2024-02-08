@@ -59,7 +59,8 @@ class Rx_Thread(multiprocessing.Process):
                 now = datetime.now()
                 
                 pipe = nrf.data_pipe()              
-                payload = nrf.get_payload()                                           
+                payload = nrf.get_payload()   
+                print(payload)                                        
                 if payload == b'':
                     continue 
                 
