@@ -70,7 +70,7 @@ class Rx_Thread(multiprocessing.Process):
                 
                 if payload[0] == 0x02:
                     values = struct.unpack("<B"+"f"*6, payload)
-                    print(payload)
+                    print(values)
                     self.axis_queue.put_nowait(values)
 
                 if payload[0] == 0x03:
