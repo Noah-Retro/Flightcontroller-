@@ -60,7 +60,7 @@ class Rx_Thread(multiprocessing.Process):
                 
                 pipe = nrf.data_pipe()              
                 payload = nrf.get_payload()   
-                print(payload)                                        
+                                                       
                 if payload == b'':
                     continue 
                 
@@ -69,8 +69,8 @@ class Rx_Thread(multiprocessing.Process):
                 #    self.button_queue.put_nowait(values)
                 if payload[0] == 0x02:
                     values = struct.unpack("<B"+"f"*6, payload)
-                    if self.axis_queue.qsize()<2:
-                        self.axis_queue.put_nowait(values)
+                    
+                    self.axis_queue.put_nowait(values)
 
                 if payload[0] == 0x03:
                     self.axis_queue.put_nowait(False)
