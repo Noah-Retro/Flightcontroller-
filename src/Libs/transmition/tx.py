@@ -1,3 +1,4 @@
+from sqlite3 import Time
 import struct
 import sys
 import time
@@ -61,6 +62,7 @@ class Tx_Thread(threading.Thread):
         payload=None
         try:
             while True:
+                start=time.time_ns()
                 sends=self.controller.get_data()        
                 if sends[6] and sends[7]:
                     for s in file_to_bytearray(0x03,MOTORS_SETTINGS_PATH):
@@ -78,12 +80,13 @@ class Tx_Thread(threading.Thread):
                                     *sends[:6])
                     nrf.reset_packages_lost()
                     nrf.send(payload) 
-
+                
                 try:
                     if payload:
                         nrf.wait_until_sent()
-                        print("I have sent data")
-
+                        
+                    end = time.time_ns()
+                    print(end-start)
                 except TimeoutError:
                     time.sleep(0.2)
                     continue
