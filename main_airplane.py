@@ -7,7 +7,7 @@ import nrf24
 from src.Libs.transmition import Rx_Thread
 from threading import Thread
 import time
-from queue import Queue
+from multiprocessing import Queue
 import os
 import sys
 import sqlite3
@@ -73,7 +73,7 @@ def main():
     print("Prog start")
     while True: 
         try:       
-            print(axis_queue.qsize())
+            print(axis_queue.get())
             if not axis_queue.empty():
                 print(axis_queue.qsize())
                 for _ in range(axis_queue.qsize()-1):
