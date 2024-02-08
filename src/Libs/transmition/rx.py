@@ -67,10 +67,10 @@ class Rx_Thread(multiprocessing.Process):
                 #if payload[0] == 0x01:
                 #    values = struct.unpack("<B"+"?"*13, payload)
                 #    self.button_queue.put_nowait(values)
-                print(payload)
+                
                 if payload[0] == 0x02:
                     values = struct.unpack("<B"+"f"*6, payload)
-                    
+                    print(payload)
                     self.axis_queue.put_nowait(values)
 
                 if payload[0] == 0x03:
