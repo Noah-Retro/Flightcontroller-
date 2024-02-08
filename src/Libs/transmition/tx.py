@@ -62,7 +62,6 @@ class Tx_Thread(multiprocessing.Process):
         payload=None
         try:
             while True:
-                start=time.time_ns()
                 sends=self.controller.get_data()        
                 if sends[6] and sends[7]:
                     for s in file_to_bytearray(0x03,MOTORS_SETTINGS_PATH):
@@ -84,9 +83,7 @@ class Tx_Thread(multiprocessing.Process):
                 try:
                     if payload:
                         nrf.wait_until_sent()
-                        
-                    end = time.time_ns()
-                    print((end-start)*10e-6)
+                            
                 except TimeoutError:
                     time.sleep(0.2)
                     continue
