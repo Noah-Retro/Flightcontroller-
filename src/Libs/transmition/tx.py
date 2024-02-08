@@ -82,6 +82,7 @@ class Tx_Thread(threading.Thread):
                 try:
                     if payload:
                         nrf.wait_until_sent()
+                        print("I have sent data")
 
                 except TimeoutError:
                     time.sleep(0.2)
