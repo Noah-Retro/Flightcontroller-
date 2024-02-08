@@ -4,7 +4,7 @@ import sys
 import time
 from queue import Queue
 import json
-import threading
+import multiprocessing
 import math
 import pigpio
 from nrf24 import *
@@ -48,7 +48,7 @@ def file_to_bytearray(prefix:bytes,file_path:str):
             yield s
 
 
-class Tx_Thread(threading.Thread):
+class Tx_Thread(multiprocessing.Process):
     def __init__(self) -> None:
         self.controller = PS4Controller()
         super().__init__()
