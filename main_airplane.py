@@ -70,10 +70,8 @@ except Exception as e:
 dled.progLed(Status.READY,LEDS.PROGLED)
 
 def main():
-    print("Prog start")
     while True: 
         try:       
-            print(axis_queue.get())
             if not axis_queue.empty():
                 print(axis_queue.qsize())
                 for _ in range(axis_queue.qsize()-1):
