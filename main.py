@@ -19,7 +19,7 @@ controllerData = []
 
 if __name__ == '__main__':
     
-    app.start()
+    #app.start()
     tx.start()
     
     while True:
