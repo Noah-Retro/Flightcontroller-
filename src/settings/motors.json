@@ -28,6 +28,6 @@
     "throtleL": {
         "pin": 26,
         "clamp_max": 0.15,
-        "clamp_min": 0
+        "clamp_min": 0.0000001
     }
 }
