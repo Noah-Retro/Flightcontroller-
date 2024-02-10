@@ -7,3 +7,5 @@ MOTORS_SETTINGS_PATH = os.path.abspath("src/settings/motors.json")
 TRANSMITT_SETTINGS_PATH = os.path.abspath("src/settings/transmitt.json")
 VIDEO_SETTINGS_PATH = os.path.abspath("src/settings/video.json")
 SETTINGS_PATH = os.path.abspath("src/settings")
+
+print(CONTROLLER_SETTINGS_PATH)
