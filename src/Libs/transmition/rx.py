@@ -6,12 +6,13 @@ import threading
 from typing import Any
 from queue import Queue
 import multiprocessing
+from src.Libs.tools.paths import MOTORS_SETTINGS_PATH, TRANSMITT_SETTINGS_PATH
 
 import pigpio
 from nrf24 import *
 
 
-data = open("src/settings/transmitt.json")
+data = open(TRANSMITT_SETTINGS_PATH)
 settings = json.load(data)
 rx_settings = settings["rx"]
 
@@ -88,9 +89,9 @@ class Rx_Thread(multiprocessing.Process):
                 
                 if payload[0]==0x05:
                     self.axis_queue.put_nowait(False)
-                    with open("src/settings/motors.json",mode="w") as motor_file:
+                    with open(MOTORS_SETTINGS_PATH,mode="w") as motor_file:
                         motor_file.write(g)
-                    with open("src/settings/transmitt.json",mode="w") as transmit_file:
+                    with open(TRANSMITT_SETTINGS_PATH,mode="w") as transmit_file:
                         transmit_file.write(b)
                     g=""
                     b=""
