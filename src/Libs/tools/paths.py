@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).parent
+ROOT_DIR = Path(__file__).parent.parent.parent.parent
 CONTROLLER_SETTINGS_PATH = os.path.abspath("src/settings/controller.json")
 DATA_SETTINGS_PATH = os.path.abspath("src/settings/data.json")
 DEBUG_LED_PATH = os.path.abspath("src/settings/debug.json")
