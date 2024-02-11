@@ -50,7 +50,10 @@ def file_to_bytearray(prefix:bytes,file_path:str):
 
 class Tx_Thread(multiprocessing.Process):
     def __init__(self) -> None:
-        self.controller = PS4Controller()
+        try:
+            self.controller = PS4Controller()
+        except:
+            exit(0)
         super().__init__()
 
     def callback(self):
