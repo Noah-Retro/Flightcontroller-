@@ -9,4 +9,6 @@ MOTORS_SETTINGS_PATH = ROOT_DIR+"/src/settings/motors.json"
 TRANSMITT_SETTINGS_PATH = ROOT_DIR+"/src/settings/transmitt.json"
 VIDEO_SETTINGS_PATH = ROOT_DIR+"/src/settings/video.json"
 SETTINGS_PATH = ROOT_DIR+"/src/settings"
+DB_PATH = ROOT_DIR+"/src/DB/flight_data.db"
+SCHEMA_PATH = ROOT_DIR+"/src/Libs/db_tools/schema.sql"
 print(ROOT_DIR)

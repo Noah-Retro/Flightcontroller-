@@ -5,6 +5,7 @@ import json
 import threading
 from queue import Queue
 from src.Libs.sensors import MPU_9250
+from src.Libs.tools.paths import DB_PATH, SCHEMA_PATH
 
 def generate_smooth_random_walk(num_samples, std_dev=0.05):
     data = {'Timestamp': pd.date_range(start='2024-01-06', periods=num_samples, freq='S')}
@@ -18,7 +19,7 @@ def generate_smooth_random_walk(num_samples, std_dev=0.05):
 
 
 class DbHandler(threading.Thread):
-    def __init__(self,q:Queue,path:str="./src/DB/flight_data.db",schema_path:str="./src/Libs/db_tools/schema.sql") -> None:
+    def __init__(self,q:Queue,path:str=DB_PATH,schema_path:str=SCHEMA_PATH) -> None:
         self.path = path
         self.con = sqlite3.connect(self.path,check_same_thread=False)
         self.cur = self.con.cursor()
