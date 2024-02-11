@@ -5,7 +5,7 @@ import json
 import threading
 from queue import Queue
 from src.Libs.sensors import MPU_9250
-from src.Libs.tools.paths import DB_PATH, SCHEMA_PATH
+from src.Libs.tools.paths import DATA_PATH, DB_PATH, SCHEMA_PATH
 
 def generate_smooth_random_walk(num_samples, std_dev=0.05):
     data = {'Timestamp': pd.date_range(start='2024-01-06', periods=num_samples, freq='S')}
@@ -25,7 +25,7 @@ class DbHandler(threading.Thread):
         self.cur = self.con.cursor()
         self.schema_path = schema_path
         self.q = q
-        with open("./src/settings/data.json") as data:
+        with open(DATA_PATH) as data:
             self.settings = json.load(data)
 
         with open(self.schema_path,encoding="utf8") as f:

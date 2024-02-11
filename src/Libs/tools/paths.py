@@ -11,4 +11,5 @@ VIDEO_SETTINGS_PATH = ROOT_DIR+"/src/settings/video.json"
 SETTINGS_PATH = ROOT_DIR+"/src/settings"
 DB_PATH = ROOT_DIR+"/src/DB/flight_data.db"
 SCHEMA_PATH = ROOT_DIR+"/src/Libs/db_tools/schema.sql"
+DATA_PATH = ROOT_DIR +"/src/settings/data.json"
 print(ROOT_DIR)
