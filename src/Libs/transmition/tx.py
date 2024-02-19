@@ -33,8 +33,8 @@ nrf = NRF24(pi,
             data_rate=getattr(RF24_DATA_RATE,tx_settings["data_rate"]["value"]),
             pa_level=getattr(RF24_PA,tx_settings["pa_level"]["value"]))
 nrf.set_address_bytes(len(address))
-nrf.open_writing_pipe(address,size=getattr(RF24_PAYLOAD,tx_settings["payload_size"]["value"]))
-    
+nrf.open_writing_pipe(address,size=getattr(RF24_PAYLOAD,tx_settings["payload_size"]["value"])) 
+
     # Display the content of NRF24L01 device registers.
 nrf.show_registers()
 
@@ -65,6 +65,7 @@ class Tx_Thread(multiprocessing.Process):
         payload=None
         try:
             while True:
+                #TODO
                 sends=self.controller.get_data()        
                 if sends[6] and sends[7]:
                     for s in file_to_bytearray(0x03,MOTORS_SETTINGS_PATH):
@@ -77,6 +78,7 @@ class Tx_Thread(multiprocessing.Process):
                     nrf.send(0x05)   
 
                 else:     
+                    #TODO
                     payload = struct.pack("<B"+"f"*6, #Axis data
                                     0x02,
                                     *sends[:6])

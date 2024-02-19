@@ -1,4 +1,3 @@
-import copy
 from src.Libs.tools.debug_leds import DebugLEDHandler,LEDS,Status
 dled = DebugLEDHandler()
 dled.progLed(Status.BOOTUP,LEDS.PROGLED)
@@ -64,7 +63,8 @@ try:
 except Exception as e:
     print(e)
     dled.progLed(Status.DBERROR,LEDS.DATALED)
-    
+
+#FIXME  
 #db.start()    
       
 dled.progLed(Status.READY,LEDS.PROGLED)
@@ -79,13 +79,13 @@ def main():
                 if data == False:
                     dled.progLed(Status.FILE_TRANSMITT,LEDS.DATALED)
                     data=[0,0,0,-1,0,0,-1]
-
+                #TODO REFACTURE
                 servoRL.setVal((data[3] + data[6]*-1)/2)
                 throtleR.setVal(data[2]*-1)
                 throtleL.setVal(data[2]*-1)
                 servoUDL.setVal((data[4]*-1 + data[5])/2)
                 servoUDR.setVal((data[4]*-1 + data[5]*-1)/2)   
-                            
+        #TODO Clean up              
         except KeyboardInterrupt:
             dled.clear()
             tx.join()

@@ -5,7 +5,7 @@ import plotly.subplots as sp
 import plotly.express as px
 import math
 
-
+#TODO Refacture and re-design
 class VisualizationHandler():
     def plot_3d_coordinates(self,df:pd.DataFrame, title='3D Coordinates', label='Location (meters)'):
         fig = go.Figure()

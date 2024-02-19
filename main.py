@@ -18,7 +18,7 @@ app=App(SETTINGS_PATH)
 controllerData = []
 
 if __name__ == '__main__':
-    
+    #TODO
     app.start()
     tx.start()
     
