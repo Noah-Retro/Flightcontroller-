@@ -69,6 +69,7 @@ python main.py
 ```
 sudo python main_airplaine.py
 ```
+* make shure to anable all the interfaces who are needed.
 
 ## Authors
 
